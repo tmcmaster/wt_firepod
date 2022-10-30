@@ -1,9 +1,5 @@
 library wt_firepod;
 
-export 'src/auth/link_email_sign_in_view.dart';
-export 'src/auth/login_view.dart';
-export 'src/auth/user_auth.dart';
-export 'src/database_provider.dart';
 export 'src/firebase_init.dart';
 export 'src/firebase_providers.dart';
 export 'src/firebase_setup.dart';

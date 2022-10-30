@@ -1,8 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import "package:firebase_core/firebase_core.dart";
 import "package:firebase_database/firebase_database.dart";
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'auth/auth.dart';
 import 'firebase_providers.dart';
 
 class FirebaseSetup {
@@ -11,7 +11,6 @@ class FirebaseSetup {
   late AlwaysAliveProviderBase<FirebaseApp> app;
   late AlwaysAliveProviderBase<FirebaseDatabase> database;
   late AlwaysAliveProviderBase<FirebaseAuth> auth;
-  late StateNotifierProvider<FlutterfireAuthNotifier, UserAuth> login;
 
   FirebaseSetup._() {
     app = Provider(
@@ -32,13 +31,5 @@ class FirebaseSetup {
       final firebaseApp = ref.read(app);
       return FirebaseDatabase.instanceFor(app: firebaseApp);
     });
-    login = StateNotifierProvider<FlutterfireAuthNotifier, UserAuth>(
-      name: 'FirebaseSetup : Login',
-      (ref) {
-        final firebaseAuth = ref.read(auth);
-        final firebaseOptions = ref.read(FirebaseProviders.firebaseOptions);
-        return FlutterfireAuthNotifier(ref, firebaseAuth: firebaseAuth, firebaseOptions: firebaseOptions);
-      },
-    );
   }
 }

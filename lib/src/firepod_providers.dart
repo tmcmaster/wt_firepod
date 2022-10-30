@@ -1,9 +1,9 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:wt_settings/wt_settings.dart';
 
-import 'auth/auth.dart';
 import 'firebase_setup.dart';
 import 'firepod_settings.dart';
 import 'site/site.dart';
