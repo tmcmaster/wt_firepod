@@ -2,20 +2,21 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:wt_models/wt_models.dart';
 
 class ToModelFromFirebase<T> extends ToModelFrom<T> {
+  final String idField;
+
   ToModelFromFirebase({
     required super.json,
     super.titles,
+    this.idField = 'id',
     super.none,
   });
 
-  T snapshot(DataSnapshot snapshot, [String? mapKeyField]) {
+  T snapshot(DataSnapshot snapshot) {
     if (snapshot.exists) {
       final map = snapshot.value as Map<dynamic, dynamic>;
-      var newMap = {for (var e in map.entries) e.key.toString(): _addKeyFieldIfRequired(e.value, e.key, mapKeyField)};
+      var newMap = {for (var e in map.entries) e.key.toString(): _addKeyFieldIfRequired(e.value, e.key, idField)};
 
-      if (mapKeyField != null) {
-        newMap[mapKeyField] = snapshot.key ?? '';
-      }
+      newMap[idField] = snapshot.key ?? '';
 
       return super.json(newMap);
     } else {
@@ -27,7 +28,7 @@ class ToModelFromFirebase<T> extends ToModelFrom<T> {
     }
   }
 
-  // TODO: need to test this properly
+  // TODO: need to test this properly, for the child
   Object _addKeyFieldIfRequired(Object value, String key, String? mapKeyField) {
     if (value is Map && mapKeyField != null) {
       value[mapKeyField] = key;
