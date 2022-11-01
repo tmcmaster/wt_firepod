@@ -1,6 +1,5 @@
 import 'package:wt_models/wt_models.dart';
 
-import 'firebase_setup.dart';
 import 'firepod.dart';
 import 'utils/logging.dart';
 
@@ -33,7 +32,7 @@ class GenericSiteDataNotifier<T> extends StateNotifier<T> {
   void _readFromDatabase(Ref ref, IdSupport? site) {
     if (site != null) {
       final siteId = site.getId();
-      final database = ref.read(FirebaseSetup.instance.database);
+      final database = ref.read(FirebaseProviders.database);
 
       final dbRef = suffixPath == null
           ? database.ref(prefixPath).child(siteId)

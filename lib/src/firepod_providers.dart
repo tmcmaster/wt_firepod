@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:wt_firepod/src/firebase_providers.dart';
 import 'package:wt_settings/wt_settings.dart';
 
-import 'firebase_setup.dart';
 import 'firepod_settings.dart';
 import 'site/site.dart';
 
@@ -22,7 +22,7 @@ class SiteListNotifier extends StateNotifier<List<Site>?> {
   late StreamSubscription _subscription;
 
   SiteListNotifier(super.state, this.ref) {
-    _subscription = ref.read(FirebaseSetup.instance.auth).authStateChanges().listen((User? user) {
+    _subscription = ref.read(FirebaseProviders.auth).authStateChanges().listen((User? user) {
       final site = ref.read(FirepodSettings.site.value);
       final siteNotifier = ref.read(FirepodSettings.site.notifier);
       log.d('Settings site at login: ${site?.name}');
@@ -34,7 +34,7 @@ class SiteListNotifier extends StateNotifier<List<Site>?> {
         final userId = user.uid;
         log.d('Loading site data from the database for UserId($userId)');
         // TODO may need to change this to watch for changes. Restarting the app is fine for now.
-        ref.read(FirebaseSetup.instance.database).ref('data').child(userId).child('sites').get().then((snapshot) {
+        ref.read(FirebaseProviders.database).ref('data').child(userId).child('sites').get().then((snapshot) {
           log.d('New site data loaded from the database.');
           if (snapshot.exists) {
             final siteMap = snapshot.value as Map<Object?, Object?>;
