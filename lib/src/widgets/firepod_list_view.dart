@@ -16,9 +16,8 @@ class FirepodListView<T extends JsonSupport> extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final database = ref.read(FirebaseProviders.database);
     return FirebaseDatabaseListView(
-      query: database.ref('v1/product').orderByChild('id'),
+      query: query,
       itemBuilder: (context, snapshot) {
         final T model = snapshotToModel(snapshot);
         return itemBuilder(model, context, ref);
