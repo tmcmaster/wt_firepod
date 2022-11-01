@@ -2,8 +2,6 @@ library wt_firepod;
 
 export 'src/firebase_init.dart';
 export 'src/firebase_providers.dart';
-export 'src/firebase_setup.dart';
-export 'src/firebase_setup.dart';
 export 'src/firepod.dart';
 export 'src/firepod_init.dart';
 export 'src/firepod_map.dart';
