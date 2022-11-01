@@ -13,6 +13,10 @@ class ToModelFromFirebase<T> extends ToModelFrom<T> {
       final map = snapshot.value as Map<dynamic, dynamic>;
       var newMap = {for (var e in map.entries) e.key.toString(): _addKeyFieldIfRequired(e.value, e.key, mapKeyField)};
 
+      if (mapKeyField != null) {
+        newMap[mapKeyField] = snapshot.key ?? '';
+      }
+
       return super.json(newMap);
     } else {
       if (super.none != null) {
