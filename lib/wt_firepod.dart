@@ -14,6 +14,7 @@ export 'src/firepod_settings.dart';
 export 'src/generic_lookup_map.dart';
 export 'src/generic_lookup_map_notifier.dart';
 export 'src/utils/to_model_from_firebase.dart';
+export 'src/utils/wait_for.dart';
 export 'src/widgets/firepod_double_view.dart';
 export 'src/widgets/firepod_list_view.dart';
 export 'src/widgets/firepod_model_view.dart';

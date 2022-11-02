@@ -6,6 +6,7 @@ class FirepodModelView<T extends JsonSupport> extends StatelessWidget {
   final T Function(DataSnapshot snapshot) snapshotToModel;
   final Widget Function(T model) itemBuilder;
 
+  // TODO: need to add an errorBuilder and a waitingBuilder
   const FirepodModelView({
     super.key,
     required this.query,
@@ -18,13 +19,19 @@ class FirepodModelView<T extends JsonSupport> extends StatelessWidget {
     return StreamBuilder(
       stream: query.onValue,
       builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return const Text(':-(');
-        } else if (snapshot.hasData) {
-          final model = snapshotToModel(snapshot.data!.snapshot);
-          return itemBuilder(model);
-        } else {
+        final connectionState = snapshot.connectionState;
+
+        if (connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
+        } else {
+          if (snapshot.hasError) {
+            return Text(':-(   ${snapshot.error}');
+          } else if (snapshot.hasData) {
+            final model = snapshotToModel(snapshot.data!.snapshot);
+            return itemBuilder(model);
+          } else {
+            return const Center(child: Text('No Data'));
+          }
         }
       },
     );
