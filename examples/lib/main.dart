@@ -3,18 +3,21 @@ import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
 import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_firepod_examples/firebase_options.dart';
+import 'package:wt_firepod_examples/pages/async_example_page.dart';
+import 'package:wt_firepod_examples/pages/database_example_page.dart';
 
 void main() {
   runMyApp(
     withFirebase(
-      andAppScaffold(
-          appDefinition: appOne,
-          loginSupport: const LoginSupport(
-            emailEnabled: true,
-            googleEnabled: true,
-          )),
       appName: 'wt-app-scaffold',
       firebaseOptions: DefaultFirebaseOptions.currentPlatform,
+      andAppScaffold(
+        appDefinition: appOne,
+        loginSupport: const LoginSupport(
+          emailEnabled: true,
+          googleEnabled: true,
+        ),
+      ),
     ),
   );
 }
@@ -41,18 +44,18 @@ final appOne = Provider<AppDefinition>(
     ),
     pages: [
       PageDefinition(
-        title: 'Page One',
+        title: 'Database',
         icon: FontAwesomeIcons.bagShopping,
         primary: true,
         debug: false,
-        builder: (_) => const PlaceholderPage(title: 'Page One'),
+        builder: (_) => const DatabaseExamplePage(),
       ),
       PageDefinition(
-        title: 'Page Two',
+        title: 'Async',
         icon: FontAwesomeIcons.bagShopping,
         primary: true,
         debug: false,
-        builder: (_) => const PlaceholderPage(title: 'Page Two'),
+        builder: (_) => const AsyncExamplePage(),
       ),
       PageDefinition(
         title: 'Settings',

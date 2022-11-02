@@ -30,11 +30,16 @@ dependencies:
     git: git@github.com:tmcmaster/wt-app-scaffold.git
   wt_firepod:
     git: git@github.com:tmcmaster/wt_firepod.git
+  wt_action_button:
+    git: git@github.com:tmcmaster/wt_action_button.git
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  build_runner:
+  freezed:
+  json_serializable:
 flutter:
   uses-material-design: true
   assets:
