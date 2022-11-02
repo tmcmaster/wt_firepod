@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>626479055094-qih6hfrg4cppf316rru2i7orreprbh7h.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.626479055094-qih6hfrg4cppf316rru2i7orreprbh7h</string>
+	<key>API_KEY</key>
+	<string>AIzaSyByITq8sLhkhs6RsZ8Rr0JdbLU2KSr9UNI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>626479055094</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>net.wonkytech.wtFirepodExamples</string>
+	<key>PROJECT_ID</key>
+	<string>wt-app-scaffold</string>
+	<key>STORAGE_BUCKET</key>
+	<string>wt-app-scaffold.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:626479055094:ios:ca4efd71178bcf50952cd7</string>
+	<key>DATABASE_URL</key>
+	<string>https://wt-app-scaffold-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
