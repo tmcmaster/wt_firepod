@@ -1013,18 +1013,16 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "8249650aa76dd218c41f5500f6813e1ef00562f2"
+      resolved-ref: "628d676a317f64593a522266b6371c457db3ce46"
       url: "git@github.com:tmcmaster/wt-app-scaffold.git"
     source: git
     version: "0.0.5"
   wt_firepod:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "8468f091f61be57dc5b8de3fbb7ea3e0811265cd"
-      url: "git@github.com:tmcmaster/wt_firepod.git"
-    source: git
+      path: ".."
+      relative: true
+    source: path
     version: "0.0.1"
   wt_models:
     dependency: transitive

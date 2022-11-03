@@ -6,7 +6,7 @@ part 'product.freezed.dart';
 part 'product.g.dart';
 
 @freezed
-class Product with _$Product, JsonSupport, IdSupport<Product> {
+class Product extends IdJsonSupport<Product> with _$Product {
   static final from = ToModelFromFirebase<Product>(json: _Product.fromJson, titles: _titles);
   static final to = FromModelTo<Product>(titles: _titles);
 

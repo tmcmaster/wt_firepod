@@ -44,3 +44,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
+
+dependency_overrides:
+  wt_firepod:
+    path: ..
