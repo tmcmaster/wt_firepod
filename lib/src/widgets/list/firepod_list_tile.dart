@@ -1,0 +1,69 @@
+import 'package:wt_firepod/wt_firepod.dart';
+import 'package:wt_models/wt_models.dart';
+
+class FirepodListTile<T extends IdJsonSupport> extends StatefulWidget {
+  final T model;
+  final Widget Function(T model, BuildContext context) itemBuilder;
+  final void Function(T model, BuildContext context)? onDelete;
+  final void Function(T model, BuildContext context)? onEdit;
+  final void Function(T model, BuildContext context)? onTap;
+  final void Function(T model, bool selected, BuildContext context)? onSelect;
+  final bool initSelected;
+  const FirepodListTile({
+    super.key,
+    required this.model,
+    required this.itemBuilder,
+    this.onDelete,
+    this.onEdit,
+    this.onTap,
+    this.onSelect,
+    this.initSelected = false,
+  });
+
+  @override
+  State<FirepodListTile<T>> createState() => _FirepodListTileState<T>();
+}
+
+class _FirepodListTileState<T extends IdJsonSupport> extends State<FirepodListTile<T>> {
+  bool? selected;
+
+  @override
+  Widget build(BuildContext context) {
+    final item = ListTile(
+      leading: widget.onSelect == null
+          ? null
+          : Checkbox(
+              value: selected ?? widget.initSelected,
+              onChanged: (value) {
+                widget.onSelect?.call(widget.model, value ?? false, context);
+                setState(() {
+                  selected = value ?? false;
+                });
+              },
+            ),
+      title: widget.itemBuilder(widget.model, context),
+      trailing: widget.onEdit == null
+          ? null
+          : IconButton(
+              onPressed: () => widget.onEdit?.call(widget.model, context),
+              icon: const Icon(Icons.edit),
+            ),
+    );
+    final tile = widget.onDelete == null
+        ? item
+        : Dismissible(
+            background: Container(color: Colors.red),
+            onDismissed: (direction) {
+              widget.onDelete?.call(widget.model, context);
+            },
+            key: ValueKey(widget.model.getId()),
+            child: item,
+          );
+    return widget.onTap == null
+        ? tile
+        : GestureDetector(
+            onTap: () => widget.onTap?.call(widget.model, context),
+            child: tile,
+          );
+  }
+}

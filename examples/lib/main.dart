@@ -5,6 +5,7 @@ import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_firepod_examples/firebase_options.dart';
 import 'package:wt_firepod_examples/pages/async_example_page.dart';
 import 'package:wt_firepod_examples/pages/database_example_page.dart';
+import 'package:wt_firepod_examples/pages/form_example_page.dart';
 
 void main() {
   runMyApp(
@@ -43,6 +44,13 @@ final appOne = Provider<AppDefinition>(
       ),
     ),
     pages: [
+      PageDefinition(
+        title: 'Form',
+        icon: FontAwesomeIcons.database,
+        primary: true,
+        debug: false,
+        builder: (_) => FormExamplePage(),
+      ),
       PageDefinition(
         title: 'Database',
         icon: FontAwesomeIcons.bagShopping,

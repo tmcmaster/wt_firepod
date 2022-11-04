@@ -26,6 +26,10 @@ dependencies:
   firebase_ui_oauth_facebook: ^1.0.3
   firebase_ui_oauth_twitter: ^1.0.3
   firebase_ui_database: ^1.0.3
+  flutter_form_builder:
+  form_builder_validators:
+  flutter_animated_dialog:
+  logger:
   wt_app_scaffold:
     git: git@github.com:tmcmaster/wt-app-scaffold.git
   wt_firepod:
@@ -48,3 +52,5 @@ flutter:
 dependency_overrides:
   wt_firepod:
     path: ..
+  wt_app_scaffold:
+    path: ../../wt-app-scaffold
