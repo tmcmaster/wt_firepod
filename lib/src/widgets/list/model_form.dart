@@ -187,6 +187,7 @@ class _ModelFormState extends State<ModelForm> {
       log.d('Added an ID to the item: ${map['id']}');
     }
 
+    print(map);
     widget.persistItem(map);
   }
 }

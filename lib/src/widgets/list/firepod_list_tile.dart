@@ -3,11 +3,11 @@ import 'package:wt_models/wt_models.dart';
 
 class FirepodListTile<T extends IdJsonSupport> extends StatefulWidget {
   final T model;
-  final Widget Function(T model, BuildContext context) itemBuilder;
-  final void Function(T model, BuildContext context)? onDelete;
-  final void Function(T model, BuildContext context)? onEdit;
-  final void Function(T model, BuildContext context)? onTap;
-  final void Function(T model, bool selected, BuildContext context)? onSelect;
+  final Widget Function(T model) itemBuilder;
+  final void Function(T model)? onDelete;
+  final void Function(T model)? onEdit;
+  final void Function(T model)? onTap;
+  final void Function(T model, bool selected)? onSelect;
   final bool initSelected;
   const FirepodListTile({
     super.key,
@@ -35,17 +35,17 @@ class _FirepodListTileState<T extends IdJsonSupport> extends State<FirepodListTi
           : Checkbox(
               value: selected ?? widget.initSelected,
               onChanged: (value) {
-                widget.onSelect?.call(widget.model, value ?? false, context);
+                widget.onSelect?.call(widget.model, value ?? false);
                 setState(() {
                   selected = value ?? false;
                 });
               },
             ),
-      title: widget.itemBuilder(widget.model, context),
+      title: widget.itemBuilder(widget.model),
       trailing: widget.onEdit == null
           ? null
           : IconButton(
-              onPressed: () => widget.onEdit?.call(widget.model, context),
+              onPressed: () => widget.onEdit?.call(widget.model),
               icon: const Icon(Icons.edit),
             ),
     );
@@ -54,7 +54,7 @@ class _FirepodListTileState<T extends IdJsonSupport> extends State<FirepodListTi
         : Dismissible(
             background: Container(color: Colors.red),
             onDismissed: (direction) {
-              widget.onDelete?.call(widget.model, context);
+              widget.onDelete?.call(widget.model);
             },
             key: ValueKey(widget.model.getId()),
             child: item,
@@ -62,7 +62,7 @@ class _FirepodListTileState<T extends IdJsonSupport> extends State<FirepodListTi
     return widget.onTap == null
         ? tile
         : GestureDetector(
-            onTap: () => widget.onTap?.call(widget.model, context),
+            onTap: () => widget.onTap?.call(widget.model),
             child: tile,
           );
   }

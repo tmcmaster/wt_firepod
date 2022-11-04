@@ -1,7 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:wt_models/wt_models.dart';
 
-class ToModelFromFirebase<T> extends ToModelFrom<T> {
+class ToModelFromFirebase<T extends IdJsonSupport<T>> extends ToModelFrom<T> {
   final String idField;
 
   ToModelFromFirebase({

@@ -6,7 +6,7 @@ import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_firepod_examples/models/product.dart';
 
 final selectedItemsProvider =
-    StateNotifierProvider<SelectedItems<Product>, Set<Product>>((ref) => SelectedItems<Product>());
+    StateNotifierProvider<FirepodSelectedItems<Product>, Set<Product>>((ref) => FirepodSelectedItems<Product>());
 
 const debug = false;
 
@@ -149,22 +149,5 @@ class _FormExamplePageState extends State<FormExamplePage> {
     Map<String, dynamic> map = {..._formKey.currentState!.value};
     final product = Product.from.json(map);
     log.d(product);
-  }
-}
-
-class SelectedItemsView extends ConsumerWidget {
-  const SelectedItemsView({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final selected = ref.watch(selectedItemsProvider);
-
-    return Consumer(
-      builder: (_, ref, __) => Row(
-        children: selected.map((i) => Text(i.title)).toList(),
-      ),
-    );
   }
 }

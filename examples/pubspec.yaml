@@ -36,6 +36,8 @@ dependencies:
     git: git@github.com:tmcmaster/wt_firepod.git
   wt_action_button:
     git: git@github.com:tmcmaster/wt_action_button.git
+  wt_models:
+    git: git@github.com:tmcmaster/wt_models.git
 
 dev_dependencies:
   flutter_test:
@@ -54,3 +56,5 @@ dependency_overrides:
     path: ..
   wt_app_scaffold:
     path: ../../wt-app-scaffold
+  wt_models:
+    path: ../../wt_models

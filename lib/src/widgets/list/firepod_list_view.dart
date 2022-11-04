@@ -4,33 +4,18 @@ import 'package:wt_firepod/src/widgets/list/firepod_list_tile.dart';
 import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_models/wt_models.dart';
 
-class SelectedItems<T extends IdSupport> extends StateNotifier<Set<T>> {
-  SelectedItems() : super({});
-
-  bool isSelected(T item) {
-    return state.contains(item);
-  }
-
-  void add(T item) {
-    state = {...state, item};
-    print(state);
-  }
-
-  void remove(T item) {
-    state = {...state..remove(item)};
-    print(state);
-  }
-}
-
-class FirepodListView<T extends IdJsonSupport> extends StatelessWidget {
-  final DatabaseReference table;
+class FirepodListView<T extends IdJsonSupport<T>> extends ConsumerWidget {
+  final DatabaseReference Function(FirebaseDatabase database) table;
   final Query Function(DatabaseReference table) query;
   final T Function(DataSnapshot snapshot) snapshotToModel;
   final Widget Function(T model, BuildContext context) itemBuilder;
-  final SelectedItems<T> selection;
+  final StateNotifierProvider<FirepodSelectedItems<T>, Set<T>> selection;
   final Map<String, ModelFormDefinition<dynamic>> formItemDefinitions;
   final T Function(Map<String, dynamic> json) mapToItem;
   final Map<String, dynamic> Function(T item) itemToMap;
+  final void Function(T item)? onSelect;
+  final bool canSelect;
+  final bool canEdit;
 
   const FirepodListView({
     super.key,
@@ -42,27 +27,32 @@ class FirepodListView<T extends IdJsonSupport> extends StatelessWidget {
     required this.formItemDefinitions,
     required this.mapToItem,
     required this.itemToMap,
+    this.onSelect,
+    this.canSelect = false,
+    this.canEdit = false,
   });
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final database = ref.read(FirebaseProviders.database);
+    final selectionNotifier = ref.read(selection.notifier);
     return FirebaseDatabaseListView(
-      query: query(table),
+      query: query(table(database)),
       itemBuilder: (context, snapshot) {
         final T model = snapshotToModel(snapshot);
         return FirepodListTile<T>(
           model: model,
-          itemBuilder: itemBuilder,
-          onDelete: onDelete,
-          onTap: onTap,
-          onEdit: onEdit,
-          onSelect: onSelect,
-          initSelected: selection.isSelected(model),
+          itemBuilder: (model) => itemBuilder(model, context),
+          onDelete: (model) => _onDelete(model, table(database), context),
+          onTap: (model) => onSelect?.call(model),
+          onEdit: canEdit ? (model) => _onEdit(model, table(database), context) : null,
+          onSelect: canSelect ? (model, isSelected) => _onSelect(model, isSelected, selectionNotifier) : null,
+          initSelected: selectionNotifier.isSelected(model),
         );
       },
     );
   }
 
-  void onSelect(T model, bool selected, BuildContext context) {
+  void _onSelect(T model, bool selected, FirepodSelectedItems selection) {
     print('Selecting $model : $selected');
     if (selected) {
       selection.add(model);
@@ -71,7 +61,7 @@ class FirepodListView<T extends IdJsonSupport> extends StatelessWidget {
     }
   }
 
-  void onEdit(T model, BuildContext context) {
+  void _onEdit(T model, DatabaseReference table, BuildContext context) {
     showAnimatedDialog(
       context: context,
       barrierDismissible: true,
@@ -89,7 +79,8 @@ class FirepodListView<T extends IdJsonSupport> extends StatelessWidget {
             itemToMap: itemToMap,
             formItemDefinitions: formItemDefinitions,
             onSubmit: (item) {
-              print(item);
+              print('onSubmit Edited: $item');
+              _update(item, table);
             },
           ),
         );
@@ -97,10 +88,26 @@ class FirepodListView<T extends IdJsonSupport> extends StatelessWidget {
     );
   }
 
-  void onDelete(T model, BuildContext context) {
+  void _onDelete(T model, DatabaseReference table, BuildContext context) {
     table.child(model.getId()).remove();
-    // TODO: need to add a toast with notification of delete, and an undo option.
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        action: SnackBarAction(
+          label: 'UNDO',
+          textColor: Colors.white,
+          onPressed: () => _update(model, table),
+        ),
+        content: Text('Deleted: $model'),
+        backgroundColor: Colors.orange,
+      ),
+    );
   }
 
-  void onTap(T model, BuildContext context) {}
+  void _update(T model, DatabaseReference table) {
+    print('_update Edited: $model');
+    final key = model.getId();
+    final ref = table.child(key);
+    final itemMap = itemToMap(model);
+    ref.set(itemMap);
+  }
 }
