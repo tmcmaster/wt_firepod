@@ -1,10 +1,14 @@
 import 'package:firebase_ui_database/firebase_ui_database.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
+import 'package:wt_firepod/src/utils/logging.dart';
+import 'package:wt_firepod/src/widgets/list/builders/firebase_reorder_list_view.dart';
 import 'package:wt_firepod/src/widgets/list/firepod_list_tile.dart';
 import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_models/wt_models.dart';
 
-class FirepodListView<T extends IdJsonSupport<T>> extends ConsumerWidget {
+class FirepodListView<T extends OrderTitleIdJsonSupport<T>> extends ConsumerWidget {
+  static final log = logger(FirepodListView);
+
   final DatabaseReference Function(FirebaseDatabase database) table;
   final Query Function(DatabaseReference table) query;
   final T Function(DataSnapshot snapshot) snapshotToModel;
@@ -16,6 +20,7 @@ class FirepodListView<T extends IdJsonSupport<T>> extends ConsumerWidget {
   final void Function(T item)? onSelect;
   final bool canSelect;
   final bool canEdit;
+  final bool canReorder;
 
   const FirepodListView({
     super.key,
@@ -30,25 +35,72 @@ class FirepodListView<T extends IdJsonSupport<T>> extends ConsumerWidget {
     this.onSelect,
     this.canSelect = false,
     this.canEdit = false,
+    this.canReorder = true,
   });
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final database = ref.read(FirebaseProviders.database);
     final selectionNotifier = ref.read(selection.notifier);
-    return FirebaseDatabaseListView(
-      query: query(table(database)),
-      itemBuilder: (context, snapshot) {
-        final T model = snapshotToModel(snapshot);
-        return FirepodListTile<T>(
-          model: model,
-          itemBuilder: (model) => itemBuilder(model, context),
-          onDelete: (model) => _onDelete(model, table(database), context),
-          onTap: (model) => onSelect?.call(model),
-          onEdit: canEdit ? (model) => _onEdit(model, table(database), context) : null,
-          onSelect: canSelect ? (model, isSelected) => _onSelect(model, isSelected, selectionNotifier) : null,
-          initSelected: selectionNotifier.isSelected(model),
-        );
-      },
+    final tableRef = table(database);
+    final queryRef = query(tableRef);
+    return canReorder
+        ? FirebaseReorderDatabaseListView(
+            query: queryRef,
+            itemBuilder: (context, snapshot) => _buildItem(
+              context,
+              tableRef,
+              snapshot,
+              selectionNotifier,
+              const EdgeInsets.only(right: 20),
+            ),
+            onReorder: (srcDoc, newOrder) => _reorderItem(srcDoc, newOrder, tableRef),
+          )
+        : FirebaseDatabaseListView(
+            query: queryRef,
+            itemBuilder: (context, snapshot) => _buildItem(
+              context,
+              tableRef,
+              snapshot,
+              selectionNotifier,
+              EdgeInsets.zero,
+            ),
+          );
+  }
+
+  void _reorderItem(
+    DataSnapshot sourceDoc,
+    double newOrder,
+    DatabaseReference tableRef,
+  ) {
+    final key = sourceDoc.key;
+    if (key != null) {
+      final itemMap = sourceDoc.value as Map;
+      itemMap['order'] = newOrder;
+      final ref = tableRef.child(key);
+      ref.set(itemMap);
+    } else {
+      log.w('Could not reorder item because it did not have an id key.');
+    }
+  }
+
+  Widget _buildItem(
+    BuildContext context,
+    DatabaseReference table,
+    DataSnapshot snapshot,
+    FirepodSelectedItems<T> selectionNotifier,
+    EdgeInsets padding,
+  ) {
+    final T model = snapshotToModel(snapshot);
+    return FirepodListTile<T>(
+      key: ValueKey(model.getId()),
+      model: model,
+      itemBuilder: (model) => itemBuilder(model, context),
+      onDelete: (model) => _onDelete(model, table, context),
+      onTap: (model) => onSelect?.call(model),
+      onEdit: canEdit ? (model) => _onEdit(model, table, context) : null,
+      onSelect: canSelect ? (model, isSelected) => _onSelect(model, isSelected, selectionNotifier) : null,
+      initSelected: selectionNotifier.isSelected(model),
+      padding: padding,
     );
   }
 

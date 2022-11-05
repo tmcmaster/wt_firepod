@@ -9,6 +9,7 @@ class FirepodListTile<T extends IdJsonSupport> extends StatefulWidget {
   final void Function(T model)? onTap;
   final void Function(T model, bool selected)? onSelect;
   final bool initSelected;
+  final EdgeInsets padding;
   const FirepodListTile({
     super.key,
     required this.model,
@@ -18,6 +19,7 @@ class FirepodListTile<T extends IdJsonSupport> extends StatefulWidget {
     this.onTap,
     this.onSelect,
     this.initSelected = false,
+    this.padding = const EdgeInsets.all(0.0),
   });
 
   @override
@@ -29,25 +31,28 @@ class _FirepodListTileState<T extends IdJsonSupport> extends State<FirepodListTi
 
   @override
   Widget build(BuildContext context) {
-    final item = ListTile(
-      leading: widget.onSelect == null
-          ? null
-          : Checkbox(
-              value: selected ?? widget.initSelected,
-              onChanged: (value) {
-                widget.onSelect?.call(widget.model, value ?? false);
-                setState(() {
-                  selected = value ?? false;
-                });
-              },
-            ),
-      title: widget.itemBuilder(widget.model),
-      trailing: widget.onEdit == null
-          ? null
-          : IconButton(
-              onPressed: () => widget.onEdit?.call(widget.model),
-              icon: const Icon(Icons.edit),
-            ),
+    final item = Padding(
+      padding: widget.padding,
+      child: ListTile(
+        leading: widget.onSelect == null
+            ? null
+            : Checkbox(
+                value: selected ?? widget.initSelected,
+                onChanged: (value) {
+                  widget.onSelect?.call(widget.model, value ?? false);
+                  setState(() {
+                    selected = value ?? false;
+                  });
+                },
+              ),
+        title: widget.itemBuilder(widget.model),
+        trailing: widget.onEdit == null
+            ? null
+            : IconButton(
+                onPressed: () => widget.onEdit?.call(widget.model),
+                icon: const Icon(Icons.edit),
+              ),
+      ),
     );
     final tile = widget.onDelete == null
         ? item

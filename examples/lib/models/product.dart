@@ -6,7 +6,7 @@ part 'product.freezed.dart';
 part 'product.g.dart';
 
 @freezed
-class Product extends TitleIdJsonSupport<Product> with _$Product {
+class Product extends OrderTitleIdJsonSupport<Product> with _$Product {
   static final from = ToModelFromFirebase<Product>(json: _Product.fromJson, titles: _titles);
   static final to = FromModelToFirebase<Product>(titles: _titles);
 
@@ -15,6 +15,7 @@ class Product extends TitleIdJsonSupport<Product> with _$Product {
   factory Product({
     @JsonKey(name: 'id') required String id,
     @JsonKey(name: 'title') required String title,
+    @JsonKey(name: 'order') required double order,
     @JsonKey(name: 'price') required double price,
     @JsonKey(name: 'weight') required double weight,
   }) = _Product;
@@ -28,4 +29,7 @@ class Product extends TitleIdJsonSupport<Product> with _$Product {
 
   @override
   String getTitle() => title ?? '';
+
+  @override
+  double getOrder() => order;
 }

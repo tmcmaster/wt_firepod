@@ -1,7 +1,7 @@
 import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_models/wt_models.dart';
 
-class FirepodListDefinition<T extends IdJsonSupport<T>> {
+class FirepodListDefinition<T extends OrderTitleIdJsonSupport<T>> {
   final StateNotifierProvider<FirepodSelectedItems<T>, Set<T>> selection =
       StateNotifierProvider<FirepodSelectedItems<T>, Set<T>>(
     (ref) => FirepodSelectedItems<T>(),
@@ -28,6 +28,7 @@ class FirepodListDefinition<T extends IdJsonSupport<T>> {
   Widget component({
     bool canSelect = false,
     bool canEdit = false,
+    bool canReorder = false,
     void Function(T item)? onSelect,
   }) {
     return FirepodListView<T>(
@@ -42,6 +43,7 @@ class FirepodListDefinition<T extends IdJsonSupport<T>> {
       canSelect: canSelect,
       canEdit: canEdit,
       onSelect: onSelect,
+      canReorder: canReorder,
     );
   }
 }

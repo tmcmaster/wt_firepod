@@ -1,8 +1,8 @@
 import 'package:wt_action_button/action_process_indicator.dart';
 import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_firepod_examples/actions/database_action.dart';
-import 'package:wt_firepod_examples/definitions/data_definitions.dart';
 import 'package:wt_firepod_examples/forms/product_form.dart';
+import 'package:wt_firepod_examples/models/definitions/data_definitions.dart';
 import 'package:wt_firepod_examples/models/product.dart';
 import 'package:wt_firepod_examples/widgets/product_list_tile.dart';
 import 'package:wt_firepod_examples/widgets/selected_item_view.dart';
@@ -76,8 +76,9 @@ class DatabaseExamplePage extends ConsumerWidget {
               height: 350,
               width: double.infinity,
               child: DataDefinitions.allProducts.component(
-                canEdit: true,
+                canEdit: false,
                 canSelect: false,
+                canReorder: true,
                 onSelect: (model) {
                   print('Selected: $model');
                 },

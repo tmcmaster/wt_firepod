@@ -24,6 +24,8 @@ mixin _$Product {
   String get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'title')
   String get title => throw _privateConstructorUsedError;
+  @JsonKey(name: 'order')
+  double get order => throw _privateConstructorUsedError;
   @JsonKey(name: 'price')
   double get price => throw _privateConstructorUsedError;
   @JsonKey(name: 'weight')
@@ -42,6 +44,7 @@ abstract class $ProductCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'id') String id,
       @JsonKey(name: 'title') String title,
+      @JsonKey(name: 'order') double order,
       @JsonKey(name: 'price') double price,
       @JsonKey(name: 'weight') double weight});
 }
@@ -61,6 +64,7 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
   $Res call({
     Object? id = null,
     Object? title = null,
+    Object? order = null,
     Object? price = null,
     Object? weight = null,
   }) {
@@ -73,6 +77,10 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
+      order: null == order
+          ? _value.order
+          : order // ignore: cast_nullable_to_non_nullable
+              as double,
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -95,6 +103,7 @@ abstract class _$$_ProductCopyWith<$Res> implements $ProductCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'id') String id,
       @JsonKey(name: 'title') String title,
+      @JsonKey(name: 'order') double order,
       @JsonKey(name: 'price') double price,
       @JsonKey(name: 'weight') double weight});
 }
@@ -111,6 +120,7 @@ class __$$_ProductCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? title = null,
+    Object? order = null,
     Object? price = null,
     Object? weight = null,
   }) {
@@ -123,6 +133,10 @@ class __$$_ProductCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
+      order: null == order
+          ? _value.order
+          : order // ignore: cast_nullable_to_non_nullable
+              as double,
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -141,6 +155,7 @@ class _$_Product extends _Product {
   _$_Product(
       {@JsonKey(name: 'id') required this.id,
       @JsonKey(name: 'title') required this.title,
+      @JsonKey(name: 'order') required this.order,
       @JsonKey(name: 'price') required this.price,
       @JsonKey(name: 'weight') required this.weight})
       : super._();
@@ -155,6 +170,9 @@ class _$_Product extends _Product {
   @JsonKey(name: 'title')
   final String title;
   @override
+  @JsonKey(name: 'order')
+  final double order;
+  @override
   @JsonKey(name: 'price')
   final double price;
   @override
@@ -163,7 +181,7 @@ class _$_Product extends _Product {
 
   @override
   String toString() {
-    return 'Product(id: $id, title: $title, price: $price, weight: $weight)';
+    return 'Product(id: $id, title: $title, order: $order, price: $price, weight: $weight)';
   }
 
   @JsonKey(ignore: true)
@@ -184,6 +202,7 @@ abstract class _Product extends Product {
   factory _Product(
       {@JsonKey(name: 'id') required final String id,
       @JsonKey(name: 'title') required final String title,
+      @JsonKey(name: 'order') required final double order,
       @JsonKey(name: 'price') required final double price,
       @JsonKey(name: 'weight') required final double weight}) = _$_Product;
   _Product._() : super._();
@@ -196,6 +215,9 @@ abstract class _Product extends Product {
   @override
   @JsonKey(name: 'title')
   String get title;
+  @override
+  @JsonKey(name: 'order')
+  double get order;
   @override
   @JsonKey(name: 'price')
   double get price;

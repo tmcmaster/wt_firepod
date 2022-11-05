@@ -6,7 +6,7 @@ import 'package:wt_firepod_examples/widgets/product_list_tile.dart';
 class ProductDefinition extends FirepodListDefinition<Product> {
   ProductDefinition({
     String path = 'v1/product',
-    String orderBy = 'id',
+    String orderBy = 'title',
     String? equalTo,
   }) : super(
           table: (database) => database.ref(path),
@@ -31,6 +31,14 @@ class ProductDefinition extends FirepodListDefinition<Product> {
               validators: [
                 FormBuilderValidators.required(),
               ],
+            ),
+            'order': ModelFormDefinition<double>(
+              label: 'Order',
+              initialValue: 0.0,
+              validators: [
+                FormBuilderValidators.required(),
+              ],
+              readOnly: true,
             ),
             'price': ModelFormDefinition<double>(
               label: 'Price',

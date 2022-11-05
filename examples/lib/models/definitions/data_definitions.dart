@@ -1,8 +1,8 @@
-import 'package:wt_firepod_examples/definitions/product_definition.dart';
+import 'package:wt_firepod_examples/models/definitions/product_definition.dart';
 
 class DataDefinitions {
   static final allProducts = ProductDefinition(
-    orderBy: 'title',
+    orderBy: 'order',
   );
   static final sfProducts = ProductDefinition(
     orderBy: 'supplier',

@@ -1,0 +1,44 @@
+{
+  "001": {
+    "order": 1,
+    "price": 1,
+    "title": "Product One",
+    "weight": 10.1
+  },
+  "002": {
+    "order": 2,
+    "price": 2,
+    "title": "Product Two",
+    "weight": 20
+  },
+  "003": {
+    "order": 3,
+    "price": 30,
+    "title": "Product Three",
+    "weight": 3.3
+  },
+  "004": {
+    "order": 4,
+    "price": 40,
+    "title": "Product Four",
+    "weight": 4.4
+  },
+  "005": {
+    "order": 5,
+    "price": 50,
+    "title": "Product Five",
+    "weight": 5.5
+  },
+  "006": {
+    "order": 6,
+    "price": 60,
+    "title": "Product Six",
+    "weight": 6.6
+  },
+  "007": {
+    "order": 7,
+    "price": 70,
+    "title": "Product Seven",
+    "weight": 7.7
+  }
+}
