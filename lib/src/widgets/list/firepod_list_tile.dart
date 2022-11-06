@@ -34,6 +34,9 @@ class _FirepodListTileState<T extends IdJsonSupport> extends State<FirepodListTi
     final item = Padding(
       padding: widget.padding,
       child: ListTile(
+        contentPadding: const EdgeInsets.all(0),
+        style: ListTileStyle.list,
+        horizontalTitleGap: 0,
         leading: widget.onSelect == null
             ? null
             : Checkbox(

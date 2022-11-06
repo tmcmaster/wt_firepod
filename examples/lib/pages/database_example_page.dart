@@ -9,15 +9,6 @@ import 'package:wt_firepod_examples/widgets/selected_item_view.dart';
 
 const debug = false;
 
-final orderedListProvider = StateNotifierProvider<OrderedListNotifier<Product>, List<Product>>(
-  name: 'orderedProductListProvider',
-  (ref) => OrderedListNotifier<Product>(
-    ref,
-    snapshotList: Product.from.snapshotList,
-    path: 'v1/product',
-  ),
-);
-
 class DatabaseExamplePage extends ConsumerWidget {
   const DatabaseExamplePage({super.key});
 
@@ -25,6 +16,7 @@ class DatabaseExamplePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final databaseAction = ref.read(NormaliseOrderValuesAction.provider);
     final database = ref.read(FirebaseProviders.database);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Database Example Page'),
@@ -77,14 +69,37 @@ class DatabaseExamplePage extends ConsumerWidget {
                     product: product,
                   ),
                   selection: DataDefinitions.allProducts.selection,
+                  canReorder: false,
+                  canEdit: false,
+                  canSelect: false,
                 ),
               ),
+            if (debug) const SizedBox(height: 50),
+            if (debug)
+              Consumer(builder: (_, ref, __) {
+                print('Consumer.build');
+                final products = ref.watch(DataDefinitions.allProducts.provider);
+                return products.isEmpty ? const Text('No products yet') : ProductListTile(product: products[0]);
+              }),
+            const SizedBox(height: 50),
+            SizedBox(
+              height: 200,
+              width: double.infinity,
+              child: DataDefinitions.drivers.component(
+                canEdit: true,
+                canSelect: false,
+                canReorder: false,
+                onSelect: (model) {
+                  print('Selected: $model');
+                },
+              ),
+            ),
             const SizedBox(height: 50),
             SizedBox(
               height: 350,
               width: double.infinity,
               child: DataDefinitions.allProducts.component(
-                canEdit: false,
+                canEdit: true,
                 canSelect: false,
                 canReorder: true,
                 onSelect: (model) {

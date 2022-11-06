@@ -13,7 +13,6 @@ class ProductListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('Building: ProductListTile ${product.title}');
     return ListTile(
       title: Text(product.title),
       subtitle: Text(product.id),

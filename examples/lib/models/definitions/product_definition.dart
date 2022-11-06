@@ -6,15 +6,18 @@ import 'package:wt_firepod_examples/widgets/product_list_tile.dart';
 class ProductDefinition extends FirepodListDefinition<Product> {
   ProductDefinition({
     String path = 'v1/product',
-    String orderBy = 'title',
+    String orderBy = 'id',
     String? equalTo,
+    int Function(Product a, Product b)? sortWith,
   }) : super(
-          table: (database) => database.ref(path),
-          query: (table) =>
-              equalTo == null ? table.orderByChild(orderBy) : table.orderByChild(orderBy).equalTo(equalTo),
+          path: path,
+          orderBy: orderBy,
+          equalTo: equalTo,
           snapshotToModel: Product.from.snapshot,
           mapToItem: Product.from.json,
           itemToMap: Product.to.firebaseMap,
+          snapshotToList: Product.from.snapshotList,
+          sortWith: sortWith,
           formItemDefinitions: {
             'id': ModelFormDefinition<String>(
               label: 'ID',

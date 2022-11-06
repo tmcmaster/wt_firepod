@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:firebase_ui_database/firebase_ui_database.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:wt_firepod/src/utils/logging.dart';
 import 'package:wt_firepod/src/widgets/list/builders/firebase_reorder_list_view.dart';
@@ -35,7 +38,7 @@ class FirepodListView<T extends TitleIdJsonSupport<T>> extends ConsumerWidget {
     this.onSelect,
     this.canSelect = false,
     this.canEdit = false,
-    this.canReorder = true,
+    this.canReorder = false,
   });
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -51,7 +54,7 @@ class FirepodListView<T extends TitleIdJsonSupport<T>> extends ConsumerWidget {
               tableRef,
               snapshot,
               selectionNotifier,
-              const EdgeInsets.only(right: 20),
+              EdgeInsets.only(right: Platform.isMacOS || kIsWeb ? 40 : 0),
             ),
             onReorder: (srcDoc, newOrder) => _reorderItem(srcDoc, newOrder, tableRef),
           )
