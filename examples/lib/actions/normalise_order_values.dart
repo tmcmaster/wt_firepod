@@ -21,8 +21,9 @@ class NormaliseOrderValuesAction extends ActionButtonDefinition {
   @override
   Future<void> execute() async {
     final notifier = ref.read(progress.notifier);
-    notifier.run(() {
+    notifier.run(() async {
       try {
+        await ref.read(DataDefinitions.allProducts.provider.notifier).refresh();
         final list = ref.read(DataDefinitions.allProducts.provider);
         normaliseOrderValue(list: list, ref: ref, path: 'v1/products');
       } catch (error) {

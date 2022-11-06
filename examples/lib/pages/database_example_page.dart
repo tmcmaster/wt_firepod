@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:wt_action_button/action_process_indicator.dart';
 import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_firepod_examples/actions/normalise_order_values.dart';
@@ -16,131 +17,138 @@ class DatabaseExamplePage extends ConsumerWidget {
     final databaseAction = ref.read(NormaliseOrderValuesAction.provider);
     final database = ref.read(FirebaseProviders.database);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Database Example Page'),
+    final examples = <Example>[
+      DataDefinitionExample(
+        'Products',
+        DataDefinitions.allProducts,
+        canReorder: true,
+        canSelect: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ListView(
+      DataDefinitionExample('Suppliers', DataDefinitions.suppliers),
+      DataDefinitionExample('Drivers', DataDefinitions.drivers),
+      DataDefinitionExample('Customers', DataDefinitions.customers),
+      Example(
+        'Normalise Product Orders',
+        Column(
           children: [
-            if (debug) databaseAction.component(label: 'Read from Database'),
-            if (debug)
-              const SizedBox(
-                height: 50,
-              ),
-            if (debug)
-              SizedBox(
-                width: 100,
-                child: databaseAction.indicator(type: IndicatorType.linear),
-              ),
-            if (debug) const SizedBox(height: 50),
-            if (debug) const SizedBox(height: 50),
-            if (debug)
-              FirepodModelView(
-                query: database.ref('v1/product/003'),
-                snapshotToModel: Product.from.snapshot,
-                itemBuilder: (product) => SizedBox(
-                  width: 250,
-                  child: ProductListTile(product: product),
-                ),
-              ),
-            if (debug) const SizedBox(height: 50),
-            if (debug)
-              FirepodDoubleView(
-                query: database.ref('v1/product/002/price'),
-                itemBuilder: (value) => Text('\$${value.toStringAsFixed(2)}'),
-              ),
-            if (debug) const SizedBox(height: 50),
-            if (debug) SelectedItemsView<Product>(selection: DataDefinitions.allProducts.selection),
-            if (debug) const SizedBox(height: 50),
-            if (debug)
-              SizedBox(
-                height: 350,
-                width: double.infinity,
-                child: FirepodListView(
-                  table: (database) => database.ref('v1/product'),
-                  query: (table) => table.orderByChild('id'),
-                  snapshotToModel: Product.from.snapshot,
-                  mapToItem: Product.from.json,
-                  itemToMap: Product.to.firebaseMap,
-                  formItemDefinitions: DataDefinitions.allProducts.formItemDefinitions,
-                  itemBuilder: (product, _) => ProductListTile(
-                    product: product,
-                  ),
-                  selection: DataDefinitions.allProducts.selection,
-                  canReorder: false,
-                  canEdit: false,
-                  canSelect: false,
-                ),
-              ),
-            if (debug) const SizedBox(height: 50),
-            if (debug)
-              Consumer(builder: (_, ref, __) {
-                print('Consumer.build');
-                final products = ref.watch(DataDefinitions.allProducts.provider);
-                return products.isEmpty ? const Text('No products yet') : ProductListTile(product: products[0]);
-              }),
-            if (debug) const SizedBox(height: 50),
-            if (debug)
-              SizedBox(
-                height: 200,
-                width: double.infinity,
-                child: DataDefinitions.drivers.component(
-                  canEdit: true,
-                  canSelect: false,
-                  canReorder: false,
-                  onSelect: (model) {
-                    print('Selected: $model');
-                  },
-                ),
-              ),
-            if (debug) const SizedBox(height: 50),
-            if (debug)
-              SizedBox(
-                height: 200,
-                width: double.infinity,
-                child: DataDefinitions.customers.component(
-                  canEdit: true,
-                  canSelect: false,
-                  canReorder: false,
-                  onSelect: (model) {
-                    print('Selected: $model');
-                  },
-                ),
-              ),
-            if (debug) const SizedBox(height: 50),
-            if (debug)
-              SizedBox(
-                height: 350,
-                width: double.infinity,
-                child: DataDefinitions.allProducts.component(
-                  canEdit: true,
-                  canSelect: false,
-                  canReorder: true,
-                  onSelect: (model) {
-                    print('Selected: $model');
-                  },
-                ),
-              ),
-            const SizedBox(height: 50),
-            SizedBox(
-              height: 250,
-              width: double.infinity,
-              child: DataDefinitions.suppliers.component(
-                canEdit: true,
-                canSelect: false,
-                canReorder: true,
-                onSelect: (model) {
-                  print('Selected: $model');
-                },
-              ),
+            databaseAction.component(label: 'Normalise Product Orders'),
+            const SizedBox(
+              height: 50,
             ),
+            databaseAction.indicator(type: IndicatorType.linear),
           ],
         ),
       ),
-      floatingActionButton: databaseAction.component(
-          floating: true, noLabel: true), // This trailing comma makes auto-formatting nicer for build methods.
+      Example(
+        'ProductListTile',
+        FirepodModelView(
+          query: database.ref('v1/product/003'),
+          snapshotToModel: Product.from.snapshot,
+          itemBuilder: (product) => SizedBox(
+            width: 250,
+            child: ProductListTile(product: product),
+          ),
+        ),
+      ),
+      Example(
+        'FirepodDoubleView',
+        FirepodDoubleView(
+          query: database.ref('v1/product/002/price'),
+          itemBuilder: (value) => Text('\$${value.toStringAsFixed(2)}'),
+        ),
+      ),
+      Example(
+        'SelectedItemsView',
+        SelectedItemsView<Product>(selection: DataDefinitions.allProducts.selection),
+      ),
+      Example(
+        'FirepodListView(Product)',
+        SizedBox(
+          height: 350,
+          width: double.infinity,
+          child: FirepodListView(
+            table: (database) => database.ref('v1/product'),
+            query: (table) => table.orderByChild('id'),
+            snapshotToModel: Product.from.snapshot,
+            mapToItem: Product.from.json,
+            itemToMap: Product.to.firebaseMap,
+            formItemDefinitions: DataDefinitions.allProducts.formItemDefinitions,
+            itemBuilder: (product, _) => ProductListTile(
+              product: product,
+            ),
+            selection: DataDefinitions.allProducts.selection,
+            canReorder: false,
+            canEdit: false,
+            canSelect: false,
+          ),
+        ),
+      ),
+      Example(
+        'RiverpodList(Product)',
+        Consumer(builder: (_, ref, __) {
+          print('Consumer.build');
+          final products = ref.watch(DataDefinitions.allProducts.provider);
+          return products.isEmpty ? const Text('No products yet') : ProductListTile(product: products[0]);
+        }),
+      ),
+    ];
+
+    return DefaultTabController(
+      length: examples.length,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Database Example Page'),
+          bottom: TabBar(
+            isScrollable: true,
+            tabs: examples
+                .map((e) => Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Text(e.title),
+                    ))
+                .toList(),
+          ),
+          backgroundColor: Colors.teal,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: TabBarView(
+            physics: const BouncingScrollPhysics(),
+            dragStartBehavior: DragStartBehavior.down,
+            children: examples.map((e) => e.widget).toList(),
+          ),
+        ),
+      ),
     );
   }
+}
+
+class DataDefinitionExample extends Example {
+  DataDefinitionExample(
+    String title,
+    FirepodListDefinition definition, {
+    bool canEdit = true,
+    bool canSelect = false,
+    bool canReorder = false,
+  }) : super(
+          title,
+          SizedBox(
+            height: 200,
+            width: double.infinity,
+            child: definition.component(
+              canEdit: canEdit,
+              canSelect: canSelect,
+              canReorder: canReorder,
+              onSelect: (model) {
+                print('Selected: $model');
+              },
+            ),
+          ),
+        );
+}
+
+class Example {
+  final String title;
+  final Widget widget;
+
+  Example(this.title, this.widget);
 }

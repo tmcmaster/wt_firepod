@@ -6,7 +6,7 @@ import 'package:wt_firepod_examples/widgets/customer_list_tile.dart';
 class CustomerDefinition extends FirepodListDefinition<Customer> {
   CustomerDefinition({
     String path = 'v1/customer',
-    String orderBy = 'name',
+    String orderBy = 'order',
     String? equalTo,
     int Function(Customer a, Customer b)? sortWith,
   }) : super(
@@ -46,7 +46,7 @@ class CustomerDefinition extends FirepodListDefinition<Customer> {
             ),
             'email': ModelFormDefinition<String>(
               type: TextInputType.emailAddress,
-              label: 'Phone',
+              label: 'Email',
               initialValue: '',
               validators: [
                 FormBuilderValidators.required(),

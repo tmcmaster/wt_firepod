@@ -5,7 +5,7 @@ import 'package:wt_firepod_examples/models/definitions/supplier_definition.dart'
 
 class DataDefinitions {
   static final customers = CustomerDefinition(
-    orderBy: 'name',
+    orderBy: 'order',
   );
   static final suppliers = SupplierDefinition(
     orderBy: 'name',
@@ -14,7 +14,7 @@ class DataDefinitions {
     orderBy: 'name',
   );
   static final allProducts = ProductDefinition(
-    orderBy: 'title',
+    orderBy: 'order',
     sortWith: (a, b) => a.weight.compareTo(b.weight),
   );
   static final sfProducts = ProductDefinition(
