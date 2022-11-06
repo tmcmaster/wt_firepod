@@ -13,11 +13,11 @@ class Product extends OrderTitleIdJsonSupport<Product> with _$Product {
   static final _titles = ['id', 'title', 'price', 'weight'];
 
   factory Product({
-    @JsonKey(name: 'id') required String id,
-    @JsonKey(name: 'title') required String title,
-    @JsonKey(name: 'order') required double order,
-    @JsonKey(name: 'price') required double price,
-    @JsonKey(name: 'weight') required double weight,
+    @JsonKey(name: 'id', defaultValue: '') required String id,
+    @JsonKey(name: 'title', defaultValue: '') required String title,
+    @JsonKey(name: 'order', defaultValue: 0.0) required double order,
+    @JsonKey(name: 'price', defaultValue: 0.0) required double price,
+    @JsonKey(name: 'weight', defaultValue: 0.0) required double weight,
   }) = _Product;
 
   Product._();

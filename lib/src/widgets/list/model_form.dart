@@ -64,7 +64,7 @@ class _ModelFormState extends State<ModelForm> {
     });
   }
 
-  double stringTpDouble(String? value) => value == null ? 0 : double.parse(value);
+  static double stringToDouble(String? value) => value == null || value.isEmpty ? 0 : double.tryParse(value) ?? 0;
 
   @override
   Widget build(BuildContext context) {
@@ -72,57 +72,34 @@ class _ModelFormState extends State<ModelForm> {
 
     final fields = widget.formItemDefinitions.keys.map((key) {
       final fieldDefinition = widget.formItemDefinitions[key];
-      // TODO: Add field type tp definition and support other types of fields
-      // TODO: need to merge these to FormBuilderTextField and do the switch on hte parameters where necessary
-      return fieldDefinition is ModelFormDefinition<String> //|| fieldDefinition is ModelFormDefinition<double>
-          ? FormBuilderTextField(
-              key: ValueKey('Form $key'),
-              autovalidateMode: AutovalidateMode.always,
-              name: key,
-              enabled: !fieldDefinition!.readOnly,
-              decoration: InputDecoration(
-                labelText: widget.formItemDefinitions[key]!.label,
-                suffixIcon: _hasError[key] ?? true
-                    ? const Icon(Icons.error, color: Colors.red)
-                    : const Icon(Icons.check, color: Colors.green),
-              ),
-              onChanged: (val) {
-                setState(() {
-                  log.d('-- Setting hasError($key): ${_hasError[key]}');
-                  _hasError[key] = !(_formKey.currentState?.fields[key]?.validate() ?? true);
-                });
-              },
-              // valueTransformer: (text) => num.tryParse(text),
-              validator: FormBuilderValidators.compose(widget.formItemDefinitions[key]!.validators),
-              initialValue: initialValues[key],
-              keyboardType: TextInputType.text,
-              textInputAction: TextInputAction.next,
-            )
-          : fieldDefinition is ModelFormDefinition<double>
-              ? FormBuilderTextField(
-                  key: ValueKey('Form $key'),
-                  autovalidateMode: AutovalidateMode.disabled,
-                  name: key,
-                  enabled: !fieldDefinition.readOnly,
-                  decoration: InputDecoration(
-                    labelText: widget.formItemDefinitions[key]!.label,
-                    suffixIcon: _hasError[key] ?? true
-                        ? const Icon(Icons.error, color: Colors.red)
-                        : const Icon(Icons.check, color: Colors.green),
-                  ),
-                  onChanged: (val) {
-                    setState(() {
-                      log.d('-- Setting hasError($key): ${_hasError[key]}');
-                      _hasError[key] = !(_formKey.currentState?.fields[key]?.validate() ?? true);
-                    });
-                  },
-                  valueTransformer: stringTpDouble,
-                  validator: FormBuilderValidators.compose(widget.formItemDefinitions[key]!.validators),
-                  initialValue: initialValues[key].toString(),
-                  keyboardType: TextInputType.number,
-                  textInputAction: TextInputAction.next,
-                )
-              : const Text('Not Supported');
+
+      // TODO: may need to extend the TextInputType enum to include more specific types like double
+      // alternatively include option transforms in the definition.
+      final isNumber = fieldDefinition!.type == TextInputType.number;
+
+      return FormBuilderTextField(
+        key: ValueKey('Form $key'),
+        autovalidateMode: AutovalidateMode.always,
+        name: key,
+        enabled: !fieldDefinition!.readOnly,
+        decoration: InputDecoration(
+          labelText: widget.formItemDefinitions[key]!.label,
+          suffixIcon: _hasError[key] ?? true
+              ? const Icon(Icons.error, color: Colors.red)
+              : const Icon(Icons.check, color: Colors.green),
+        ),
+        onChanged: (val) {
+          setState(() {
+            log.d('-- Setting hasError($key): ${_hasError[key]}');
+            _hasError[key] = !(_formKey.currentState?.fields[key]?.validate() ?? true);
+          });
+        },
+        valueTransformer: fieldDefinition.fromString ?? (isNumber ? stringToDouble : null),
+        validator: FormBuilderValidators.compose(widget.formItemDefinitions[key]!.validators),
+        initialValue: initialValues[key].toString(),
+        keyboardType: fieldDefinition.type,
+        textInputAction: TextInputAction.next,
+      );
     }).toList();
 
     return Padding(

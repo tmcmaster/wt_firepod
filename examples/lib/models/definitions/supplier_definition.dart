@@ -1,21 +1,21 @@
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:wt_firepod/wt_firepod.dart';
-import 'package:wt_firepod_examples/models/driver.dart';
-import 'package:wt_firepod_examples/widgets/driver_list_tile.dart';
+import 'package:wt_firepod_examples/models/supplier.dart';
+import 'package:wt_firepod_examples/widgets/supplier_list_tile.dart';
 
-class DriverDefinition extends FirepodListDefinition<Driver> {
-  DriverDefinition({
-    String path = 'v1/driver',
+class SupplierDefinition extends FirepodListDefinition<Supplier> {
+  SupplierDefinition({
+    String path = 'v1/supplier',
     String orderBy = 'name',
     String? equalTo,
-    int Function(Driver a, Driver b)? sortWith,
+    int Function(Supplier a, Supplier b)? sortWith,
   }) : super(
           path: path,
           orderBy: orderBy,
           equalTo: equalTo,
           sortWith: sortWith,
-          convertFrom: Driver.from,
-          convertTo: Driver.to,
+          convertFrom: Supplier.from,
+          convertTo: Supplier.to,
           formItemDefinitions: {
             'id': ModelFormDefinition<String>(
               type: TextInputType.text,
@@ -35,17 +35,17 @@ class DriverDefinition extends FirepodListDefinition<Driver> {
                 FormBuilderValidators.required(),
               ],
             ),
-            'phone': ModelFormDefinition<String>(
+            'code': ModelFormDefinition<String>(
               type: TextInputType.text,
-              label: 'Phone',
+              label: 'Code',
               initialValue: '',
               validators: [
                 FormBuilderValidators.required(),
               ],
             ),
           },
-          itemBuilder: (driver, _) => DriverListTile(
-            driver: driver,
+          itemBuilder: (supplier, _) => SupplierListTile(
+            supplier: supplier,
           ),
         );
 }

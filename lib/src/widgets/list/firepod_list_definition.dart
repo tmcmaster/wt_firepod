@@ -12,24 +12,20 @@ class FirepodListDefinition<T extends TitleIdJsonSupport<T>> {
 
   late DatabaseReference Function(FirebaseDatabase table) table;
   late Query Function(DatabaseReference table) query;
-  final T Function(DataSnapshot snapshot) snapshotToModel;
   final Widget Function(T model, BuildContext context) itemBuilder;
   final Map<String, ModelFormDefinition<dynamic>> formItemDefinitions;
-  final T Function(Map<String, dynamic> json) mapToItem;
-  final Map<String, dynamic> Function(T item) itemToMap;
-  final List<T> Function(DataSnapshot snapshot) snapshotToList;
+  final ToModelFromFirebase<T> convertFrom;
+  final FromModelToFirebase<T> convertTo;
   final int Function(T a, T b)? sortWith;
 
   FirepodListDefinition({
     required String path,
     String? orderBy,
     String? equalTo,
-    required this.snapshotToModel,
     required this.itemBuilder,
     required this.formItemDefinitions,
-    required this.mapToItem,
-    required this.itemToMap,
-    required this.snapshotToList,
+    required this.convertFrom,
+    required this.convertTo,
     required this.sortWith,
   }) {
     table = (database) => database.ref(path);
@@ -43,7 +39,7 @@ class FirepodListDefinition<T extends TitleIdJsonSupport<T>> {
       name: 'orderedProductListProvider',
       (ref) => FirepodListNotifier<T>(
         ref,
-        snapshotList: snapshotToList,
+        snapshotList: convertFrom.snapshotList,
         table: table,
         sortWith: sortWith,
       ),
@@ -59,9 +55,9 @@ class FirepodListDefinition<T extends TitleIdJsonSupport<T>> {
     return FirepodListView<T>(
       table: table,
       query: query,
-      snapshotToModel: snapshotToModel,
-      mapToItem: mapToItem,
-      itemToMap: itemToMap,
+      snapshotToModel: convertFrom.snapshot,
+      mapToItem: convertFrom.json,
+      itemToMap: convertTo.firebaseMap,
       formItemDefinitions: formItemDefinitions,
       itemBuilder: (model, context) => itemBuilder(model, context),
       selection: selection,

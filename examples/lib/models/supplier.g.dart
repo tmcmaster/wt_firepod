@@ -1,19 +1,20 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'driver.dart';
+part of 'supplier.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Driver _$$_DriverFromJson(Map<String, dynamic> json) => _$_Driver(
+_$_Supplier _$$_SupplierFromJson(Map<String, dynamic> json) => _$_Supplier(
       id: json['id'] as String? ?? '',
       name: json['name'] as String? ?? '',
-      phone: json['phone'] as String? ?? '',
+      code: json['code'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_DriverToJson(_$_Driver instance) => <String, dynamic>{
+Map<String, dynamic> _$$_SupplierToJson(_$_Supplier instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'phone': instance.phone,
+      'code': instance.code,
     };

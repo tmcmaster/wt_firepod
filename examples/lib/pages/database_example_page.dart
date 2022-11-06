@@ -1,7 +1,6 @@
 import 'package:wt_action_button/action_process_indicator.dart';
 import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_firepod_examples/actions/normalise_order_values.dart';
-import 'package:wt_firepod_examples/forms/product_form.dart';
 import 'package:wt_firepod_examples/models/definitions/data_definitions.dart';
 import 'package:wt_firepod_examples/models/product.dart';
 import 'package:wt_firepod_examples/widgets/product_list_tile.dart';
@@ -36,23 +35,24 @@ class DatabaseExamplePage extends ConsumerWidget {
                 child: databaseAction.indicator(type: IndicatorType.linear),
               ),
             if (debug) const SizedBox(height: 50),
-            const SizedBox(height: 50),
-            FirepodModelView(
-              query: database.ref('v1/product/003'),
-              snapshotToModel: Product.from.snapshot,
-              itemBuilder: (product) => SizedBox(
-                width: 250,
-                child: ProductListTile(product: product),
+            if (debug) const SizedBox(height: 50),
+            if (debug)
+              FirepodModelView(
+                query: database.ref('v1/product/003'),
+                snapshotToModel: Product.from.snapshot,
+                itemBuilder: (product) => SizedBox(
+                  width: 250,
+                  child: ProductListTile(product: product),
+                ),
               ),
-            ),
             if (debug) const SizedBox(height: 50),
             if (debug)
               FirepodDoubleView(
                 query: database.ref('v1/product/002/price'),
                 itemBuilder: (value) => Text('\$${value.toStringAsFixed(2)}'),
               ),
-            const SizedBox(height: 50),
-            SelectedItemsView<Product>(selection: DataDefinitions.allProducts.selection),
+            if (debug) const SizedBox(height: 50),
+            if (debug) SelectedItemsView<Product>(selection: DataDefinitions.allProducts.selection),
             if (debug) const SizedBox(height: 50),
             if (debug)
               SizedBox(
@@ -64,7 +64,7 @@ class DatabaseExamplePage extends ConsumerWidget {
                   snapshotToModel: Product.from.snapshot,
                   mapToItem: Product.from.json,
                   itemToMap: Product.to.firebaseMap,
-                  formItemDefinitions: productFormDefinition,
+                  formItemDefinitions: DataDefinitions.allProducts.formItemDefinitions,
                   itemBuilder: (product, _) => ProductListTile(
                     product: product,
                   ),
@@ -81,24 +81,53 @@ class DatabaseExamplePage extends ConsumerWidget {
                 final products = ref.watch(DataDefinitions.allProducts.provider);
                 return products.isEmpty ? const Text('No products yet') : ProductListTile(product: products[0]);
               }),
-            const SizedBox(height: 50),
-            SizedBox(
-              height: 200,
-              width: double.infinity,
-              child: DataDefinitions.drivers.component(
-                canEdit: true,
-                canSelect: false,
-                canReorder: false,
-                onSelect: (model) {
-                  print('Selected: $model');
-                },
+            if (debug) const SizedBox(height: 50),
+            if (debug)
+              SizedBox(
+                height: 200,
+                width: double.infinity,
+                child: DataDefinitions.drivers.component(
+                  canEdit: true,
+                  canSelect: false,
+                  canReorder: false,
+                  onSelect: (model) {
+                    print('Selected: $model');
+                  },
+                ),
               ),
-            ),
+            if (debug) const SizedBox(height: 50),
+            if (debug)
+              SizedBox(
+                height: 200,
+                width: double.infinity,
+                child: DataDefinitions.customers.component(
+                  canEdit: true,
+                  canSelect: false,
+                  canReorder: false,
+                  onSelect: (model) {
+                    print('Selected: $model');
+                  },
+                ),
+              ),
+            if (debug) const SizedBox(height: 50),
+            if (debug)
+              SizedBox(
+                height: 350,
+                width: double.infinity,
+                child: DataDefinitions.allProducts.component(
+                  canEdit: true,
+                  canSelect: false,
+                  canReorder: true,
+                  onSelect: (model) {
+                    print('Selected: $model');
+                  },
+                ),
+              ),
             const SizedBox(height: 50),
             SizedBox(
-              height: 350,
+              height: 250,
               width: double.infinity,
-              child: DataDefinitions.allProducts.component(
+              child: DataDefinitions.suppliers.component(
                 canEdit: true,
                 canSelect: false,
                 canReorder: true,

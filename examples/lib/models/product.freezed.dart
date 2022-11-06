@@ -20,15 +20,15 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Product {
-  @JsonKey(name: 'id')
+  @JsonKey(name: 'id', defaultValue: '')
   String get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'title')
+  @JsonKey(name: 'title', defaultValue: '')
   String get title => throw _privateConstructorUsedError;
-  @JsonKey(name: 'order')
+  @JsonKey(name: 'order', defaultValue: 0.0)
   double get order => throw _privateConstructorUsedError;
-  @JsonKey(name: 'price')
+  @JsonKey(name: 'price', defaultValue: 0.0)
   double get price => throw _privateConstructorUsedError;
-  @JsonKey(name: 'weight')
+  @JsonKey(name: 'weight', defaultValue: 0.0)
   double get weight => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -42,11 +42,11 @@ abstract class $ProductCopyWith<$Res> {
       _$ProductCopyWithImpl<$Res, Product>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') String id,
-      @JsonKey(name: 'title') String title,
-      @JsonKey(name: 'order') double order,
-      @JsonKey(name: 'price') double price,
-      @JsonKey(name: 'weight') double weight});
+      {@JsonKey(name: 'id', defaultValue: '') String id,
+      @JsonKey(name: 'title', defaultValue: '') String title,
+      @JsonKey(name: 'order', defaultValue: 0.0) double order,
+      @JsonKey(name: 'price', defaultValue: 0.0) double price,
+      @JsonKey(name: 'weight', defaultValue: 0.0) double weight});
 }
 
 /// @nodoc
@@ -101,11 +101,11 @@ abstract class _$$_ProductCopyWith<$Res> implements $ProductCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') String id,
-      @JsonKey(name: 'title') String title,
-      @JsonKey(name: 'order') double order,
-      @JsonKey(name: 'price') double price,
-      @JsonKey(name: 'weight') double weight});
+      {@JsonKey(name: 'id', defaultValue: '') String id,
+      @JsonKey(name: 'title', defaultValue: '') String title,
+      @JsonKey(name: 'order', defaultValue: 0.0) double order,
+      @JsonKey(name: 'price', defaultValue: 0.0) double price,
+      @JsonKey(name: 'weight', defaultValue: 0.0) double weight});
 }
 
 /// @nodoc
@@ -153,30 +153,30 @@ class __$$_ProductCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Product extends _Product {
   _$_Product(
-      {@JsonKey(name: 'id') required this.id,
-      @JsonKey(name: 'title') required this.title,
-      @JsonKey(name: 'order') required this.order,
-      @JsonKey(name: 'price') required this.price,
-      @JsonKey(name: 'weight') required this.weight})
+      {@JsonKey(name: 'id', defaultValue: '') required this.id,
+      @JsonKey(name: 'title', defaultValue: '') required this.title,
+      @JsonKey(name: 'order', defaultValue: 0.0) required this.order,
+      @JsonKey(name: 'price', defaultValue: 0.0) required this.price,
+      @JsonKey(name: 'weight', defaultValue: 0.0) required this.weight})
       : super._();
 
   factory _$_Product.fromJson(Map<String, dynamic> json) =>
       _$$_ProductFromJson(json);
 
   @override
-  @JsonKey(name: 'id')
+  @JsonKey(name: 'id', defaultValue: '')
   final String id;
   @override
-  @JsonKey(name: 'title')
+  @JsonKey(name: 'title', defaultValue: '')
   final String title;
   @override
-  @JsonKey(name: 'order')
+  @JsonKey(name: 'order', defaultValue: 0.0)
   final double order;
   @override
-  @JsonKey(name: 'price')
+  @JsonKey(name: 'price', defaultValue: 0.0)
   final double price;
   @override
-  @JsonKey(name: 'weight')
+  @JsonKey(name: 'weight', defaultValue: 0.0)
   final double weight;
 
   @override
@@ -200,29 +200,34 @@ class _$_Product extends _Product {
 
 abstract class _Product extends Product {
   factory _Product(
-      {@JsonKey(name: 'id') required final String id,
-      @JsonKey(name: 'title') required final String title,
-      @JsonKey(name: 'order') required final double order,
-      @JsonKey(name: 'price') required final double price,
-      @JsonKey(name: 'weight') required final double weight}) = _$_Product;
+      {@JsonKey(name: 'id', defaultValue: '')
+          required final String id,
+      @JsonKey(name: 'title', defaultValue: '')
+          required final String title,
+      @JsonKey(name: 'order', defaultValue: 0.0)
+          required final double order,
+      @JsonKey(name: 'price', defaultValue: 0.0)
+          required final double price,
+      @JsonKey(name: 'weight', defaultValue: 0.0)
+          required final double weight}) = _$_Product;
   _Product._() : super._();
 
   factory _Product.fromJson(Map<String, dynamic> json) = _$_Product.fromJson;
 
   @override
-  @JsonKey(name: 'id')
+  @JsonKey(name: 'id', defaultValue: '')
   String get id;
   @override
-  @JsonKey(name: 'title')
+  @JsonKey(name: 'title', defaultValue: '')
   String get title;
   @override
-  @JsonKey(name: 'order')
+  @JsonKey(name: 'order', defaultValue: 0.0)
   double get order;
   @override
-  @JsonKey(name: 'price')
+  @JsonKey(name: 'price', defaultValue: 0.0)
   double get price;
   @override
-  @JsonKey(name: 'weight')
+  @JsonKey(name: 'weight', defaultValue: 0.0)
   double get weight;
   @override
   @JsonKey(ignore: true)

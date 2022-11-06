@@ -13,14 +13,13 @@ class ProductDefinition extends FirepodListDefinition<Product> {
           path: path,
           orderBy: orderBy,
           equalTo: equalTo,
-          snapshotToModel: Product.from.snapshot,
-          mapToItem: Product.from.json,
-          itemToMap: Product.to.firebaseMap,
-          snapshotToList: Product.from.snapshotList,
+          convertFrom: Product.from,
+          convertTo: Product.to,
           sortWith: sortWith,
           formItemDefinitions: {
             'id': ModelFormDefinition<String>(
               label: 'ID',
+              type: TextInputType.text,
               isUUID: true,
               initialValue: '',
               validators: [
@@ -30,6 +29,7 @@ class ProductDefinition extends FirepodListDefinition<Product> {
             ),
             'title': ModelFormDefinition<String>(
               label: 'Title',
+              type: TextInputType.text,
               initialValue: '',
               validators: [
                 FormBuilderValidators.required(),
@@ -37,14 +37,18 @@ class ProductDefinition extends FirepodListDefinition<Product> {
             ),
             'order': ModelFormDefinition<double>(
               label: 'Order',
+              type: TextInputType.number,
               initialValue: 0.0,
               validators: [
                 FormBuilderValidators.required(),
               ],
               readOnly: true,
+              hidden: true,
             ),
             'price': ModelFormDefinition<double>(
               label: 'Price',
+              type: TextInputType.number,
+              fromString: DataTransforms.stringToDouble,
               initialValue: 0.0,
               validators: [
                 FormBuilderValidators.required(),
@@ -52,9 +56,12 @@ class ProductDefinition extends FirepodListDefinition<Product> {
             ),
             'weight': ModelFormDefinition<double>(
               label: 'Weight',
+              type: TextInputType.number,
+              fromString: DataTransforms.stringToDouble,
               initialValue: 0.0,
               validators: [
                 FormBuilderValidators.required(),
+                FormBuilderValidators.numeric(),
               ],
             ),
           },
