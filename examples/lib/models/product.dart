@@ -31,5 +31,5 @@ class Product extends OrderTitleIdJsonSupport<Product> with _$Product {
   String getTitle() => title ?? '';
 
   @override
-  double getOrder() => order;
+  double getOrder() => order ?? 0;
 }

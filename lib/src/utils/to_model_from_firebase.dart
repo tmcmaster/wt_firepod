@@ -11,6 +11,20 @@ class ToModelFromFirebase<T extends IdJsonSupport<T>> extends ToModelFrom<T> {
     super.none,
   });
 
+  List<T> snapshotList(DataSnapshot snapshot) {
+    if (snapshot.exists) {
+      final map = snapshot.value as Map<dynamic, dynamic>;
+      var newMap = _transformMap(map);
+      return newMap.values.map((e) => super.json(_transformMap(e))).toList();
+    } else {
+      return [];
+    }
+  }
+
+  Map<String, dynamic> _transformMap(Map<dynamic, dynamic> map) {
+    return {for (var e in map.entries) e.key.toString(): _addKeyFieldIfRequired(e.value, e.key, idField)};
+  }
+
   T snapshot(DataSnapshot snapshot) {
     if (snapshot.exists) {
       final map = snapshot.value as Map<dynamic, dynamic>;

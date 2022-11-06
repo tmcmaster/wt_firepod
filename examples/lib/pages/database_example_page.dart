@@ -1,6 +1,6 @@
 import 'package:wt_action_button/action_process_indicator.dart';
 import 'package:wt_firepod/wt_firepod.dart';
-import 'package:wt_firepod_examples/actions/database_action.dart';
+import 'package:wt_firepod_examples/actions/normalise_order_values.dart';
 import 'package:wt_firepod_examples/forms/product_form.dart';
 import 'package:wt_firepod_examples/models/definitions/data_definitions.dart';
 import 'package:wt_firepod_examples/models/product.dart';
@@ -9,14 +9,22 @@ import 'package:wt_firepod_examples/widgets/selected_item_view.dart';
 
 const debug = false;
 
+final orderedListProvider = StateNotifierProvider<OrderedListNotifier<Product>, List<Product>>(
+  name: 'orderedProductListProvider',
+  (ref) => OrderedListNotifier<Product>(
+    ref,
+    snapshotList: Product.from.snapshotList,
+    path: 'v1/product',
+  ),
+);
+
 class DatabaseExamplePage extends ConsumerWidget {
   const DatabaseExamplePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final databaseAction = ref.read(DatabaseAction.provider);
+    final databaseAction = ref.read(NormaliseOrderValuesAction.provider);
     final database = ref.read(FirebaseProviders.database);
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Database Example Page'),

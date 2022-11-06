@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:wt_firepod/src/utils/logging.dart';
 
 class FirebaseReorderDatabaseListView extends FirebaseDatabaseQueryBuilder {
-  static final log = logger(FirebaseReorderDatabaseListView);
+  static final log = logger(FirebaseReorderDatabaseListView, level: Level.warning);
 
   final void Function(
     DataSnapshot sourceDoc,
@@ -44,6 +44,7 @@ class FirebaseReorderDatabaseListView extends FirebaseDatabaseQueryBuilder {
           query: query,
           pageSize: pageSize,
           builder: (context, snapshot, _) {
+            print('ReorderableListView.builder');
             if (snapshot.isFetching) {
               return loadingBuilder?.call(context) ?? const Center(child: CircularProgressIndicator());
             }
@@ -59,6 +60,7 @@ class FirebaseReorderDatabaseListView extends FirebaseDatabaseQueryBuilder {
             return ReorderableListView.builder(
               itemCount: snapshot.docs.length,
               itemBuilder: (context, index) {
+                log.v('ReorderableListView.builder');
                 final isLastItem = index + 1 == snapshot.docs.length;
                 if (isLastItem && snapshot.hasMore) snapshot.fetchMore();
 
@@ -71,8 +73,10 @@ class FirebaseReorderDatabaseListView extends FirebaseDatabaseQueryBuilder {
                 final sourceDoc = snapshot.docs[oldIndex];
                 final sourceOrder = (sourceDoc.value as Map)['order'];
                 bool dragDown = (oldIndex < newIndex);
+
                 final nIndex = newIndex + (dragDown ? -1 : 0);
-                final newPrevPos = nIndex - 1;
+
+                final newPrevPos = nIndex + (dragDown ? 0 : -1);
                 final newNextPos = nIndex + 1;
 
                 log.d(

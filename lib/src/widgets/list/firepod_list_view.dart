@@ -6,7 +6,7 @@ import 'package:wt_firepod/src/widgets/list/firepod_list_tile.dart';
 import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_models/wt_models.dart';
 
-class FirepodListView<T extends OrderTitleIdJsonSupport<T>> extends ConsumerWidget {
+class FirepodListView<T extends TitleIdJsonSupport<T>> extends ConsumerWidget {
   static final log = logger(FirepodListView);
 
   final DatabaseReference Function(FirebaseDatabase database) table;

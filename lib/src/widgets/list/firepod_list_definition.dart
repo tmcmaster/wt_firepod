@@ -1,7 +1,7 @@
 import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_models/wt_models.dart';
 
-class FirepodListDefinition<T extends OrderTitleIdJsonSupport<T>> {
+class FirepodListDefinition<T extends TitleIdJsonSupport<T>> {
   final StateNotifierProvider<FirepodSelectedItems<T>, Set<T>> selection =
       StateNotifierProvider<FirepodSelectedItems<T>, Set<T>>(
     (ref) => FirepodSelectedItems<T>(),
