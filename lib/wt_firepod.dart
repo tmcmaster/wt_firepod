@@ -1,8 +1,9 @@
 library wt_firepod;
 
+export 'src/auth/auth.dart';
+export 'src/auth/login_view.dart';
 export 'src/firebase_init.dart';
 export 'src/firebase_providers.dart';
-export 'src/firepod.dart';
 export 'src/firepod_init.dart';
 export 'src/firepod_map.dart';
 export 'src/firepod_map_int.dart';
@@ -13,6 +14,7 @@ export 'src/firepod_providers.dart';
 export 'src/firepod_settings.dart';
 export 'src/generic_lookup_map.dart';
 export 'src/generic_lookup_map_notifier.dart';
+export 'src/site/site.dart';
 export 'src/utils/data_transforms.dart';
 export 'src/utils/from_model_to_firebase.dart';
 export 'src/utils/normalise_order_values.dart';

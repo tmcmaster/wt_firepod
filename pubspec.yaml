@@ -15,20 +15,23 @@ dependencies:
     git: git@github.com:tmcmaster/wt_models.git
   wt_settings:
     git: git@github.com:tmcmaster/wt_settings.git
+  wt_logging:
+    git: git@github.com:tmcmaster/wt_logging.git
 
   shared_preferences:
   crypto:
   logger:
-  riverpod: ^2.0.2
+  riverpod:
   freezed_annotation:
   font_awesome_flutter:
-  flutter_riverpod:
   hooks_riverpod:
-  firebase_core: ^2.1.1
-  firebase_auth: ^4.1.0
-  firebase_database: ^10.0.3
-  firebase_remote_config: ^3.0.3
-  cloud_functions: ^4.0.3
+  flutter_hooks:
+  flutter_riverpod:
+  firebase_core:
+  firebase_auth:
+  firebase_database:
+  firebase_remote_config:
+  cloud_functions:
   #  google_sign_in: ^5.4.2
   #  sign_in_with_apple: ^4.1.0
   firebase_ui_auth: ^1.0.3
@@ -41,6 +44,9 @@ dependencies:
   form_builder_validators:
   flutter_animated_dialog:
   uuid:
+  google_sign_in: ^5.3.1
+  sign_in_with_apple: ^4.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -48,6 +54,10 @@ dev_dependencies:
 
 flutter:
 
-dependency_overrides:
-  wt_models:
-    path: ../wt_models
+#dependency_overrides:
+#  wt_models:
+#    path: ../wt_models
+#  wt_settings:
+#    path: ../wt_settings
+#  wt_logging:
+#    path: ../wt_logging

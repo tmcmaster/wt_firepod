@@ -1,4 +1,5 @@
-import 'package:wt_firepod/wt_firepod.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/material.dart';
 import 'package:wt_models/wt_models.dart';
 
 class FirepodModelView<T extends JsonSupport> extends StatelessWidget {

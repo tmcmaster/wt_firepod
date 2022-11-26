@@ -1,4 +1,4 @@
-import 'package:wt_firepod/wt_firepod.dart';
+import 'package:flutter/material.dart';
 import 'package:wt_models/wt_models.dart';
 
 class FirepodListTile<T extends IdJsonSupport> extends StatefulWidget {
