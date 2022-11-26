@@ -197,13 +197,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
-  curved_navigation_bar:
-    dependency: transitive
-    description:
-      name: curved_navigation_bar
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.3"
   dart_style:
     dependency: transitive
     description:
@@ -225,13 +218,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.11"
-  draggable_bottom_sheet:
-    dependency: transitive
-    description:
-      name: draggable_bottom_sheet
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.2"
   email_validator:
     dependency: transitive
     description:
@@ -588,13 +574,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.0"
-  grouped_list:
-    dependency: transitive
-    description:
-      name: grouped_list
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "5.1.2"
   hooks_riverpod:
     dependency: transitive
     description:
@@ -1057,15 +1036,6 @@ packages:
       url: "git@github.com:tmcmaster/wt_action_button.git"
     source: git
     version: "0.0.2"
-  wt_app_scaffold:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: HEAD
-      resolved-ref: bed3a1ba708f37552521e3202ee1eba85b201b27
-      url: "git@github.com:tmcmaster/wt_app_scaffold.git"
-    source: git
-    version: "0.0.5"
   wt_firepod:
     dependency: "direct main"
     description:

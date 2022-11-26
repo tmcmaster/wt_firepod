@@ -30,8 +30,8 @@ dependencies:
   form_builder_validators:
   flutter_animated_dialog:
   logger:
-  wt_app_scaffold:
-    git: git@github.com:tmcmaster/wt_app_scaffold.git
+#  wt_app_scaffold:
+#    git: git@github.com:tmcmaster/wt_app_scaffold.git
   wt_firepod:
     git: git@github.com:tmcmaster/wt_firepod.git
   wt_action_button:
