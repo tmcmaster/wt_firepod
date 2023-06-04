@@ -10,6 +10,7 @@ class FirepodObject<T> {
     required T none,
     required T Function(Map<dynamic, dynamic> value) decoder,
     required String prefixPath,
+    bool watch = false,
   }) {
     value = StateNotifierProvider<StateNotifier<T>, T>(
       name: name,
@@ -18,6 +19,7 @@ class FirepodObject<T> {
         prefixPath: prefixPath,
         decoder: (value) => value == null ? none : decoder(value as Map<dynamic, dynamic>),
         none: none,
+        watch: watch,
       ),
     );
   }

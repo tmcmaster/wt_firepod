@@ -12,6 +12,7 @@ abstract class FirepodMap<T> {
     required T Function(Object? value) decoder,
     required String prefixPath,
     String? keyField,
+    bool watch = false,
   }) {
     value = StateNotifierProvider<StateNotifier<GenericLookupMap<T>>, GenericLookupMap<T>>(
       name: name,
@@ -20,6 +21,7 @@ abstract class FirepodMap<T> {
         prefixPath: prefixPath,
         decoder: GenericLookupMap.createDecoder<T>((object) => decoder(object), keyField),
         none: none,
+        watch: watch,
       ),
     );
   }
