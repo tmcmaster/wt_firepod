@@ -51,9 +51,8 @@ class GenericSiteDataNotifier<T> extends StateNotifier<T> {
         _subscription = dbRef.onChildChanged.listen((event) {
           _refreshState(dbRef, site);
         }, onError: (error) => log.e(error));
-      } else {
-        _refreshState(dbRef, site);
       }
+      _refreshState(dbRef, site);
     } else {
       log.w('There was no site selected.');
       state = none;
