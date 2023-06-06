@@ -74,6 +74,9 @@ class GenericSiteDataNotifier<T> extends StateNotifier<T> {
 
   @override
   void dispose() {
+    if (_subscription != null) {
+      _subscription!.cancel();
+    }
     _removeListener.close();
     super.dispose();
   }

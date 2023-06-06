@@ -32,3 +32,14 @@ hold
 junk
 
 firebase_options.dart
+
+# TODO: need to remove the APIs from this repo. and look into changing the API KEY.
+#lib/firebase_options.dart
+#packages/firebase/lib/firebase_options.dart
+#android/app/google-services.json
+#ios/Runner/GoogleService-Info.plist
+#ios/firebase_app_id_file.json
+#macos/Runner/GoogleService-Info.plist
+#macos/firebase_app_id_file.json
+
+examples/lib/login/app_secrets.dart
