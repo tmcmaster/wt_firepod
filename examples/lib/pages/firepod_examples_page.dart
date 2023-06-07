@@ -15,9 +15,7 @@ class FirepodExamplesPage extends ConsumerWidget {
         children: const [
           ExampleFirepodSite(),
           ExampleFirepodObject(),
-          ExampleFirepodSite(),
           ExampleFirepodMapInt(),
-          ExampleFirepodSite(),
           ExampleFirepodMapDouble(),
         ],
       ),
