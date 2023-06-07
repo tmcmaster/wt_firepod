@@ -3,35 +3,35 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_firepod_examples/pages/firepod_examples/widgets/value_and_action.dart';
 
-class ExampleFirepodMapDouble extends ConsumerWidget {
-  static const prefixPath = '/v1/testing/map-double';
+class ExampleFirepodMapString extends ConsumerWidget {
+  static const prefixPath = '/v1/testing/map-string';
 
-  static final firepodNoSiteWatch = FirepodMapDouble(
-    name: 'ExampleFirepodMapDoubleNoSiteWatch',
+  static final firepodNoSiteWatch = FirepodMapString(
+    name: 'ExampleFirepodMapStringNoSiteWatch',
     prefixPath: '$prefixPath/site1',
     watch: true,
     siteEnabled: false,
   );
-  static final firepodNoSiteNoWatch = FirepodMapDouble(
-    name: 'ExampleMapDoubleFirepodMapDoubleNoSiteNoWatch',
+  static final firepodNoSiteNoWatch = FirepodMapString(
+    name: 'ExampleMapStringFirepodMapStringNoSiteNoWatch',
     prefixPath: '$prefixPath/site1',
     watch: false,
     siteEnabled: false,
   );
-  static final firepodSiteWatch = FirepodMapDouble(
-    name: 'ExampleMapDoubleFirepodMapDoubleSiteWatch',
+  static final firepodSiteWatch = FirepodMapString(
+    name: 'ExampleMapStringFirepodMapStringSiteWatch',
     prefixPath: prefixPath,
     watch: true,
     siteEnabled: true,
   );
-  static final firepodSiteNoWatch = FirepodMapDouble(
-    name: 'ExampleMapDoubleFirepodMapDoubleSiteNoWatch',
+  static final firepodSiteNoWatch = FirepodMapString(
+    name: 'ExampleMapStringFirepodMapStringSiteNoWatch',
     prefixPath: prefixPath,
     watch: false,
     siteEnabled: true,
   );
 
-  const ExampleFirepodMapDouble({super.key});
+  const ExampleFirepodMapString({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -47,43 +47,43 @@ class ExampleFirepodMapDouble extends ConsumerWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         ValueAndAction(
-          title: 'FirepodMapDouble : no site / watch',
-          buttonText: 'Increment Test',
+          title: 'FirepodMapString : no site / watch',
+          buttonText: 'Add to Test',
           value: noSiteWatch,
           action: () {
             final newMap = {...noSiteWatch.map};
-            newMap['test'] = (newMap['test'] ?? 0) + 1;
-            noSiteWatchNotifier.update(GenericLookupMap<double>(map: newMap));
+            newMap['test'] = '${newMap['test'] ?? ''}a';
+            noSiteWatchNotifier.update(GenericLookupMap<String>(map: newMap));
           },
         ),
         ValueAndAction(
-          title: 'FirepodMapDouble : no site / no watch',
-          buttonText: 'Increment Test',
+          title: 'FirepodMapString : no site / no watch',
+          buttonText: 'Add to Test',
           value: noSiteNoWatch,
           action: () {
             final newMap = {...noSiteNoWatch.map};
-            newMap['test'] = (newMap['test'] ?? 0) + 1;
-            noSiteNoWatchNotifier.update(GenericLookupMap<double>(map: newMap));
+            newMap['test'] = '${newMap['test'] ?? ''}a';
+            noSiteNoWatchNotifier.update(GenericLookupMap<String>(map: newMap));
           },
         ),
         ValueAndAction(
-          title: 'FirepodMapDouble : site / watch',
-          buttonText: 'Increment Test',
+          title: 'FirepodMapString : site / watch',
+          buttonText: 'Add to Test',
           value: siteWatch,
           action: () {
             final newMap = {...siteWatch.map};
-            newMap['test'] = (newMap['test'] ?? 0) + 1;
-            siteWatchNotifier.update(GenericLookupMap<double>(map: newMap));
+            newMap['test'] = '${newMap['test'] ?? ''}a';
+            siteWatchNotifier.update(GenericLookupMap<String>(map: newMap));
           },
         ),
         ValueAndAction(
-          title: 'FirepodMapDouble : site / no watch',
-          buttonText: 'Increment Test',
+          title: 'FirepodMapString : site / no watch',
+          buttonText: 'Add to Test',
           value: siteNoWatch,
           action: () {
             final newMap = {...siteNoWatch.map};
-            newMap['test'] = (newMap['test'] ?? 0) + 1;
-            siteNoWatchNotifier.update(GenericLookupMap<double>(map: newMap));
+            newMap['test'] = '${newMap['test'] ?? ''}a';
+            siteNoWatchNotifier.update(GenericLookupMap<String>(map: newMap));
           },
         ),
       ],
