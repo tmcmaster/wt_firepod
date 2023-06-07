@@ -25,9 +25,17 @@ class GenericLookupMap<T> {
   static GenericLookupMap<T> Function(Object? value) createDecoder<T>(
       T Function(Object? value) decoder, String? keyField) {
     return (Object? value) => GenericLookupMap<T>(
-            map: Map.fromEntries((value as Map).entries.map((e) {
-          return MapEntry<String, T>(e.key.toString(), decoder(_addKey(e.value, e.key, keyField)));
-        })));
+          map: Map.fromEntries((value as Map).entries.map((e) {
+            return MapEntry<String, T>(
+                e.key.toString(), decoder(_addKey(e.value, e.key, keyField)));
+          })),
+        );
+  }
+
+  // TODO: need to write this properly like the function above.
+  static dynamic Function(T? value) createEncoder<T>(
+      dynamic Function(T? object) encoder, String? keyField) {
+    return (T? object) => encoder(object);
   }
 
   static Object? _addKey(Object? value, String key, String? keyField) {

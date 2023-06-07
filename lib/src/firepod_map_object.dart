@@ -9,6 +9,7 @@ class FirepodMapObject<T> extends FirepodMap<T> {
     required String name,
     required String prefixPath,
     required T Function(Map<String, dynamic> value) modelDecoder,
+    required Map<String, dynamic> Function(T object) modelEncoder,
     String? keyField,
   }) : super(
           name: name,
@@ -21,6 +22,8 @@ class FirepodMapObject<T> extends FirepodMap<T> {
             T model = modelDecoder(newMap);
             return model;
           },
+          // TODO: This encoder needs to be written properly like above.
+          encoder: (GenericLookupMap<T>? object) => object?.map,
           prefixPath: prefixPath,
           keyField: keyField,
         );

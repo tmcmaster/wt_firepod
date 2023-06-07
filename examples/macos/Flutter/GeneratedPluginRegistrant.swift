@@ -11,7 +11,7 @@ import firebase_auth
 import firebase_core
 import firebase_database
 import firebase_remote_config
-import shared_preferences_macos
+import shared_preferences_foundation
 import sign_in_with_apple
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {

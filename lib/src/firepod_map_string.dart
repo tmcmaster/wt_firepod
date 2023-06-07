@@ -10,6 +10,7 @@ class FirepodMapString extends FirepodMap<String> {
           name: name,
           none: none,
           decoder: (value) => value.toString(),
+          encoder: (object) => object.toString(),
           prefixPath: prefixPath,
         );
 }

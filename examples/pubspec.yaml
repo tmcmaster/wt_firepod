@@ -20,12 +20,12 @@ dependencies:
   firebase_database:
   firebase_remote_config:
   cloud_functions:
-  firebase_ui_auth:
-  firebase_ui_oauth_google:
-  firebase_ui_oauth_apple:
-  firebase_ui_oauth_facebook:
-  firebase_ui_oauth_twitter:
-  firebase_ui_database:
+#  firebase_ui_auth:
+#  firebase_ui_oauth_google:
+#  firebase_ui_oauth_apple:
+#  firebase_ui_oauth_facebook:
+#  firebase_ui_oauth_twitter:
+#  firebase_ui_database:
   flutter_form_builder:
   form_builder_validators:
   flutter_animated_dialog:
@@ -54,6 +54,8 @@ flutter:
 dependency_overrides:
   wt_firepod:
     path: ..
+  wt_settings:
+    path: ../../wt_settings
 #  wt_app_scaffold:
 #    path: ../../wt_app_scaffold
 #  wt_models:

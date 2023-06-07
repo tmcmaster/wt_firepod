@@ -16,7 +16,7 @@ abstract class FirepodProviders {
 }
 
 class SiteListNotifier extends StateNotifier<List<Site>?> {
-  final log = logger(SiteListNotifier);
+  final log = logger(SiteListNotifier, level: Level.debug);
 
   final Ref ref;
   late StreamSubscription _subscription;
@@ -34,17 +34,21 @@ class SiteListNotifier extends StateNotifier<List<Site>?> {
         final userId = user.uid;
         log.d('Loading site data from the database for UserId($userId)');
         // TODO may need to change this to watch for changes. Restarting the app is fine for now.
-        ref.read(FirebaseProviders.database).ref('data').child(userId).child('sites').get().then((snapshot) {
+        ref.read(FirebaseProviders.database).ref('data').child(userId).child('sites').get().then(
+            (snapshot) {
           log.d('New site data loaded from the database.');
           if (snapshot.exists) {
             final siteMap = snapshot.value as Map<Object?, Object?>;
-            state = siteMap.entries.map((e) => Site(id: e.key as String, name: e.value as String)).toList();
+            state = siteMap.entries
+                .map((e) => Site(id: e.key as String, name: e.value as String))
+                .toList();
             log.i('Updated site list.');
             if (_siteIsLoaded(site)) {
               if (_siteIsInList(site)) {
                 log.d('Site has loaded, and it appears in the new list of sites.');
               } else {
-                log.d('Site does not appear in the new list of sites, so selecting the first site in the list.');
+                log.d(
+                    'Site does not appear in the new list of sites, so selecting the first site in the list.');
                 _setSiteToFirstItemInList(siteNotifier);
               }
             } else {
@@ -52,7 +56,7 @@ class SiteListNotifier extends StateNotifier<List<Site>?> {
               siteNotifier.load();
             }
           } else {
-            log.w('Could not find the site list for user: ${user.displayName}');
+            log.w('Could not find the site list for user: ${user.displayName ?? user.uid}');
             state = [];
           }
         }, onError: (error) {

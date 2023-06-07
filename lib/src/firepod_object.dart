@@ -3,26 +3,29 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'generic_lookup_map_notifier.dart';
 
 class FirepodObject<T> {
-  late StateNotifierProvider<StateNotifier<T>, T> value;
+  late StateNotifierProvider<GenericSiteDataNotifier<T>, T> value;
 
   FirepodObject({
     required String name,
     required T none,
     required T Function(Map<dynamic, dynamic> value) decoder,
+    required dynamic Function(T model) encoder,
     required String prefixPath,
     bool watch = false,
+    bool siteEnabled = true,
   }) {
-    value = StateNotifierProvider<StateNotifier<T>, T>(
+    value = StateNotifierProvider<GenericSiteDataNotifier<T>, T>(
       name: name,
       (ref) => GenericSiteDataNotifier<T>(
-        ref: ref,
-        prefixPath: prefixPath,
-        decoder: (value) => value == null ? none : decoder(value as Map<dynamic, dynamic>),
-        none: none,
-        watch: watch,
-      ),
+          ref: ref,
+          prefixPath: prefixPath,
+          decoder: (value) => value == null ? none : decoder(value as Map<dynamic, dynamic>),
+          encoder: (T? object) => object == null ? null : encoder(object),
+          none: none,
+          watch: watch,
+          siteEnabled: siteEnabled),
     );
   }
 
-  AlwaysAliveRefreshable<StateNotifier<T>> get notifier => value.notifier;
+  AlwaysAliveRefreshable<GenericSiteDataNotifier<T>> get notifier => value.notifier;
 }
