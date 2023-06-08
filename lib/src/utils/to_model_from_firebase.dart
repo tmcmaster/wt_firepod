@@ -22,13 +22,17 @@ class ToModelFromFirebase<T extends IdJsonSupport<T>> extends ToModelFrom<T> {
   }
 
   Map<String, dynamic> _transformMap(Map<dynamic, dynamic> map) {
-    return {for (var e in map.entries) e.key.toString(): _addKeyFieldIfRequired(e.value, e.key, idField)};
+    return {
+      for (var e in map.entries) e.key.toString(): _addKeyFieldIfRequired(e.value, e.key, idField)
+    };
   }
 
   T snapshot(DataSnapshot snapshot) {
     if (snapshot.exists) {
       final map = snapshot.value as Map<dynamic, dynamic>;
-      var newMap = {for (var e in map.entries) e.key.toString(): _addKeyFieldIfRequired(e.value, e.key, idField)};
+      var newMap = {
+        for (var e in map.entries) e.key.toString(): _addKeyFieldIfRequired(e.value, e.key, idField)
+      };
 
       newMap[idField] = snapshot.key ?? '';
 
@@ -48,5 +52,11 @@ class ToModelFromFirebase<T extends IdJsonSupport<T>> extends ToModelFrom<T> {
       value[mapKeyField] = key;
     }
     return value;
+  }
+
+  static Map<String, dynamic> firebaseMapToJsonMap(Map<Object?, Object?> map) {
+    return Map.fromEntries(map.entries.map((e) {
+      return MapEntry<String, dynamic>(e.key.toString(), e.value);
+    }));
   }
 }

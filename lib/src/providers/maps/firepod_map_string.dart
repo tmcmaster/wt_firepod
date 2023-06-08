@@ -1,9 +1,9 @@
+import '../generic/generic_lookup_map.dart';
 import 'firepod_map.dart';
-import 'generic_lookup_map.dart';
 
-class FirepodMapDouble extends FirepodMap<double> {
-  static const none = GenericLookupMap<double>(map: {});
-  FirepodMapDouble({
+class FirepodMapString extends FirepodMap<String> {
+  static const none = GenericLookupMap<String>(map: {});
+  FirepodMapString({
     required String name,
     required String path,
     bool watch = true,
@@ -11,10 +11,9 @@ class FirepodMapDouble extends FirepodMap<double> {
   }) : super(
           name: name,
           none: none,
-          decoder: (value) => double.parse(value.toString()),
+          decoder: (value) => value.toString(),
           encoder: (object) => object,
           path: path,
           watch: watch,
-          siteEnabled: siteEnabled,
         );
 }

@@ -17,7 +17,6 @@ class ExampleFirepodObject extends ConsumerWidget {
     encoder: encoder,
     none: none,
     watch: true,
-    siteEnabled: false,
   );
   static final firepodNoSiteNoWatch = FirepodObject<Product>(
     name: 'ExampleFirepodObjectNoSiteNoWatch',
@@ -26,7 +25,6 @@ class ExampleFirepodObject extends ConsumerWidget {
     encoder: encoder,
     none: none,
     watch: false,
-    siteEnabled: false,
   );
   static final firepodSiteWatch = FirepodObject<Product>(
     name: 'ExampleFirepodObjectSiteWatch',
@@ -35,7 +33,6 @@ class ExampleFirepodObject extends ConsumerWidget {
     encoder: encoder,
     none: none,
     watch: true,
-    siteEnabled: true,
   );
   static final firepodSiteNoWatch = FirepodObject<Product>(
     name: 'ExampleFirepodObjectSiteNoWatch',
@@ -44,7 +41,6 @@ class ExampleFirepodObject extends ConsumerWidget {
     encoder: encoder,
     none: none,
     watch: false,
-    siteEnabled: true,
   );
 
   const ExampleFirepodObject({super.key});

@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:wt_firepod/src/firebase_providers.dart';
+import 'package:wt_firepod/src/models/site.dart';
+import 'package:wt_firepod/src/providers/firebase_providers.dart';
 import 'package:wt_logging/wt_logging.dart';
 import 'package:wt_settings/wt_settings.dart';
 
-import 'firepod_settings.dart';
-import 'site/site.dart';
+import '../settings/firepod_settings.dart';
 
 abstract class FirepodProviders {
   static final siteListProvider = StateNotifierProvider<SiteListNotifier, List<Site>?>(

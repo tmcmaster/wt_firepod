@@ -9,7 +9,7 @@ import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import 'package:wt_firepod/src/firebase_providers.dart';
+import 'package:wt_firepod/src/providers/firebase_providers.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 import 'user_auth.dart';
@@ -78,7 +78,8 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
 
   Future<UserAuthResult> emailSignIn(String email, String password) {
     log.d('emailSignIn');
-    return _waitForCredentials(firebaseAuth.signInWithEmailAndPassword(email: email, password: password));
+    return _waitForCredentials(
+        firebaseAuth.signInWithEmailAndPassword(email: email, password: password));
   }
 
   Future<UserAuthResult> linkEmailSignIn(String email, String password) {
@@ -147,7 +148,8 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
 
   Future<UserAuthResult> createUser(String email, String password) {
     log.d('createUser');
-    return _waitForCredentials(firebaseAuth.createUserWithEmailAndPassword(email: email, password: password));
+    return _waitForCredentials(
+        firebaseAuth.createUserWithEmailAndPassword(email: email, password: password));
   }
 
   Future<UserAuthResult> resetPassword(String email) {
@@ -195,7 +197,8 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
     final completer = Completer<UserAuthResult>();
 
     _createAppleCredentials().then((oAuthCredential) {
-      _waitForCredentials(firebaseAuth.signInWithCredential(oAuthCredential)).then((userAuthResults) {
+      _waitForCredentials(firebaseAuth.signInWithCredential(oAuthCredential))
+          .then((userAuthResults) {
         completer.complete(userAuthResults);
       }).catchError((error) {
         completer.completeError("Could not get the UserAuthResults: ${error.toString()}");
@@ -220,7 +223,8 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
     return completer.future;
   }
 
-  Future<UserAuthResult> verifyPhoneNumber(ConfirmationResult confirmationResult, String verificationCode) async {
+  Future<UserAuthResult> verifyPhoneNumber(
+      ConfirmationResult confirmationResult, String verificationCode) async {
     return _waitForCredentials(confirmationResult.confirm(verificationCode));
   }
 

@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:wt_firepod/src/providers/generic/generic_lookup_map_notifier.dart';
 
-import 'generic_lookup_map.dart';
-import 'generic_lookup_map_notifier.dart';
+import '../generic/generic_lookup_map.dart';
 
 abstract class FirepodMap<T> {
   late StateNotifierProvider<GenericSiteDataNotifier<GenericLookupMap<T>>, GenericLookupMap<T>>
@@ -15,7 +15,6 @@ abstract class FirepodMap<T> {
     required String path,
     String? keyField,
     bool watch = false,
-    bool siteEnabled = true,
   }) {
     value =
         StateNotifierProvider<GenericSiteDataNotifier<GenericLookupMap<T>>, GenericLookupMap<T>>(
@@ -27,7 +26,6 @@ abstract class FirepodMap<T> {
         encoder: GenericLookupMap.createEncoder<T>((T? object) => encoder(object), keyField),
         none: none,
         watch: watch,
-        siteEnabled: siteEnabled,
       ),
     );
   }

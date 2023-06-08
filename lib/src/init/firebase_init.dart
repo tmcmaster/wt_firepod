@@ -4,14 +4,13 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'firebase_providers.dart';
+import '../providers/firebase_providers.dart';
 
 Future<ProviderScope> Function() Function(
   Future<dynamic> Function(
     FirebaseApp app,
     FirebaseOptions firebaseOptions,
-  )
-      childBuilder, {
+  ) childBuilder, {
   required String appName,
   required FirebaseOptions firebaseOptions,
 }) withFirebase = andFirebase;
@@ -20,8 +19,7 @@ Future<ProviderScope> Function() andFirebase(
   Future<dynamic> Function(
     FirebaseApp app,
     FirebaseOptions firebaseOptions,
-  )
-      childBuilder, {
+  ) childBuilder, {
   required String appName,
   required FirebaseOptions firebaseOptions,
 }) {

@@ -1,10 +1,11 @@
 import 'dart:async';
 
+import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_firepod/src/builders/firebase_database_reference_builder.dart';
+import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_logging/wt_logging.dart';
 import 'package:wt_models/wt_models.dart';
-
-import 'firepod.dart';
 
 class GenericSiteDataNotifier<T> extends StateNotifier<T> {
   static final log = logger(GenericSiteDataNotifier, level: Level.debug);
@@ -18,7 +19,6 @@ class GenericSiteDataNotifier<T> extends StateNotifier<T> {
   final T? Function(Object? value) decoder;
   final dynamic Function(T? object) encoder;
   final bool watch;
-  final bool siteEnabled;
   final bool autoSave;
   final bool isScalar;
   GenericSiteDataNotifier({
@@ -28,12 +28,11 @@ class GenericSiteDataNotifier<T> extends StateNotifier<T> {
     required this.decoder,
     required this.encoder,
     this.watch = false,
-    this.siteEnabled = false,
     this.autoSave = true,
     this.isScalar = false,
   }) : super(none) {
     _setupSubscribers(ref);
-    if (siteEnabled) {
+    if (path.contains('{site}')) {
       log.d('Listening to ${FirepodSettings.site.value.name} for changes.');
       _removeListener = ref.listen<IdSupport?>(FirepodSettings.site.value, (oldSite, newSite) {
         log.d('${FirepodSettings.site.value} has changed');

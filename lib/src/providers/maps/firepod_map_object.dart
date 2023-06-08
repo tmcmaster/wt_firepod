@@ -1,7 +1,7 @@
 import 'package:wt_logging/wt_logging.dart';
 
+import '../generic/generic_lookup_map.dart';
 import 'firepod_map.dart';
-import 'generic_lookup_map.dart';
 
 class FirepodMapObject<T> extends FirepodMap<T> {
   static final log = logger(FirepodMapObject);
@@ -38,6 +38,5 @@ class FirepodMapObject<T> extends FirepodMap<T> {
           path: path,
           keyField: keyField,
           watch: watch,
-          siteEnabled: siteEnabled,
         );
 }

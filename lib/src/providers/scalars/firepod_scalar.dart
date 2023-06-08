@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'generic_lookup_map_notifier.dart';
+import '../generic/generic_lookup_map_notifier.dart';
 
 class FirepodScalar<T> {
   late StateNotifierProvider<GenericSiteDataNotifier<T>, T> value;
@@ -15,14 +15,14 @@ class FirepodScalar<T> {
     value = StateNotifierProvider<GenericSiteDataNotifier<T>, T>(
       name: name,
       (ref) => GenericSiteDataNotifier<T>(
-          ref: ref,
-          path: path,
-          decoder: (value) => value as T,
-          encoder: (object) => object,
-          none: none,
-          watch: watch,
-          isScalar: true,
-          siteEnabled: siteEnabled),
+        ref: ref,
+        path: path,
+        decoder: (value) => value as T,
+        encoder: (object) => object,
+        none: none,
+        watch: watch,
+        isScalar: true,
+      ),
     );
   }
 

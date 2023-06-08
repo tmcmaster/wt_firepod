@@ -10,25 +10,21 @@ class ExampleFirepodMapInt extends ConsumerWidget {
     name: 'ExampleFirepodMapInt',
     path: '$basePath/site1',
     watch: true,
-    siteEnabled: false,
   );
   static final firepodNoSiteNoWatch = FirepodMapInt(
     name: 'ExampleFirepodMapInt',
     path: '$basePath/site1',
     watch: false,
-    siteEnabled: false,
   );
   static final firepodSiteWatch = FirepodMapInt(
     name: 'ExampleFirepodMapInt',
     path: '$basePath/{site}',
     watch: true,
-    siteEnabled: true,
   );
   static final firepodSiteNoWatch = FirepodMapInt(
     name: 'ExampleFirepodMapInt',
     path: '$basePath/{site}',
     watch: false,
-    siteEnabled: true,
   );
 
   const ExampleFirepodMapInt({super.key});

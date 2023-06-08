@@ -1,6 +1,5 @@
-import 'package:flutter/widgets.dart';
-import 'package:wt_firepod/src/firepod.dart';
-import 'package:wt_firepod/wt_firepod.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/material.dart';
 
 abstract class FirepodValueView<T> extends StatelessWidget {
   final Query query;
