@@ -10,37 +10,41 @@ class ExampleFirepodMapObject extends ConsumerWidget {
   static const decoder = Product.fromJsonDynamic;
   static final encoder = Product.to.jsonFromModel;
 
-  static final firepodNoSiteWatch = FirepodMapObject(
+  static final firepodNoSiteWatch = FirepodMapObject<Product>(
     name: 'ExampleFirepodMapObjectNoSiteWatch',
     path: '$basePath/site1',
     watch: true,
     siteEnabled: false,
     modelDecoder: decoder,
     modelEncoder: encoder,
+    keyField: 'id',
   );
-  static final firepodNoSiteNoWatch = FirepodMapObject(
+  static final firepodNoSiteNoWatch = FirepodMapObject<Product>(
     name: 'ExampleFirepodMapObjectNoSiteNoWatch',
     path: '$basePath/site1',
     watch: false,
     siteEnabled: false,
     modelDecoder: decoder,
     modelEncoder: encoder,
+    keyField: 'id',
   );
-  static final firepodSiteWatch = FirepodMapObject(
+  static final firepodSiteWatch = FirepodMapObject<Product>(
     name: 'ExampleFirepodMapObjectSiteWatch',
     path: '$basePath/{site}',
     watch: true,
     siteEnabled: true,
     modelDecoder: decoder,
     modelEncoder: encoder,
+    keyField: 'id',
   );
-  static final firepodSiteNoWatch = FirepodMapObject(
+  static final firepodSiteNoWatch = FirepodMapObject<Product>(
     name: 'ExampleFirepodMapObjectSiteNoWatch',
     path: '$basePath/{site}',
     watch: false,
     siteEnabled: true,
     modelDecoder: decoder,
     modelEncoder: encoder,
+    keyField: 'id',
   );
 
   const ExampleFirepodMapObject({super.key});

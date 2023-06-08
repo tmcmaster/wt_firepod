@@ -8,6 +8,7 @@ part 'product.g.dart';
 @freezed
 class Product extends TitleIdJsonSupport<Product> with _$Product {
   static final Product none = Product(
+    id: '',
     order: 0,
     price: 0.0,
     title: '',
@@ -15,6 +16,7 @@ class Product extends TitleIdJsonSupport<Product> with _$Product {
   );
 
   factory Product({
+    String? id,
     required int order,
     required double price,
     required String title,
@@ -22,6 +24,7 @@ class Product extends TitleIdJsonSupport<Product> with _$Product {
   }) = _Product;
 
   static final _titles = [
+    'id',
     'order',
     'price',
     'title',
@@ -39,9 +42,9 @@ class Product extends TitleIdJsonSupport<Product> with _$Product {
       Product.fromJson(Map<String, dynamic>.from(json));
 
   @override
-  String getId() => '';
+  String getId() => id ?? '';
   @override
-  String getTitle() => '';
+  String getTitle() => title;
   @override
   Map<String, dynamic> toJson() => {};
 }

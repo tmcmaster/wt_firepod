@@ -25,9 +25,15 @@ class FirepodMapObject<T> extends FirepodMap<T> {
             T model = modelDecoder(newMap);
             return model;
           },
-          // TODO: This encoder needs to be written properly like above.
           encoder: (T? object) {
-            return object == null ? null : modelEncoder(object);
+            if (object == null) {
+              return null;
+            }
+            final newModelMap = modelEncoder(object);
+            if (keyField != null) {
+              newModelMap.remove(keyField);
+            }
+            return newModelMap;
           },
           path: path,
           keyField: keyField,
