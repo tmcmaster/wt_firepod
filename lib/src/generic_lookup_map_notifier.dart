@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:wt_firepod/src/site/site.dart';
+import 'package:wt_logging/wt_logging.dart';
 import 'package:wt_models/wt_models.dart';
 
 import 'firepod.dart';
-import 'utils/logging.dart';
 
 class GenericSiteDataNotifier<T> extends StateNotifier<T> {
   static final log = logger(GenericSiteDataNotifier, level: Level.debug);

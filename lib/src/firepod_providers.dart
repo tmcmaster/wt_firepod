@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:wt_firepod/src/firebase_providers.dart';
+import 'package:wt_logging/wt_logging.dart';
 import 'package:wt_settings/wt_settings.dart';
 
 import 'firepod_settings.dart';
