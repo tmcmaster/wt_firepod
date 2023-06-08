@@ -14,6 +14,7 @@ class ExampleFirepodListObject extends ConsumerWidget {
     name: 'ExampleFirepodMapObjectNoSiteWatch',
     path: '$basePath/products',
     watch: true,
+    autoSave: true,
     decoder: decoder,
     encoder: encoder,
     keyField: 'id',

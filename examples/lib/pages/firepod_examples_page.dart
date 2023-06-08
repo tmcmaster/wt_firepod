@@ -10,8 +10,11 @@ class FirepodExamplesPage extends ConsumerWidget {
     return Scaffold(
       body: ListView(
         children: const [
-          // ExampleFirepodSite(),
+          ExampleFirepodSite(),
           ExampleFirepodListString(),
+          ExampleFirepodListInt(),
+          ExampleFirepodListDouble(),
+          ExampleFirepodListBool(),
           ExampleFirepodListObject(),
           ExampleUserSiteList(),
           ExampleFirepodScalar(),
