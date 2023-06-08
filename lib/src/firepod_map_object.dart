@@ -23,7 +23,7 @@ class FirepodMapObject<T> extends FirepodMap<T> {
             return model;
           },
           // TODO: This encoder needs to be written properly like above.
-          encoder: (GenericLookupMap<T>? object) => object?.map,
+          encoder: (object) => object,
           prefixPath: prefixPath,
           keyField: keyField,
         );

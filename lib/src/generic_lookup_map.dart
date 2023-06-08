@@ -32,10 +32,13 @@ class GenericLookupMap<T> {
         );
   }
 
-  // TODO: need to write this properly like the function above. Then update the encoder functions.
-  static dynamic Function(T? value) createEncoder<T>(
-      dynamic Function(T? object) encoder, String? keyField) {
-    return (T? object) => encoder(object);
+  static dynamic Function(GenericLookupMap<T>? value) createEncoder<T>(
+      Object? Function(T? value) encoder, String? keyField) {
+    return (GenericLookupMap<T>? value) => value == null
+        ? null
+        : Map.fromEntries(value.map.entries.map((e) {
+            return MapEntry<String, Object?>(e.key.toString(), encoder(e.value));
+          }));
   }
 
   static Object? _addKey(Object? value, String key, String? keyField) {

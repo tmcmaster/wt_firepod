@@ -70,7 +70,7 @@ class ExampleFirepodObject extends ConsumerWidget {
           action: () {
             noSiteWatchNotifier.update(
               noSiteWatch.copyWith(
-                weight: noSiteWatch.weight + 0.1,
+                weight: noSiteWatch.weight + 1.0,
               ),
             );
           },
@@ -82,7 +82,7 @@ class ExampleFirepodObject extends ConsumerWidget {
           action: () {
             noSiteNoWatchNotifier.update(
               noSiteNoWatch.copyWith(
-                weight: noSiteNoWatch.weight + 0.1,
+                weight: noSiteNoWatch.weight + 1.0,
               ),
             );
           },
@@ -94,7 +94,7 @@ class ExampleFirepodObject extends ConsumerWidget {
           action: () {
             siteWatchNotifier.update(
               siteWatch.copyWith(
-                weight: siteWatch.weight + 0.1,
+                weight: siteWatch.weight + 1.0,
               ),
             );
           },
@@ -106,7 +106,7 @@ class ExampleFirepodObject extends ConsumerWidget {
           action: () {
             siteNoWatchNotifier.update(
               siteNoWatch.copyWith(
-                weight: siteNoWatch.weight + 0.1,
+                weight: siteNoWatch.weight + 1.0,
               ),
             );
           },

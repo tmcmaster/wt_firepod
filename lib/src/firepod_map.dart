@@ -11,7 +11,7 @@ abstract class FirepodMap<T> {
     required String name,
     required GenericLookupMap<T> none,
     required T Function(Object? value) decoder,
-    required dynamic Function(GenericLookupMap<T>? object) encoder,
+    required dynamic Function(T? object) encoder,
     required String prefixPath,
     String? keyField,
     bool watch = false,
@@ -24,8 +24,7 @@ abstract class FirepodMap<T> {
         ref: ref,
         prefixPath: prefixPath,
         decoder: GenericLookupMap.createDecoder<T>((object) => decoder(object), keyField),
-        encoder: GenericLookupMap.createEncoder(
-            (GenericLookupMap<T>? object) => encoder(object), keyField),
+        encoder: GenericLookupMap.createEncoder<T>((T? object) => encoder(object), keyField),
         none: none,
         watch: watch,
         siteEnabled: siteEnabled,

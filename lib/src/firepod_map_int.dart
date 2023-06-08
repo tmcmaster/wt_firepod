@@ -12,7 +12,7 @@ class FirepodMapInt extends FirepodMap<int> {
           name: name,
           none: none,
           decoder: (value) => int.parse(value.toString()),
-          encoder: (object) => object == null ? null : object!.map,
+          encoder: (object) => object,
           prefixPath: prefixPath,
           watch: watch,
           siteEnabled: siteEnabled,

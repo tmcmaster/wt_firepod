@@ -12,7 +12,7 @@ class FirepodMapString extends FirepodMap<String> {
           name: name,
           none: none,
           decoder: (value) => value.toString(),
-          encoder: (object) => object == null ? null : object!.map,
+          encoder: (object) => object,
           prefixPath: prefixPath,
           watch: watch,
           siteEnabled: siteEnabled,

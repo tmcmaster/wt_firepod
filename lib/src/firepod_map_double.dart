@@ -12,7 +12,7 @@ class FirepodMapDouble extends FirepodMap<double> {
           name: name,
           none: none,
           decoder: (value) => double.parse(value.toString()),
-          encoder: (object) => object?.map,
+          encoder: (object) => object,
           prefixPath: prefixPath,
           watch: watch,
           siteEnabled: siteEnabled,
