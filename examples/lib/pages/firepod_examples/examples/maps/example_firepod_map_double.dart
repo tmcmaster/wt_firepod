@@ -10,21 +10,25 @@ class ExampleFirepodMapDouble extends ConsumerWidget {
     name: 'ExampleFirepodMapDoubleNoSiteWatch',
     path: '$basePath/site1',
     watch: true,
+    autoSave: true,
   );
   static final firepodNoSiteNoWatch = FirepodMapDouble(
     name: 'ExampleMapDoubleFirepodMapDoubleNoSiteNoWatch',
     path: '$basePath/site1',
     watch: false,
+    autoSave: true,
   );
   static final firepodSiteWatch = FirepodMapDouble(
     name: 'ExampleMapDoubleFirepodMapDoubleSiteWatch',
     path: '$basePath/{site}',
     watch: true,
+    autoSave: true,
   );
   static final firepodSiteNoWatch = FirepodMapDouble(
     name: 'ExampleMapDoubleFirepodMapDoubleSiteNoWatch',
     path: '$basePath/{site}',
     watch: false,
+    autoSave: true,
   );
 
   const ExampleFirepodMapDouble({super.key});

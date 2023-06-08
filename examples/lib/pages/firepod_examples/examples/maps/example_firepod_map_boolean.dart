@@ -10,21 +10,25 @@ class ExampleFirepodMapBoolean extends ConsumerWidget {
     name: 'ExampleFirepodMapBooleanNoSiteWatch',
     path: '$prefixPath/site1',
     watch: true,
+    autoSave: true,
   );
   static final firepodNoSiteNoWatch = FirepodMapBoolean(
     name: 'ExampleMapBooleanFirepodMapBooleanNoSiteNoWatch',
     path: '$prefixPath/site1',
     watch: false,
+    autoSave: true,
   );
   static final firepodSiteWatch = FirepodMapBoolean(
     name: 'ExampleMapBooleanFirepodMapBooleanSiteWatch',
     path: '$prefixPath/{site}',
     watch: true,
+    autoSave: true,
   );
   static final firepodSiteNoWatch = FirepodMapBoolean(
     name: 'ExampleMapBooleanFirepodMapBooleanSiteNoWatch',
     path: '$prefixPath/{site}',
     watch: false,
+    autoSave: true,
   );
 
   const ExampleFirepodMapBoolean({super.key});

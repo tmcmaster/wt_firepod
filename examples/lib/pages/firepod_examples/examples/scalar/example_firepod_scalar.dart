@@ -10,21 +10,25 @@ class ExampleFirepodScalar extends ConsumerWidget {
     name: 'ExampleFirepodScalarString',
     path: '$basePath/string',
     watch: true,
+    autoSave: true,
   );
   static final firepodScalarInt = FirepodScalarInt(
     name: 'ExampleFirepodScalarInt',
     path: '$basePath/integer',
     watch: true,
+    autoSave: true,
   );
   static final firepodScalarDouble = FirepodScalarDouble(
     name: 'ExampleFirepodScalarDouble',
     path: '$basePath/double',
     watch: true,
+    autoSave: true,
   );
   static final firepodScalarBool = FirepodScalarBool(
     name: 'ExampleFirepodScalarBool',
     path: '$basePath/boolean',
     watch: true,
+    autoSave: true,
   );
 
   const ExampleFirepodScalar({super.key});
