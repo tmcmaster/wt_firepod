@@ -6,7 +6,7 @@ class FirepodMapBoolean extends FirepodMap<bool> {
   FirepodMapBoolean({
     required String name,
     required String path,
-    bool watch = true,
+    bool watch = false,
     bool autoSave = false,
   }) : super(
           name: name,

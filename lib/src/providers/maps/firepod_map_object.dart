@@ -11,7 +11,7 @@ class FirepodMapObject<T> extends FirepodMap<T> {
     required String path,
     required T Function(Map<String, dynamic> value) modelDecoder,
     required Map<String, dynamic> Function(T object) modelEncoder,
-    bool watch = true,
+    bool watch = false,
     bool autoSave = false,
     String? keyField,
   }) : super(

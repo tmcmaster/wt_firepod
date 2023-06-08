@@ -7,7 +7,7 @@ class FirepodListObject<T> extends FirepodList<T> {
     required T Function(Map<dynamic, dynamic>) decoder,
     required Map<dynamic, dynamic> Function(T object) encoder,
     String? keyField,
-    bool watch = true,
+    bool watch = false,
     bool autoSave = false,
   }) : super(
           name: name,

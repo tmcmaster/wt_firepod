@@ -6,7 +6,7 @@ class FirepodMapInt extends FirepodMap<int> {
   FirepodMapInt({
     required String name,
     required String path,
-    bool watch = true,
+    bool watch = false,
     bool autoSave = false,
   }) : super(
           name: name,

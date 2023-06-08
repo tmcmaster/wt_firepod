@@ -28,7 +28,7 @@ class GenericSiteDataNotifier<T> extends StateNotifier<T> {
     required this.decoder,
     required this.encoder,
     this.watch = false,
-    this.autoSave = true,
+    this.autoSave = false,
     this.isScalar = false,
   }) : super(none) {
     _setupSubscribers(ref);
