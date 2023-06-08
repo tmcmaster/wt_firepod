@@ -5,12 +5,13 @@ class FirepodListString extends FirepodList<String> {
     required String name,
     required String path,
     bool watch = true,
-    bool siteEnabled = false,
+    bool autoSave = false,
   }) : super(
           name: name,
-          decoder: (Object? object) => object?.toString(),
-          encoder: (String? value) => value,
           path: path,
+          decoder: (Object object) => object.toString(),
+          encoder: (String value) => value,
           watch: watch,
+          autoSave: autoSave,
         );
 }

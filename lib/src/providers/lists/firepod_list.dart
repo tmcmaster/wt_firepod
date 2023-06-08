@@ -6,20 +6,21 @@ class FirepodList<M> {
 
   FirepodList({
     required String name,
-    required M? Function(Object? object) decoder,
-    required dynamic Function(M? object) encoder,
+    required M Function(Object object) decoder,
+    required dynamic Function(M object) encoder,
     required String path,
     String? keyField,
     bool watch = false,
+    bool autoSave = false,
   }) {
     List<M?>? modelListDecoder(Object? object) {
       return object == null
           ? null
-          : (object as List<Object?>).map((Object? o) => decoder(o)).toList();
+          : (object as List<Object?>).map((Object? o) => o == null ? null : decoder(o)).toList();
     }
 
     List<dynamic>? modelListEncoder(List<M?>? list) {
-      return list?.map((M? item) => encoder(item)).toList();
+      return list?.map((M? item) => item == null ? null : encoder(item)).toList();
     }
 
     value = StateNotifierProvider<GenericSiteDataNotifier<List<M?>>, List<M?>>(
@@ -31,6 +32,7 @@ class FirepodList<M> {
         encoder: modelListEncoder,
         none: <M>[],
         watch: watch,
+        autoSave: autoSave,
       ),
     );
   }

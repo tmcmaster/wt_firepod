@@ -7,6 +7,7 @@ class FirepodMapDouble extends FirepodMap<double> {
     required String name,
     required String path,
     bool watch = true,
+    bool autoSave = false,
   }) : super(
           name: name,
           none: none,
@@ -14,5 +15,6 @@ class FirepodMapDouble extends FirepodMap<double> {
           encoder: (object) => object,
           path: path,
           watch: watch,
+          autoSave: autoSave,
         );
 }

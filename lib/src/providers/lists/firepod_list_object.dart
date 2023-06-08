@@ -8,17 +8,18 @@ class FirepodListObject<T> extends FirepodList<T> {
     required Map<dynamic, dynamic> Function(T object) encoder,
     String? keyField,
     bool watch = true,
-    bool siteEnabled = false,
+    bool autoSave = false,
   }) : super(
           name: name,
-          decoder: (Object? value) {
-            return value == null ? null : decoder(value as Map<dynamic, dynamic>);
+          decoder: (Object value) {
+            return decoder(value as Map<dynamic, dynamic>);
           },
-          encoder: (T? model) {
-            return model == null ? null : encoder(model);
+          encoder: (T model) {
+            return encoder(model);
           },
           path: path,
           watch: watch,
+          autoSave: autoSave,
           keyField: keyField,
         );
 }

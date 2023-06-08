@@ -10,7 +10,7 @@ class FirepodScalar<T> {
     required T none,
     required String path,
     bool watch = false,
-    bool siteEnabled = true,
+    bool autoSave = false,
     required T Function(Object value) decoder,
     required dynamic Function(T object) encoder,
   }) {
@@ -23,6 +23,7 @@ class FirepodScalar<T> {
         encoder: (value) => value == null ? null : encoder(value),
         none: none,
         watch: watch,
+        autoSave: autoSave,
         isScalar: true,
       ),
     );

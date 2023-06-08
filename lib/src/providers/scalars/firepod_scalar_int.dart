@@ -5,6 +5,7 @@ class FirepodScalarInt extends FirepodScalar<int> {
     required String name,
     required String path,
     bool watch = false,
+    bool autoSave = false,
   }) : super(
           name: name,
           path: path,
@@ -12,5 +13,6 @@ class FirepodScalarInt extends FirepodScalar<int> {
           decoder: (object) => int.parse(object.toString()),
           encoder: (value) => value,
           watch: watch,
+          autoSave: autoSave,
         );
 }

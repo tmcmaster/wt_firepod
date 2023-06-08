@@ -15,6 +15,7 @@ abstract class FirepodMap<T> {
     required String path,
     String? keyField,
     bool watch = false,
+    bool autoSave = false,
   }) {
     value =
         StateNotifierProvider<GenericSiteDataNotifier<GenericLookupMap<T>>, GenericLookupMap<T>>(
@@ -26,6 +27,7 @@ abstract class FirepodMap<T> {
         encoder: GenericLookupMap.createEncoder<T>((T? object) => encoder(object), keyField),
         none: none,
         watch: watch,
+        autoSave: autoSave,
       ),
     );
   }

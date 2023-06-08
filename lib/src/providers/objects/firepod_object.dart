@@ -12,6 +12,7 @@ class FirepodObject<T> {
     required dynamic Function(T model) encoder,
     required String path,
     bool watch = false,
+    bool autoSave = false,
   }) {
     value = StateNotifierProvider<GenericSiteDataNotifier<T>, T>(
       name: name,
@@ -22,6 +23,7 @@ class FirepodObject<T> {
         encoder: (T? object) => object == null ? null : encoder(object),
         none: none,
         watch: watch,
+        autoSave: autoSave,
       ),
     );
   }

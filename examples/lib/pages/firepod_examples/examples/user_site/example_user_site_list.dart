@@ -7,7 +7,6 @@ class ExampleUserSiteList extends ConsumerWidget {
     name: 'ExampleUserSiteList',
     path: '/data/{user}/sites',
     watch: true,
-    siteEnabled: false,
   );
   static final siteTitle = FirepodScalarString(
     name: 'ExampleUserSiteList',

@@ -5,6 +5,7 @@ class FirepodScalarBool extends FirepodScalar<bool> {
     required String name,
     required String path,
     bool watch = false,
+    bool autoSave = false,
   }) : super(
           name: name,
           path: path,
@@ -12,5 +13,6 @@ class FirepodScalarBool extends FirepodScalar<bool> {
           decoder: (object) => bool.parse(object.toString()),
           encoder: (value) => value,
           watch: watch,
+          autoSave: autoSave,
         );
 }
