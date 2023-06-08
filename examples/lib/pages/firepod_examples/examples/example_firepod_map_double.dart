@@ -4,29 +4,29 @@ import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_firepod_examples/pages/firepod_examples/widgets/value_and_action.dart';
 
 class ExampleFirepodMapDouble extends ConsumerWidget {
-  static const prefixPath = '/v1/testing/map-double';
+  static const basePath = '/v1/testing/map-double';
 
   static final firepodNoSiteWatch = FirepodMapDouble(
     name: 'ExampleFirepodMapDoubleNoSiteWatch',
-    prefixPath: '$prefixPath/site1',
+    path: '$basePath/site1',
     watch: true,
     siteEnabled: false,
   );
   static final firepodNoSiteNoWatch = FirepodMapDouble(
     name: 'ExampleMapDoubleFirepodMapDoubleNoSiteNoWatch',
-    prefixPath: '$prefixPath/site1',
+    path: '$basePath/site1',
     watch: false,
     siteEnabled: false,
   );
   static final firepodSiteWatch = FirepodMapDouble(
     name: 'ExampleMapDoubleFirepodMapDoubleSiteWatch',
-    prefixPath: prefixPath,
+    path: '$basePath/{site}',
     watch: true,
     siteEnabled: true,
   );
   static final firepodSiteNoWatch = FirepodMapDouble(
     name: 'ExampleMapDoubleFirepodMapDoubleSiteNoWatch',
-    prefixPath: prefixPath,
+    path: '$basePath/{site}',
     watch: false,
     siteEnabled: true,
   );

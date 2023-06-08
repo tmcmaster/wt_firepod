@@ -5,14 +5,14 @@ import 'package:wt_firepod_examples/pages/firepod_examples/models/product.dart';
 import 'package:wt_firepod_examples/pages/firepod_examples/widgets/value_and_action.dart';
 
 class ExampleFirepodMapObject extends ConsumerWidget {
-  static const prefixPath = '/v1/testing/map-object';
+  static const basePath = '/v1/testing/map-object';
 
   static const decoder = Product.fromJsonDynamic;
   static final encoder = Product.to.jsonFromModel;
 
   static final firepodNoSiteWatch = FirepodMapObject(
     name: 'ExampleFirepodMapObjectNoSiteWatch',
-    prefixPath: '$prefixPath/site1',
+    path: '$basePath/site1',
     watch: true,
     siteEnabled: false,
     modelDecoder: decoder,
@@ -20,7 +20,7 @@ class ExampleFirepodMapObject extends ConsumerWidget {
   );
   static final firepodNoSiteNoWatch = FirepodMapObject(
     name: 'ExampleFirepodMapObjectNoSiteNoWatch',
-    prefixPath: '$prefixPath/site1',
+    path: '$basePath/site1',
     watch: false,
     siteEnabled: false,
     modelDecoder: decoder,
@@ -28,7 +28,7 @@ class ExampleFirepodMapObject extends ConsumerWidget {
   );
   static final firepodSiteWatch = FirepodMapObject(
     name: 'ExampleFirepodMapObjectSiteWatch',
-    prefixPath: prefixPath,
+    path: '$basePath/{site}',
     watch: true,
     siteEnabled: true,
     modelDecoder: decoder,
@@ -36,7 +36,7 @@ class ExampleFirepodMapObject extends ConsumerWidget {
   );
   static final firepodSiteNoWatch = FirepodMapObject(
     name: 'ExampleFirepodMapObjectSiteNoWatch',
-    prefixPath: prefixPath,
+    path: '$basePath/{site}',
     watch: false,
     siteEnabled: true,
     modelDecoder: decoder,

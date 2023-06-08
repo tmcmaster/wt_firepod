@@ -5,7 +5,7 @@ class FirepodMapString extends FirepodMap<String> {
   static const none = GenericLookupMap<String>(map: {});
   FirepodMapString({
     required String name,
-    required String prefixPath,
+    required String path,
     bool watch = true,
     bool siteEnabled = true,
   }) : super(
@@ -13,7 +13,7 @@ class FirepodMapString extends FirepodMap<String> {
           none: none,
           decoder: (value) => value.toString(),
           encoder: (object) => object,
-          prefixPath: prefixPath,
+          path: path,
           watch: watch,
           siteEnabled: siteEnabled,
         );

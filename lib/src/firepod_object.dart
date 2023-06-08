@@ -10,7 +10,7 @@ class FirepodObject<T> {
     required T none,
     required T Function(Map<dynamic, dynamic> value) decoder,
     required dynamic Function(T model) encoder,
-    required String prefixPath,
+    required String path,
     bool watch = false,
     bool siteEnabled = true,
   }) {
@@ -18,7 +18,7 @@ class FirepodObject<T> {
       name: name,
       (ref) => GenericSiteDataNotifier<T>(
           ref: ref,
-          prefixPath: prefixPath,
+          path: path,
           decoder: (value) => value == null ? none : decoder(value as Map<dynamic, dynamic>),
           encoder: (T? object) => object == null ? null : encoder(object),
           none: none,

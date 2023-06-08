@@ -5,7 +5,7 @@ class FirepodMapBoolean extends FirepodMap<bool> {
   static const none = GenericLookupMap<bool>(map: {});
   FirepodMapBoolean({
     required String name,
-    required String prefixPath,
+    required String path,
     bool watch = true,
     bool siteEnabled = true,
   }) : super(
@@ -13,7 +13,7 @@ class FirepodMapBoolean extends FirepodMap<bool> {
           none: none,
           decoder: (value) => bool.parse(value.toString()),
           encoder: (object) => object,
-          prefixPath: prefixPath,
+          path: path,
           watch: watch,
           siteEnabled: siteEnabled,
         );

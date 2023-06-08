@@ -8,7 +8,7 @@ class FirepodMapObject<T> extends FirepodMap<T> {
 
   FirepodMapObject({
     required String name,
-    required String prefixPath,
+    required String path,
     required T Function(Map<String, dynamic> value) modelDecoder,
     required Map<String, dynamic> Function(T object) modelEncoder,
     bool watch = true,
@@ -29,7 +29,7 @@ class FirepodMapObject<T> extends FirepodMap<T> {
           encoder: (T? object) {
             return object == null ? null : modelEncoder(object);
           },
-          prefixPath: prefixPath,
+          path: path,
           keyField: keyField,
           watch: watch,
           siteEnabled: siteEnabled,

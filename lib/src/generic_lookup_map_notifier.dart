@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:wt_firepod/src/site/site.dart';
+import 'package:wt_firepod/src/builders/firebase_database_reference_builder.dart';
 import 'package:wt_logging/wt_logging.dart';
 import 'package:wt_models/wt_models.dart';
 
@@ -13,8 +13,7 @@ class GenericSiteDataNotifier<T> extends StateNotifier<T> {
   StreamSubscription<DatabaseEvent>? _subscription;
   DatabaseReference? _dbRef;
 
-  final String prefixPath;
-  final String? suffixPath;
+  final String path;
   final T none;
   final T? Function(Object? json) decoder;
   final dynamic Function(T? object) encoder;
@@ -24,8 +23,7 @@ class GenericSiteDataNotifier<T> extends StateNotifier<T> {
   GenericSiteDataNotifier({
     required Ref ref,
     required this.none,
-    required this.prefixPath,
-    this.suffixPath,
+    required this.path,
     required this.decoder,
     required this.encoder,
     this.watch = false,
@@ -43,7 +41,8 @@ class GenericSiteDataNotifier<T> extends StateNotifier<T> {
   }
 
   void _setupSubscribers(Ref ref) {
-    _dbRef = _generateDatabaseReference(ref);
+    final dbRefBuilder = ref.read(FirebaseDatabaseReferenceBuilder.provider);
+    _dbRef = dbRefBuilder.build(path);
     if (_dbRef == null) {
       state = none;
     } else {
@@ -56,25 +55,6 @@ class GenericSiteDataNotifier<T> extends StateNotifier<T> {
         }, onError: (error) => log.e(error));
       }
       load();
-    }
-  }
-
-  DatabaseReference? _generateDatabaseReference(Ref ref) {
-    final database = ref.read(FirebaseProviders.database);
-    if (siteEnabled) {
-      final site = ref.read(FirepodSettings.site.value);
-      if (site == null || site == Site.none) {
-        return null;
-      } else {
-        final siteId = site.getId();
-        return suffixPath == null
-            ? database.ref(prefixPath).child(siteId)
-            : database.ref(prefixPath).child(siteId).child(suffixPath!);
-      }
-    } else {
-      return suffixPath == null
-          ? database.ref(prefixPath)
-          : database.ref(prefixPath).child(suffixPath!);
     }
   }
 

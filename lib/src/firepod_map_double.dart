@@ -5,7 +5,7 @@ class FirepodMapDouble extends FirepodMap<double> {
   static const none = GenericLookupMap<double>(map: {});
   FirepodMapDouble({
     required String name,
-    required String prefixPath,
+    required String path,
     bool watch = true,
     bool siteEnabled = true,
   }) : super(
@@ -13,7 +13,7 @@ class FirepodMapDouble extends FirepodMap<double> {
           none: none,
           decoder: (value) => double.parse(value.toString()),
           encoder: (object) => object,
-          prefixPath: prefixPath,
+          path: path,
           watch: watch,
           siteEnabled: siteEnabled,
         );

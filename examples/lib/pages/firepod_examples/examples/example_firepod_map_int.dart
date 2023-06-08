@@ -4,29 +4,29 @@ import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_firepod_examples/pages/firepod_examples/widgets/value_and_action.dart';
 
 class ExampleFirepodMapInt extends ConsumerWidget {
-  static const prefixPath = '/v1/testing/map-int';
+  static const basePath = '/v1/testing/map-int';
 
   static final firepodNoSiteWatch = FirepodMapInt(
     name: 'ExampleFirepodMapInt',
-    prefixPath: '$prefixPath/site1',
+    path: '$basePath/site1',
     watch: true,
     siteEnabled: false,
   );
   static final firepodNoSiteNoWatch = FirepodMapInt(
     name: 'ExampleFirepodMapInt',
-    prefixPath: '$prefixPath/site1',
+    path: '$basePath/site1',
     watch: false,
     siteEnabled: false,
   );
   static final firepodSiteWatch = FirepodMapInt(
     name: 'ExampleFirepodMapInt',
-    prefixPath: prefixPath,
+    path: '$basePath/{site}',
     watch: true,
     siteEnabled: true,
   );
   static final firepodSiteNoWatch = FirepodMapInt(
     name: 'ExampleFirepodMapInt',
-    prefixPath: prefixPath,
+    path: '$basePath/{site}',
     watch: false,
     siteEnabled: true,
   );
