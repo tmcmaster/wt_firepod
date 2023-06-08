@@ -6,6 +6,7 @@ export 'src/firebase_init.dart';
 export 'src/firebase_providers.dart';
 export 'src/firepod_init.dart';
 export 'src/firepod_map.dart';
+export 'src/firepod_map_boolean.dart';
 export 'src/firepod_map_double.dart';
 export 'src/firepod_map_int.dart';
 export 'src/firepod_map_object.dart';

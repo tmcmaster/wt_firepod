@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wt_firepod_examples/pages/firepod_examples/examples/example_firepod_map_boolean.dart';
 import 'package:wt_firepod_examples/pages/firepod_examples/examples/example_firepod_map_double.dart';
 import 'package:wt_firepod_examples/pages/firepod_examples/examples/example_firepod_map_int.dart';
 import 'package:wt_firepod_examples/pages/firepod_examples/examples/example_firepod_map_object.dart';
@@ -16,10 +17,11 @@ class FirepodExamplesPage extends ConsumerWidget {
       body: ListView(
         children: const [
           ExampleFirepodSite(),
-          ExampleFirepodObject(),
-          ExampleFirepodMapString(),
-          ExampleFirepodMapInt(),
+          ExampleFirepodMapBoolean(),
           ExampleFirepodMapDouble(),
+          ExampleFirepodMapInt(),
+          ExampleFirepodMapString(),
+          ExampleFirepodObject(),
           ExampleFirepodMapObject(),
         ],
       ),
