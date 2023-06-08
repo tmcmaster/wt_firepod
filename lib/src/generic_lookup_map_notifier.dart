@@ -20,6 +20,7 @@ class GenericSiteDataNotifier<T> extends StateNotifier<T> {
   final dynamic Function(T? object) encoder;
   final bool watch;
   final bool siteEnabled;
+  final bool autoSave;
   GenericSiteDataNotifier({
     required Ref ref,
     required this.none,
@@ -29,6 +30,7 @@ class GenericSiteDataNotifier<T> extends StateNotifier<T> {
     required this.encoder,
     this.watch = false,
     this.siteEnabled = false,
+    this.autoSave = true,
   }) : super(none) {
     _setupSubscribers(ref);
     if (siteEnabled) {
@@ -53,13 +55,7 @@ class GenericSiteDataNotifier<T> extends StateNotifier<T> {
           state = decoder(event.snapshot.value) ?? none;
         }, onError: (error) => log.e(error));
       }
-      _dbRef!.get().then((snapshot) {
-        if (snapshot.exists) {
-          state = decoder(snapshot.value) ?? none;
-        } else {
-          state = none;
-        }
-      }, onError: (error) => log.e(error));
+      load();
     }
   }
 
@@ -84,9 +80,26 @@ class GenericSiteDataNotifier<T> extends StateNotifier<T> {
 
   void update(T newValue) {
     state = newValue;
+    if (autoSave) {
+      save();
+    }
+  }
+
+  void save() {
     if (_dbRef != null) {
-      print('encoded value: ${encoder(newValue)}');
-      _dbRef!.set(encoder(newValue));
+      _dbRef!.set(encoder(state));
+    }
+  }
+
+  void load() {
+    if (_dbRef != null) {
+      _dbRef!.get().then((snapshot) {
+        if (snapshot.exists) {
+          state = decoder(snapshot.value) ?? none;
+        } else {
+          state = none;
+        }
+      }, onError: (error) => log.e(error));
     }
   }
 

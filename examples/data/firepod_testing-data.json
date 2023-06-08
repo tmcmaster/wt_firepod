@@ -1,0 +1,91 @@
+{
+  "map-double": {
+    "site1": {
+      "001": 1,
+      "test": 11
+    },
+    "site2": {
+      "001": 2
+    }
+  },
+  "map-int": {
+    "site1": {
+      "001": 1,
+      "002": 2,
+      "test": 35
+    },
+    "site2": {
+      "001": 101,
+      "002": 102,
+      "test": 100
+    }
+  },
+  "map-object": {
+    "site1": {
+      "product1": {
+        "order": 1,
+        "price": 10,
+        "title": "Product One",
+        "weight": 6.8
+      },
+      "product2": {
+        "order": 2,
+        "price": 33,
+        "title": "Product Two",
+        "weight": 3.3
+      },
+      "test": {
+        "order": 0,
+        "price": 0.0,
+        "title": "Test Product",
+        "weight": 0.0
+      }
+    },
+    "site2": {
+      "product1": {
+        "order": 10,
+        "price": 100,
+        "title": "Product Three",
+        "weight": 8.8
+      },
+      "product2": {
+        "order": 11,
+        "price": 101,
+        "title": "Product Four",
+        "weight": 5.3
+      },
+      "test": {
+        "order": 0,
+        "price": 0.0,
+        "title": "Test Product",
+        "weight": 0.0
+      }
+    }
+  },
+  "map-string": {
+    "site1": {
+      "001": "One",
+      "002": "Two",
+      "test": "TESTaaa"
+    },
+    "site2": {
+      "001": "111",
+      "002": "222",
+      "test": "TESTING"
+    }
+  },
+  "object": {
+    "site1": {
+      "order": 1,
+      "price": 10,
+      "title": "Product One",
+      "weight": 6.8
+    },
+    "site2": {
+      "order": 2,
+      "price": 33,
+      "title": "Product Two",
+      "weight": 3.3
+    }
+  }
+}
