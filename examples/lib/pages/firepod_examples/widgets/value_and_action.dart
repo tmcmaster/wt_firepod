@@ -39,13 +39,18 @@ class ValueAndAction extends StatelessWidget {
           ),
           Wrap(
             children: actionMap.entries
-                .map(
-                  (e) => ElevatedButton(
-                    onPressed: e.value,
-                    child: Text(e.key),
-                  ),
-                )
-                .toList(),
+                .map((e) => [
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      ElevatedButton(
+                        onPressed: e.value,
+                        child: Text(e.key),
+                      )
+                    ])
+                .expand((element) => element)
+                .toList()
+                .sublist(1),
           ),
         ],
       ),

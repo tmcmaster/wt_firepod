@@ -17,7 +17,7 @@ abstract class FirepodProviders {
 }
 
 class SiteListNotifier extends StateNotifier<List<Site>?> {
-  final log = logger(SiteListNotifier, level: Level.debug);
+  final log = logger(SiteListNotifier, level: Level.warning);
 
   final Ref ref;
   late StreamSubscription _subscription;

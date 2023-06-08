@@ -33,7 +33,12 @@ class ExampleFirepodListString extends ConsumerWidget {
           title: 'FirepodListString',
           value: stringList,
           actionMap: {
-            'Add': () => stringListNotifier.update([...stringList, 'a'])
+            'Add': () => stringListNotifier.update([...stringList, 'a']),
+            'Remove': () {
+              if (stringList.length > 1) {
+                stringListNotifier.update(stringList.sublist(0, stringList.length - 1));
+              }
+            },
           },
         ),
       ],

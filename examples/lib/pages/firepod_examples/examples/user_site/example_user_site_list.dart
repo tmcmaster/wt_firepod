@@ -9,12 +9,10 @@ class ExampleUserSiteList extends ConsumerWidget {
     watch: true,
     siteEnabled: false,
   );
-  static final siteTitle = FirepodScalar<String>(
+  static final siteTitle = FirepodScalarString(
     name: 'ExampleUserSiteList',
     path: '/data/{user}/sites/{site}',
-    none: '',
     watch: true,
-    siteEnabled: true,
   );
 
   const ExampleUserSiteList({super.key});

@@ -8,7 +8,7 @@ import 'package:wt_logging/wt_logging.dart';
 import 'package:wt_models/wt_models.dart';
 
 class GenericSiteDataNotifier<T> extends StateNotifier<T> {
-  static final log = logger(GenericSiteDataNotifier, level: Level.debug);
+  static final log = logger(GenericSiteDataNotifier, level: Level.warning);
 
   late ProviderSubscription _removeListener;
   StreamSubscription<DatabaseEvent>? _subscription;
@@ -76,14 +76,22 @@ class GenericSiteDataNotifier<T> extends StateNotifier<T> {
     if (_dbRef != null) {
       _dbRef!.get().then((snapshot) {
         if (snapshot.exists) {
-          // TODO: need to find out why reading scalar values reads the parent map
-          //      this will be loading a lot more data that is need each time.
-          final newValue = snapshot.value == null
-              ? null
-              : isScalar
-                  ? (snapshot.value as Map<dynamic, dynamic>)[snapshot.key]
-                  : snapshot.value;
-          state = decoder(newValue) ?? none;
+          if (snapshot.value == null) {
+            state = none;
+          } else {
+            if (isScalar) {
+              if (snapshot.value is Map<dynamic, dynamic>) {
+                // TODO: need to find out why reading scalar values reads the parent map
+                //      this will be loading a lot more data that is need each time.
+                final value = (snapshot.value as Map<dynamic, dynamic>)[snapshot.key];
+                state = decoder(value) ?? none;
+              } else {
+                state = decoder(snapshot.value) ?? none;
+              }
+            } else {
+              state = decoder(snapshot.value) ?? none;
+            }
+          }
         } else {
           state = none;
         }

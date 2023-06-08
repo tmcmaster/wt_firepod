@@ -22,8 +22,6 @@ class FirepodListNotifier<T extends TitleIdJsonSupport> extends StateNotifier<Li
   }) : super([]) {
     final database = ref.read(FirebaseProviders.database);
     _subscription = table(database).onValue.listen((event) {
-      // print('Event ${event.type}');
-
       final newList = snapshotList(event.snapshot);
 
       if (sortWith != null) {

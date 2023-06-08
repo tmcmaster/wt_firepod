@@ -6,33 +6,25 @@ import 'package:wt_firepod_examples/pages/firepod_examples/widgets/value_and_act
 class ExampleFirepodScalar extends ConsumerWidget {
   static const basePath = '/v1/testing/scalar';
 
-  static final firepodScalarString = FirepodScalar<String>(
+  static final firepodScalarString = FirepodScalarString(
     name: 'ExampleFirepodScalarString',
     path: '$basePath/string',
-    none: '',
     watch: true,
-    siteEnabled: false,
   );
-  static final firepodScalarInt = FirepodScalar<int>(
+  static final firepodScalarInt = FirepodScalarInt(
     name: 'ExampleFirepodScalarInt',
     path: '$basePath/integer',
-    none: 0,
     watch: true,
-    siteEnabled: false,
   );
-  static final firepodScalarDouble = FirepodScalar<double>(
-    name: 'ExampleFirepodScalarString',
-    path: '$basePath/string',
-    none: 0.0,
+  static final firepodScalarDouble = FirepodScalarDouble(
+    name: 'ExampleFirepodScalarDouble',
+    path: '$basePath/double',
     watch: true,
-    siteEnabled: false,
   );
-  static final firepodScalarBool = FirepodScalar<bool>(
+  static final firepodScalarBool = FirepodScalarBool(
     name: 'ExampleFirepodScalarBool',
     path: '$basePath/boolean',
-    none: true,
     watch: true,
-    siteEnabled: false,
   );
 
   const ExampleFirepodScalar({super.key});

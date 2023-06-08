@@ -11,14 +11,16 @@ class FirepodScalar<T> {
     required String path,
     bool watch = false,
     bool siteEnabled = true,
+    required T Function(Object value) decoder,
+    required dynamic Function(T object) encoder,
   }) {
     value = StateNotifierProvider<GenericSiteDataNotifier<T>, T>(
       name: name,
       (ref) => GenericSiteDataNotifier<T>(
         ref: ref,
         path: path,
-        decoder: (value) => value as T,
-        encoder: (object) => object,
+        decoder: (object) => object == null ? null : decoder(object),
+        encoder: (value) => value == null ? null : encoder(value),
         none: none,
         watch: watch,
         isScalar: true,

@@ -41,6 +41,11 @@ class ExampleFirepodListObject extends ConsumerWidget {
                     weight: 3,
                   )
                 ]),
+            'Remove': () {
+              if (productList.length > 1) {
+                productListNotifier.update(productList.sublist(0, productList.length - 1));
+              }
+            },
           },
         ),
       ],

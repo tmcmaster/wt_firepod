@@ -13,8 +13,6 @@ class FirebaseDatabaseReferenceBuilder {
   FirebaseDatabaseReferenceBuilder(this.ref);
 
   DatabaseReference? build(String path) {
-    print('PATH: $path');
-
     final userRequired = path.contains('{user}');
     final siteRequired = path.contains('{site}');
     final userId = userRequired ? ref.read(FirebaseProviders.auth).currentUser?.uid : null;
