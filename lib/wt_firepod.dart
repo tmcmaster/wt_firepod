@@ -13,6 +13,7 @@ export 'src/firepod_map_object.dart';
 export 'src/firepod_map_string.dart';
 export 'src/firepod_object.dart';
 export 'src/firepod_providers.dart';
+export 'src/firepod_scalar.dart';
 export 'src/firepod_settings.dart';
 export 'src/generic_lookup_map.dart';
 export 'src/generic_lookup_map_notifier.dart';

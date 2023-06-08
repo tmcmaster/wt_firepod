@@ -6,6 +6,7 @@ import 'package:wt_firepod_examples/pages/firepod_examples/examples/example_fire
 import 'package:wt_firepod_examples/pages/firepod_examples/examples/example_firepod_map_object.dart';
 import 'package:wt_firepod_examples/pages/firepod_examples/examples/example_firepod_map_string.dart';
 import 'package:wt_firepod_examples/pages/firepod_examples/examples/example_firepod_object.dart';
+import 'package:wt_firepod_examples/pages/firepod_examples/examples/example_firepod_scalar.dart';
 import 'package:wt_firepod_examples/pages/firepod_examples/examples/example_firepod_site.dart';
 import 'package:wt_firepod_examples/pages/firepod_examples/examples/example_user_site_list.dart';
 
@@ -19,6 +20,7 @@ class FirepodExamplesPage extends ConsumerWidget {
         children: const [
           ExampleFirepodSite(),
           ExampleUserSiteList(),
+          ExampleFirepodScalar(),
           ExampleFirepodMapBoolean(),
           ExampleFirepodMapDouble(),
           ExampleFirepodMapInt(),

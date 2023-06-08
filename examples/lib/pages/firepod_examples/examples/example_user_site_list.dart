@@ -9,12 +9,20 @@ class ExampleUserSiteList extends ConsumerWidget {
     watch: true,
     siteEnabled: false,
   );
+  static final siteTitle = FirepodScalar<String>(
+    name: 'ExampleUserSiteList',
+    path: '/data/{user}/sites/{site}',
+    none: '',
+    watch: true,
+    siteEnabled: true,
+  );
 
   const ExampleUserSiteList({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final value = ref.watch(userSiteList.value);
+    final selectedTitle = ref.watch(siteTitle.value);
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -28,6 +36,11 @@ class ExampleUserSiteList extends ConsumerWidget {
         ),
         Text(
           '$value',
+          softWrap: true,
+          textAlign: TextAlign.center,
+        ),
+        Text(
+          selectedTitle,
           softWrap: true,
           textAlign: TextAlign.center,
         ),

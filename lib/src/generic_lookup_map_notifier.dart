@@ -15,11 +15,12 @@ class GenericSiteDataNotifier<T> extends StateNotifier<T> {
 
   final String path;
   final T none;
-  final T? Function(Object? json) decoder;
+  final T? Function(Object? value) decoder;
   final dynamic Function(T? object) encoder;
   final bool watch;
   final bool siteEnabled;
   final bool autoSave;
+  final bool isScalar;
   GenericSiteDataNotifier({
     required Ref ref,
     required this.none,
@@ -29,6 +30,7 @@ class GenericSiteDataNotifier<T> extends StateNotifier<T> {
     this.watch = false,
     this.siteEnabled = false,
     this.autoSave = true,
+    this.isScalar = false,
   }) : super(none) {
     _setupSubscribers(ref);
     if (siteEnabled) {
@@ -75,7 +77,14 @@ class GenericSiteDataNotifier<T> extends StateNotifier<T> {
     if (_dbRef != null) {
       _dbRef!.get().then((snapshot) {
         if (snapshot.exists) {
-          state = decoder(snapshot.value) ?? none;
+          // TODO: need to find out why reading scalar values reads the parent map
+          //      this will be loading a lot more data that is need each time.
+          final newValue = snapshot.value == null
+              ? null
+              : isScalar
+                  ? (snapshot.value as Map<dynamic, dynamic>)[snapshot.key]
+                  : snapshot.value;
+          state = decoder(newValue) ?? none;
         } else {
           state = none;
         }
