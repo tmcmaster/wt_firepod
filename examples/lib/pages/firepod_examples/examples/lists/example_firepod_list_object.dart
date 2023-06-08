@@ -30,10 +30,18 @@ class ExampleFirepodListObject extends ConsumerWidget {
       children: [
         ValueAndAction(
           title: 'FirepodListObject : Products',
-          buttonText: 'Add',
           value: productList,
-          action: () => productListNotifier.update(
-              [...productList, Product(order: 1, price: 2, title: 'New Product', weight: 3)]),
+          actionMap: {
+            'Add': () => productListNotifier.update([
+                  ...productList,
+                  Product(
+                    order: 1,
+                    price: 2,
+                    title: 'New Product',
+                    weight: 3,
+                  )
+                ]),
+          },
         ),
       ],
     );

@@ -64,27 +64,31 @@ class ExampleFirepodMapObject extends ConsumerWidget {
       children: [
         ValueAndAction(
           title: 'FirepodMapObject : no site / watch',
-          buttonText: 'Increment Test',
           value: noSiteWatch,
-          action: () => _updateValue(noSiteWatch, noSiteWatchNotifier),
+          actionMap: {
+            'Increment Test': () => _updateValue(noSiteWatch, noSiteWatchNotifier),
+          },
         ),
         ValueAndAction(
           title: 'FirepodMapObject : no site / no watch',
-          buttonText: 'Increment Test',
           value: noSiteNoWatch,
-          action: () => _updateValue(noSiteNoWatch, noSiteNoWatchNotifier),
+          actionMap: {
+            'Increment Test': () => _updateValue(noSiteNoWatch, noSiteNoWatchNotifier),
+          },
         ),
         ValueAndAction(
           title: 'FirepodMapObject : site / watch',
-          buttonText: 'Increment Test',
           value: siteWatch,
-          action: () => _updateValue(siteWatch, siteWatchNotifier),
+          actionMap: {
+            'Increment Test': () => _updateValue(siteWatch, siteWatchNotifier),
+          },
         ),
         ValueAndAction(
           title: 'FirepodMapObject : site / no watch',
-          buttonText: 'Increment Test',
           value: siteNoWatch,
-          action: () => _updateValue(siteNoWatch, siteNoWatchNotifier),
+          actionMap: {
+            'Increment Test': () => _updateValue(siteNoWatch, siteNoWatchNotifier),
+          },
         ),
       ],
     );

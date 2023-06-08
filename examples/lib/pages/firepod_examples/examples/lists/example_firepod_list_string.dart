@@ -31,9 +31,10 @@ class ExampleFirepodListString extends ConsumerWidget {
       children: [
         ValueAndAction(
           title: 'FirepodListString',
-          buttonText: 'Add',
           value: stringList,
-          action: () => stringListNotifier.update([...stringList, 'a']),
+          actionMap: {
+            'Add': () => stringListNotifier.update([...stringList, 'a'])
+          },
         ),
       ],
     );

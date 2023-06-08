@@ -44,42 +44,46 @@ class ExampleFirepodMapInt extends ConsumerWidget {
       children: [
         ValueAndAction(
           title: 'FirepodMapInt : no site / watch',
-          buttonText: 'Increment Test',
           value: noSiteWatch,
-          action: () {
-            final newMap = {...noSiteWatch.map};
-            newMap['test'] = (newMap['test'] ?? 0) + 1;
-            noSiteWatchNotifier.update(GenericLookupMap<int>(map: newMap));
+          actionMap: {
+            'Increment Test': () {
+              final newMap = {...noSiteWatch.map};
+              newMap['test'] = (newMap['test'] ?? 0) + 1;
+              noSiteWatchNotifier.update(GenericLookupMap<int>(map: newMap));
+            }
           },
         ),
         ValueAndAction(
           title: 'FirepodMapInt : no site / no watch',
-          buttonText: 'Increment Test',
           value: noSiteNoWatch,
-          action: () {
-            final newMap = {...noSiteNoWatch.map};
-            newMap['test'] = (newMap['test'] ?? 0) + 1;
-            noSiteNoWatchNotifier.update(GenericLookupMap<int>(map: newMap));
+          actionMap: {
+            'Increment Test': () {
+              final newMap = {...noSiteNoWatch.map};
+              newMap['test'] = (newMap['test'] ?? 0) + 1;
+              noSiteNoWatchNotifier.update(GenericLookupMap<int>(map: newMap));
+            }
           },
         ),
         ValueAndAction(
           title: 'FirepodMapInt : site / watch',
-          buttonText: 'Increment Test',
           value: siteWatch,
-          action: () {
-            final newMap = {...siteWatch.map};
-            newMap['test'] = (newMap['test'] ?? 0) + 1;
-            siteWatchNotifier.update(GenericLookupMap<int>(map: newMap));
+          actionMap: {
+            'Increment Test': () {
+              final newMap = {...siteWatch.map};
+              newMap['test'] = (newMap['test'] ?? 0) + 1;
+              siteWatchNotifier.update(GenericLookupMap<int>(map: newMap));
+            }
           },
         ),
         ValueAndAction(
           title: 'FirepodMapInt : site / no watch',
-          buttonText: 'Increment Test',
           value: siteNoWatch,
-          action: () {
-            final newMap = {...siteNoWatch.map};
-            newMap['test'] = (newMap['test'] ?? 0) + 1;
-            siteNoWatchNotifier.update(GenericLookupMap<int>(map: newMap));
+          actionMap: {
+            'Increment Test': () {
+              final newMap = {...siteNoWatch.map};
+              newMap['test'] = (newMap['test'] ?? 0) + 1;
+              siteNoWatchNotifier.update(GenericLookupMap<int>(map: newMap));
+            }
           },
         ),
       ],

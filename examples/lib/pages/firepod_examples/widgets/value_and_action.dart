@@ -3,15 +3,12 @@ import 'package:flutter/material.dart';
 class ValueAndAction extends StatelessWidget {
   final String title;
   final Object? value;
-  final VoidCallback action;
-  final String buttonText;
-
+  final Map<String, VoidCallback> actionMap;
   const ValueAndAction({
     super.key,
     required this.title,
     required this.value,
-    required this.action,
-    required this.buttonText,
+    required this.actionMap,
   });
 
   @override
@@ -40,9 +37,15 @@ class ValueAndAction extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          ElevatedButton(
-            onPressed: action,
-            child: Text(buttonText),
+          Wrap(
+            children: actionMap.entries
+                .map(
+                  (e) => ElevatedButton(
+                    onPressed: e.value,
+                    child: Text(e.key),
+                  ),
+                )
+                .toList(),
           ),
         ],
       ),

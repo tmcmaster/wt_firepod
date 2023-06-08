@@ -48,42 +48,46 @@ class ExampleFirepodMapString extends ConsumerWidget {
       children: [
         ValueAndAction(
           title: 'FirepodMapString : no site / watch',
-          buttonText: 'Add to Test',
           value: noSiteWatch,
-          action: () {
-            final newMap = {...noSiteWatch.map};
-            newMap['test'] = '${newMap['test'] ?? ''}a';
-            noSiteWatchNotifier.update(GenericLookupMap<String>(map: newMap));
+          actionMap: {
+            'Add to Test': () {
+              final newMap = {...noSiteWatch.map};
+              newMap['test'] = '${newMap['test'] ?? ''}a';
+              noSiteWatchNotifier.update(GenericLookupMap<String>(map: newMap));
+            }
           },
         ),
         ValueAndAction(
           title: 'FirepodMapString : no site / no watch',
-          buttonText: 'Add to Test',
           value: noSiteNoWatch,
-          action: () {
-            final newMap = {...noSiteNoWatch.map};
-            newMap['test'] = '${newMap['test'] ?? ''}a';
-            noSiteNoWatchNotifier.update(GenericLookupMap<String>(map: newMap));
+          actionMap: {
+            'Add to Test': () {
+              final newMap = {...noSiteNoWatch.map};
+              newMap['test'] = '${newMap['test'] ?? ''}a';
+              noSiteNoWatchNotifier.update(GenericLookupMap<String>(map: newMap));
+            }
           },
         ),
         ValueAndAction(
           title: 'FirepodMapString : site / watch',
-          buttonText: 'Add to Test',
           value: siteWatch,
-          action: () {
-            final newMap = {...siteWatch.map};
-            newMap['test'] = '${newMap['test'] ?? ''}a';
-            siteWatchNotifier.update(GenericLookupMap<String>(map: newMap));
+          actionMap: {
+            'Add to Test': () {
+              final newMap = {...siteWatch.map};
+              newMap['test'] = '${newMap['test'] ?? ''}a';
+              siteWatchNotifier.update(GenericLookupMap<String>(map: newMap));
+            }
           },
         ),
         ValueAndAction(
           title: 'FirepodMapString : site / no watch',
-          buttonText: 'Add to Test',
           value: siteNoWatch,
-          action: () {
-            final newMap = {...siteNoWatch.map};
-            newMap['test'] = '${newMap['test'] ?? ''}a';
-            siteNoWatchNotifier.update(GenericLookupMap<String>(map: newMap));
+          actionMap: {
+            'Add to Test': () {
+              final newMap = {...siteNoWatch.map};
+              newMap['test'] = '${newMap['test'] ?? ''}a';
+              siteNoWatchNotifier.update(GenericLookupMap<String>(map: newMap));
+            }
           },
         ),
       ],

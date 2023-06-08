@@ -61,50 +61,54 @@ class ExampleFirepodObject extends ConsumerWidget {
       children: [
         ValueAndAction(
           title: 'FirepodObject : no site / watch',
-          buttonText: 'Increment Weight',
           value: noSiteWatch,
-          action: () {
-            noSiteWatchNotifier.update(
-              noSiteWatch.copyWith(
-                weight: noSiteWatch.weight + 1.0,
-              ),
-            );
+          actionMap: {
+            'Increment Weight': () {
+              noSiteWatchNotifier.update(
+                noSiteWatch.copyWith(
+                  weight: noSiteWatch.weight + 1.0,
+                ),
+              );
+            }
           },
         ),
         ValueAndAction(
           title: 'FirepodObject : no site / no watch',
-          buttonText: 'Increment Weight',
           value: noSiteNoWatch,
-          action: () {
-            noSiteNoWatchNotifier.update(
-              noSiteNoWatch.copyWith(
-                weight: noSiteNoWatch.weight + 1.0,
-              ),
-            );
+          actionMap: {
+            'Increment Weight': () {
+              noSiteNoWatchNotifier.update(
+                noSiteNoWatch.copyWith(
+                  weight: noSiteNoWatch.weight + 1.0,
+                ),
+              );
+            }
           },
         ),
         ValueAndAction(
           title: 'FirepodObject : site / watch',
-          buttonText: 'Increment Weight',
           value: siteWatch,
-          action: () {
-            siteWatchNotifier.update(
-              siteWatch.copyWith(
-                weight: siteWatch.weight + 1.0,
-              ),
-            );
+          actionMap: {
+            'Increment Weight': () {
+              siteWatchNotifier.update(
+                siteWatch.copyWith(
+                  weight: siteWatch.weight + 1.0,
+                ),
+              );
+            }
           },
         ),
         ValueAndAction(
           title: 'FirepodObject : site / no watch',
-          buttonText: 'Increment Weight',
           value: siteNoWatch,
-          action: () {
-            siteNoWatchNotifier.update(
-              siteNoWatch.copyWith(
-                weight: siteNoWatch.weight + 1.0,
-              ),
-            );
+          actionMap: {
+            'Increment Weight': () {
+              siteNoWatchNotifier.update(
+                siteNoWatch.copyWith(
+                  weight: siteNoWatch.weight + 1.0,
+                ),
+              );
+            }
           },
         )
       ],
