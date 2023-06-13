@@ -51,36 +51,28 @@ class ExampleFirepodScalar extends ConsumerWidget {
           title: 'FirepodScalarString',
           value: scalarString,
           actionMap: {
-            'Increment': () {
-              scalarStringNotifier.update('${scalarString}a');
-            }
+            'Increment': () => scalarStringNotifier.update('${scalarString}a'),
           },
         ),
         ValueAndAction(
           title: 'FirepodScalarInt',
           value: scalarInt,
           actionMap: {
-            'Increment': () {
-              scalarIntNotifier.update(scalarInt + 1);
-            }
+            'Increment': () => scalarIntNotifier.update(scalarInt + 1),
           },
         ),
         ValueAndAction(
           title: 'FirepodScalarDouble',
           value: scalarDouble,
           actionMap: {
-            'Increment': () {
-              scalarDoubleNotifier.update(scalarDouble + 1.0);
-            }
+            'Increment': () => scalarDoubleNotifier.update(scalarDouble + 1.0),
           },
         ),
         ValueAndAction(
           title: 'FirepodScalarBool',
           value: scalarBool,
           actionMap: {
-            'Toggle': () {
-              scalarBoolNotifier.update(!scalarBool);
-            }
+            'Toggle': () => scalarBoolNotifier.update(!scalarBool),
           },
         ),
       ],

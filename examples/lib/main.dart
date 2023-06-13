@@ -32,7 +32,6 @@ void main() async {
     }, onError: (error) {
       print('LOGIN ERROR: $error');
     });
-    ;
   }, onError: (error) {
     debugPrint('ERROR: $error');
   });
