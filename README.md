@@ -54,7 +54,7 @@ class UserSiteSettings extends ConsumerWidget {
     decoder: SiteSettings.fromJson,
     encoder: SiteSettings.toJson,
     none: SiteSettings.none,
-    watch: false,
+    watch: true,
     autoSave: true,
   );
   const UserSiteSettings({super.key});
