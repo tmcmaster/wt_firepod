@@ -6,7 +6,28 @@ For all of the Firepod providers:
 - The watch property will watch Firebase values and update the provider when they change.
 - The autoSave property will update Firebase value when the provider changes.
 
-All of these examples use the following baseUrl:
+Supported Types:
+
+- map
+  - FirepodMapDouble
+  - FirepodMapString
+  - FirepodMapBoolean
+  - FirepodMapInt
+  - FirepodMapObject<T>
+- list
+  - FirepodListObject<T>
+  - FirepodListString
+  - FirepodList<M>
+  - FirepodListBool
+  - FirepodListInt
+  - FirepodListDouble
+- scalar 
+  - FirepodScalarString
+  - FirepodScalarInt
+  - FirepodScalarBool
+  - FirepodScalarDouble
+
+All of the following examples use the following baseUrl:
 ```dart
   static const basePath = '/v1/testing/list-object';
 ```
