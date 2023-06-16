@@ -19,8 +19,8 @@ class FirepodScalar<T> {
       (ref) => GenericSiteDataNotifier<T>(
         ref: ref,
         path: path,
-        decoder: (object) => object == null ? null : decoder(object),
-        encoder: (value) => value == null ? null : encoder(value),
+        decoder: (Object object) => decoder(object),
+        encoder: (T value) => value == null ? none : encoder(value),
         none: none,
         watch: watch,
         autoSave: autoSave,

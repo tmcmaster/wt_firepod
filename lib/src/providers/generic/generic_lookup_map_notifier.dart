@@ -16,8 +16,8 @@ class GenericSiteDataNotifier<T> extends StateNotifier<T> {
 
   final String path;
   final T none;
-  final T? Function(Object? value) decoder;
-  final dynamic Function(T? object) encoder;
+  final T Function(Object value) decoder;
+  final dynamic Function(T object) encoder;
   final bool watch;
   final bool autoSave;
   final bool isScalar;
@@ -52,7 +52,7 @@ class GenericSiteDataNotifier<T> extends StateNotifier<T> {
           _subscription!.cancel();
         }
         _subscription = _dbRef!.onValue.listen((event) {
-          state = decoder(event.snapshot.value) ?? none;
+          state = event.snapshot.value == null ? none : decoder(event.snapshot.value!);
         }, onError: (error) => log.e(error));
       }
       load();
@@ -86,10 +86,10 @@ class GenericSiteDataNotifier<T> extends StateNotifier<T> {
                 final value = (snapshot.value as Map<dynamic, dynamic>)[snapshot.key];
                 state = decoder(value) ?? none;
               } else {
-                state = decoder(snapshot.value) ?? none;
+                state = snapshot.value == null ? none : decoder(snapshot.value!);
               }
             } else {
-              state = decoder(snapshot.value) ?? none;
+              state = snapshot.value == null ? none : decoder(snapshot.value!);
             }
           }
         } else {

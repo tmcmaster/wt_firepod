@@ -22,18 +22,18 @@ class GenericLookupMap<T> {
     return json.encode(map);
   }
 
-  static GenericLookupMap<T> Function(Object? value) createDecoder<T>(
-      T Function(Object? value) decoder, String? keyField) {
-    return (Object? value) => GenericLookupMap<T>(
-          map: Map.fromEntries((value as Map).entries.map((e) {
-            return MapEntry<String, T>(
-                e.key.toString(), decoder(_addKey(e.value, e.key, keyField)));
+  static GenericLookupMap<T> Function(Object value) createDecoder<T>(
+      T Function(Object value) decoder, String? keyField) {
+    return (Object value) => GenericLookupMap<T>(
+          map: Map.fromEntries((value as Map).entries.map((MapEntry<dynamic, dynamic> e) {
+            return MapEntry<String, T>(e.key.toString(),
+                keyField == null ? decoder(e.value) : decoder(_addKey(e.value, e.key, keyField)));
           })),
         );
   }
 
   static dynamic Function(GenericLookupMap<T>? value) createEncoder<T>(
-      Object? Function(T? value) encoder, String? keyField) {
+      Object Function(T value) encoder, String? keyField) {
     return (GenericLookupMap<T>? value) => value == null
         ? null
         : Map.fromEntries(value.map.entries.map((e) {
@@ -41,11 +41,8 @@ class GenericLookupMap<T> {
           }));
   }
 
-  static Object? _addKey(Object? value, String key, String? keyField) {
-    if (keyField != null) {
-      (value as Map)[keyField] = key;
-    }
-
+  static Object _addKey(Object value, String key, String keyField) {
+    (value as Map)[keyField] = key;
     return value;
   }
 }

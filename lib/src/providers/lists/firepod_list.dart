@@ -2,7 +2,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:wt_firepod/wt_firepod.dart';
 
 class FirepodList<M> {
-  late StateNotifierProvider<GenericSiteDataNotifier<List<M?>>, List<M?>> value;
+  late StateNotifierProvider<GenericSiteDataNotifier<List<M>>, List<M>> value;
 
   FirepodList({
     required String name,
@@ -13,19 +13,17 @@ class FirepodList<M> {
     bool watch = false,
     bool autoSave = false,
   }) {
-    List<M?>? modelListDecoder(Object? object) {
-      return object == null
-          ? null
-          : (object as List<Object?>).map((Object? o) => o == null ? null : decoder(o)).toList();
+    List<M> modelListDecoder(Object object) {
+      return ((object as List).whereType<Object>()).map((Object o) => decoder(o)).toList();
     }
 
-    List<dynamic>? modelListEncoder(List<M?>? list) {
+    List<dynamic>? modelListEncoder(List<M>? list) {
       return list?.map((M? item) => item == null ? null : encoder(item)).toList();
     }
 
-    value = StateNotifierProvider<GenericSiteDataNotifier<List<M?>>, List<M?>>(
+    value = StateNotifierProvider<GenericSiteDataNotifier<List<M>>, List<M>>(
       name: name,
-      (ref) => GenericSiteDataNotifier<List<M?>>(
+      (ref) => GenericSiteDataNotifier<List<M>>(
         ref: ref,
         path: path,
         decoder: modelListDecoder,
@@ -37,5 +35,5 @@ class FirepodList<M> {
     );
   }
 
-  AlwaysAliveRefreshable<GenericSiteDataNotifier<List<M?>>> get notifier => value.notifier;
+  AlwaysAliveRefreshable<GenericSiteDataNotifier<List<M>>> get notifier => value.notifier;
 }
