@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../generic/generic_lookup_map_notifier.dart';
+import '../generic/generic_site_data_notifier.dart';
 
 class FirepodScalar<T> {
   late StateNotifierProvider<GenericSiteDataNotifier<T>, T> value;
@@ -22,7 +22,7 @@ class FirepodScalar<T> {
         decoder: (Object object) => decoder(object),
         encoder: (T value) => value == null ? none : encoder(value),
         none: none,
-        watch: watch,
+        autoLoad: watch,
         autoSave: autoSave,
         isScalar: true,
       ),

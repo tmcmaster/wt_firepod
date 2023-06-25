@@ -13,9 +13,9 @@ class Supplier extends TitleIdJsonSupport<Supplier> with _$Supplier {
   static final _titles = ['id', 'name'];
 
   factory Supplier({
-    @JsonKey(name: 'id', defaultValue: '') required String id,
-    @JsonKey(name: 'name', defaultValue: '') required String name,
-    @JsonKey(name: 'code', defaultValue: '') required String code,
+    @Default('') required String id,
+    @Default('') required String name,
+    @Default('') required String code,
   }) = _Supplier;
 
   Supplier._();

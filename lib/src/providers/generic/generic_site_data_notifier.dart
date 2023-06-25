@@ -7,7 +7,7 @@ import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_logging/wt_logging.dart';
 import 'package:wt_models/wt_models.dart';
 
-class GenericSiteDataNotifier<T> extends StateNotifier<T> {
+class GenericSiteDataNotifier<T> extends GenericSiteDataNotifierBase<T> {
   static final log = logger(GenericSiteDataNotifier, level: Level.warning);
 
   late ProviderSubscription _removeListener;
@@ -18,7 +18,7 @@ class GenericSiteDataNotifier<T> extends StateNotifier<T> {
   final T none;
   final T Function(Object value) decoder;
   final dynamic Function(T object) encoder;
-  final bool watch;
+  final bool autoLoad;
   final bool autoSave;
   final bool isScalar;
   GenericSiteDataNotifier({
@@ -27,7 +27,7 @@ class GenericSiteDataNotifier<T> extends StateNotifier<T> {
     required this.path,
     required this.decoder,
     required this.encoder,
-    this.watch = false,
+    this.autoLoad = false,
     this.autoSave = false,
     this.isScalar = false,
   }) : super(none) {
@@ -47,7 +47,7 @@ class GenericSiteDataNotifier<T> extends StateNotifier<T> {
     if (_dbRef == null) {
       state = none;
     } else {
-      if (watch) {
+      if (autoLoad) {
         if (_subscription != null) {
           _subscription!.cancel();
         }
@@ -59,6 +59,7 @@ class GenericSiteDataNotifier<T> extends StateNotifier<T> {
     }
   }
 
+  @override
   void update(T newValue) {
     state = newValue;
     if (autoSave) {
@@ -66,12 +67,14 @@ class GenericSiteDataNotifier<T> extends StateNotifier<T> {
     }
   }
 
+  @override
   void save() {
     if (_dbRef != null) {
       _dbRef!.set(encoder(state));
     }
   }
 
+  @override
   void load() {
     if (_dbRef != null) {
       _dbRef!.get().then((snapshot) {

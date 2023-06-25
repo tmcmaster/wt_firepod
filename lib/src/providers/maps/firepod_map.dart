@@ -1,10 +1,13 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:wt_firepod/src/providers/generic/generic_lookup_map_notifier.dart';
+import 'package:wt_firepod/src/providers/generic/firepod_map_interface.dart';
+import 'package:wt_firepod/src/providers/generic/generic_site_data_notifier.dart';
+import 'package:wt_firepod/src/providers/generic/generic_site_data_notifier_base.dart';
 
 import '../generic/generic_lookup_map.dart';
 
-abstract class FirepodMap<T> {
-  late StateNotifierProvider<GenericSiteDataNotifier<GenericLookupMap<T>>, GenericLookupMap<T>>
+abstract class FirepodMap<T> implements FirepodMapInterface<T> {
+  @override
+  late StateNotifierProvider<GenericSiteDataNotifierBase<GenericLookupMap<T>>, GenericLookupMap<T>>
       value;
 
   FirepodMap({
@@ -17,8 +20,8 @@ abstract class FirepodMap<T> {
     bool watch = false,
     bool autoSave = false,
   }) {
-    value =
-        StateNotifierProvider<GenericSiteDataNotifier<GenericLookupMap<T>>, GenericLookupMap<T>>(
+    value = StateNotifierProvider<GenericSiteDataNotifierBase<GenericLookupMap<T>>,
+        GenericLookupMap<T>>(
       name: name,
       (ref) => GenericSiteDataNotifier<GenericLookupMap<T>>(
         ref: ref,
@@ -26,14 +29,13 @@ abstract class FirepodMap<T> {
         decoder: GenericLookupMap.createDecoder<T>((object) => decoder(object), keyField),
         encoder: GenericLookupMap.createEncoder<T>((T object) => encoder(object), keyField),
         none: none,
-        watch: watch,
+        autoLoad: watch,
         autoSave: autoSave,
       ),
     );
   }
 
-  AlwaysAliveRefreshable<GenericSiteDataNotifier<GenericLookupMap>> get notifier => value.notifier;
+  @override
+  AlwaysAliveRefreshable<GenericSiteDataNotifierBase<GenericLookupMap>> get notifier =>
+      value.notifier;
 }
-
-// dynamic Function(GenericLookupMap<T>?)
-// dynamic Function(GenericLookupMap<T>?)

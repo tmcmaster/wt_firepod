@@ -96,7 +96,7 @@ class ExampleFirepodMapObject extends ConsumerWidget {
 
   void _updateValue(
     GenericLookupMap<Product> noSiteNoWatch,
-    GenericSiteDataNotifier<GenericLookupMap> noSiteNoWatchNotifier,
+    GenericSiteDataNotifierBase<GenericLookupMap> noSiteNoWatchNotifier,
   ) {
     final newMap = {...noSiteNoWatch.map};
     if (newMap.containsKey('test')) {

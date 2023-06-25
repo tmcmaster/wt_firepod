@@ -13,12 +13,12 @@ class Customer extends TitleIdJsonSupport<Customer> with _$Customer {
   static final _titles = ['id', 'name'];
 
   factory Customer({
-    @JsonKey(name: 'id', defaultValue: '') required String id,
-    @JsonKey(name: 'name', defaultValue: '') required String name,
-    @JsonKey(name: 'phone', defaultValue: '') required String phone,
-    @JsonKey(name: 'email', defaultValue: '') required String email,
-    @JsonKey(name: 'address', defaultValue: '') required String address,
-    @JsonKey(name: 'postcode', defaultValue: 0) required int postcode,
+    @Default('') required String id,
+    @Default('') required String name,
+    @Default('') required String phone,
+    @Default('') required String email,
+    @Default('') required String address,
+    @Default(0) required int postcode,
   }) = _Customer;
 
   Customer._();

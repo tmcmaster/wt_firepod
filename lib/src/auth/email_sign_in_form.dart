@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:wt_firepod/src/auth/flutterfire_auth.dart';
@@ -37,12 +36,14 @@ class EmailSignInForm extends HookConsumerWidget {
             controller: passwordController,
             obscureText: true,
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           ElevatedButton(
-            child: Text('Email Sign In'),
+            child: const Text('Email Sign In'),
             onPressed: () {
               print('Logging in with email: ${emailController.text}');
-              firebaseLogin.emailSignIn(emailController.text, passwordController.text).then((UserAuthResult auth) {
+              firebaseLogin
+                  .emailSignIn(emailController.text, passwordController.text)
+                  .then((UserAuthResult auth) {
                 log.d('Login completed : ${auth.success} : ${auth.user.name}');
                 if (auth.user != UserAuth.none) {
                   log.d('Routing to the default page');
