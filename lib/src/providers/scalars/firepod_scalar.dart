@@ -1,9 +1,10 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:wt_firepod/src/providers/generic/generic_site_data_notifier_base.dart';
 
 import '../generic/generic_site_data_notifier.dart';
 
 class FirepodScalar<T> {
-  late StateNotifierProvider<GenericSiteDataNotifier<T>, T> value;
+  late StateNotifierProvider<GenericSiteDataNotifierBase<T>, T> value;
 
   FirepodScalar({
     required String name,
@@ -14,7 +15,7 @@ class FirepodScalar<T> {
     required T Function(Object value) decoder,
     required dynamic Function(T object) encoder,
   }) {
-    value = StateNotifierProvider<GenericSiteDataNotifier<T>, T>(
+    value = StateNotifierProvider<GenericSiteDataNotifierBase<T>, T>(
       name: name,
       (ref) => GenericSiteDataNotifier<T>(
         ref: ref,
@@ -29,5 +30,5 @@ class FirepodScalar<T> {
     );
   }
 
-  AlwaysAliveRefreshable<GenericSiteDataNotifier<T>> get notifier => value.notifier;
+  AlwaysAliveRefreshable<GenericSiteDataNotifierBase<T>> get notifier => value.notifier;
 }

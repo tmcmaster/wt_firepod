@@ -1,12 +1,10 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:wt_firepod/src/providers/generic/firepod_map_interface.dart';
 import 'package:wt_firepod/src/providers/generic/generic_site_data_notifier.dart';
 import 'package:wt_firepod/src/providers/generic/generic_site_data_notifier_base.dart';
 
 import '../generic/generic_lookup_map.dart';
 
-abstract class FirepodMap<T> implements FirepodMapInterface<T> {
-  @override
+abstract class FirepodMap<T> {
   late StateNotifierProvider<GenericSiteDataNotifierBase<GenericLookupMap<T>>, GenericLookupMap<T>>
       value;
 
@@ -35,7 +33,6 @@ abstract class FirepodMap<T> implements FirepodMapInterface<T> {
     );
   }
 
-  @override
   AlwaysAliveRefreshable<GenericSiteDataNotifierBase<GenericLookupMap>> get notifier =>
       value.notifier;
 }

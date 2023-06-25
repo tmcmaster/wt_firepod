@@ -1,9 +1,8 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:wt_firepod/wt_firepod.dart';
 
-class FirepodList<M> implements FirepodListInterface<M> {
-  @override
-  late StateNotifierProvider<GenericSiteDataNotifier<List<M>>, List<M>> value;
+class FirepodList<M> {
+  late StateNotifierProvider<GenericSiteDataNotifierBase<List<M>>, List<M>> value;
 
   FirepodList({
     required String name,
@@ -22,7 +21,7 @@ class FirepodList<M> implements FirepodListInterface<M> {
       return list?.map((M? item) => item == null ? null : encoder(item)).toList();
     }
 
-    value = StateNotifierProvider<GenericSiteDataNotifier<List<M>>, List<M>>(
+    value = StateNotifierProvider<GenericSiteDataNotifierBase<List<M>>, List<M>>(
       name: name,
       (ref) => GenericSiteDataNotifier<List<M>>(
         ref: ref,
@@ -36,6 +35,5 @@ class FirepodList<M> implements FirepodListInterface<M> {
     );
   }
 
-  @override
-  AlwaysAliveRefreshable<GenericSiteDataNotifier<List<M>>> get notifier => value.notifier;
+  AlwaysAliveRefreshable<GenericSiteDataNotifierBase<List<M>>> get notifier => value.notifier;
 }

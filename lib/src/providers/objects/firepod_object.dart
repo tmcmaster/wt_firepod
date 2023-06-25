@@ -1,11 +1,9 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:wt_firepod/src/providers/generic/firepod_object_interface.dart';
 import 'package:wt_firepod/src/providers/generic/generic_site_data_notifier_base.dart';
 
 import '../generic/generic_site_data_notifier.dart';
 
-class FirepodObject<T> implements FirepodObjectInterface<T> {
-  @override
+class FirepodObject<T> {
   late StateNotifierProvider<GenericSiteDataNotifierBase<T>, T> value;
 
   FirepodObject({
@@ -31,6 +29,5 @@ class FirepodObject<T> implements FirepodObjectInterface<T> {
     );
   }
 
-  @override
   AlwaysAliveRefreshable<GenericSiteDataNotifierBase<T>> get notifier => value.notifier;
 }
