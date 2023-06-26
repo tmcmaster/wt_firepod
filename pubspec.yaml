@@ -12,11 +12,13 @@ dependencies:
   flutter:
     sdk: flutter
   wt_models:
-    git: git@github.com:tmcmaster/wt_models.git
+    git: https://github.com/tmcmaster/wt_models.git
   wt_settings:
-    git: git@github.com:tmcmaster/wt_settings.git
+    git:
+      url: https://github.com/tmcmaster/wt_settings.git
   wt_logging:
-    git: git@github.com:tmcmaster/wt_logging.git
+    git:
+      url: https://github.com/tmcmaster/wt_logging.git
   shared_preferences:
   crypto:
   logger:
@@ -45,7 +47,7 @@ dev_dependencies:
 
 flutter:
 
-dependency_overrides:
+#dependency_overrides:
 #  wt_models:
 #    path: ../wt_models
 #  wt_settings:

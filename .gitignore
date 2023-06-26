@@ -43,3 +43,4 @@ firebase_options.dart
 #macos/firebase_app_id_file.json
 
 examples/lib/login/app_secrets.dart
+coverage
