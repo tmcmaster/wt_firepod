@@ -25,11 +25,11 @@ dependencies:
   flutter_animated_dialog:
   logger:
   wt_firepod:
-    git: git@github.com:tmcmaster/wt_firepod.git
+    git: https://github.com/tmcmaster/wt_firepod.git
   wt_action_button:
-    git: git@github.com:tmcmaster/wt_action_button.git
+    git: https://github.com/tmcmaster/wt_action_button.git
   wt_models:
-    git: git@github.com:tmcmaster/wt_models.git
+    git: https://github.com/tmcmaster/wt_models.git
 
 dev_dependencies:
   flutter_test:
