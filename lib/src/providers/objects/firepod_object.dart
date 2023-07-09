@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:wt_firepod/src/providers/generic/generic_site_data_notifier.dart';
 import 'package:wt_firepod/src/providers/generic/generic_site_data_notifier_base.dart';
-
-import '../generic/generic_site_data_notifier.dart';
+import 'package:wt_firepod/src/utils/transformer.dart';
 
 class FirepodObject<T> {
   late StateNotifierProvider<GenericSiteDataNotifierBase<T>, T> value;
@@ -20,7 +20,7 @@ class FirepodObject<T> {
       (ref) => GenericSiteDataNotifier<T>(
         ref: ref,
         path: path,
-        decoder: (value) => decoder(value as Map<dynamic, dynamic>),
+        decoder: (value) => decoder(Transformer.convertSnapshotMap(value as Map)),
         encoder: (T? object) => object == null ? null : encoder(object),
         none: none,
         autoLoad: watch,

@@ -1,7 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:wt_firepod/src/providers/generic/generic_site_data_notifier.dart';
 import 'package:wt_firepod/src/providers/generic/generic_site_data_notifier_base.dart';
-
-import '../generic/generic_site_data_notifier.dart';
 
 class FirepodScalar<T> {
   late StateNotifierProvider<GenericSiteDataNotifierBase<T>, T> value;

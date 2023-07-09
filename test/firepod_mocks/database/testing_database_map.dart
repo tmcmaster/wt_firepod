@@ -6,7 +6,7 @@ import 'package:wt_firepod/src/providers/maps/firepod_map_string.dart';
 
 import '../models/product.dart';
 
-abstract class TestingDatabaseMap {
+mixin TestingDatabaseMap {
   static const basePath = '/v1/testing/map';
 
   static final firepodMapBool = FirepodMapBoolean(

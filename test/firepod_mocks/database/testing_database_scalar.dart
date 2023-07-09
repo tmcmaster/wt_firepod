@@ -1,6 +1,6 @@
 import 'package:wt_firepod/wt_firepod.dart';
 
-abstract class TestingDatabaseScalar {
+mixin TestingDatabaseScalar {
   static const basePath = '/v1/testing/scalar';
 
   static final firepodScalarString = FirepodScalarString(

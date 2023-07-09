@@ -6,7 +6,7 @@ import 'package:wt_firepod/src/providers/lists/firepod_list_string.dart';
 
 import '../models/product.dart';
 
-abstract class TestingDatabaseList {
+mixin TestingDatabaseList {
   static const basePath = '/v1/testing/list';
 
   static final firepodListBool = FirepodListBool(
@@ -33,6 +33,5 @@ abstract class TestingDatabaseList {
     autoSave: true,
     decoder: Product.fromJsonDynamic,
     encoder: Product.to.jsonFromModel,
-    keyField: 'id',
   );
 }

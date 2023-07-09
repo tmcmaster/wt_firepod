@@ -7,35 +7,37 @@ environment:
   sdk: '>=2.18.2 <3.0.0'
 
 dependencies:
-  flutter:
-    sdk: flutter
+  cloud_functions:
   cupertino_icons:
-  font_awesome_flutter:
-  freezed:
-  freezed_annotation:
-  riverpod:
-  flutter_riverpod:
-  firebase_core:
   firebase_auth:
+  firebase_core:
   firebase_database:
   firebase_remote_config:
-  cloud_functions:
-  flutter_form_builder:
-  form_builder_validators:
+  flutter:
+    sdk: flutter
   flutter_animated_dialog:
+  flutter_form_builder:
+  flutter_riverpod:
+  font_awesome_flutter:
+  form_builder_validators:
+  freezed:
+  freezed_annotation:
   logger:
-  wt_firepod:
-    git: https://github.com/tmcmaster/wt_firepod.git
+  riverpod:
   wt_action_button:
     git: https://github.com/tmcmaster/wt_action_button.git
+  wt_firepod:
+    git: https://github.com/tmcmaster/wt_firepod.git
+  wt_logging:
+    git: https://github.com/tmcmaster/wt_logging.git
   wt_models:
     git: https://github.com/tmcmaster/wt_models.git
 
 dev_dependencies:
+  build_runner:
+  flutter_lints:
   flutter_test:
     sdk: flutter
-  flutter_lints:
-  build_runner:
   json_serializable:
 flutter:
   uses-material-design: true

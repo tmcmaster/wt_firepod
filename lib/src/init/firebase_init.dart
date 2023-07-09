@@ -3,8 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../providers/firebase_providers.dart';
+import 'package:wt_firepod/src/providers/firebase_providers.dart';
+import 'package:wt_logging/wt_logging.dart';
 
 Future<ProviderScope> Function() Function(
   Future<dynamic> Function(
@@ -23,24 +23,25 @@ Future<ProviderScope> Function() andFirebase(
   required String appName,
   required FirebaseOptions firebaseOptions,
 }) {
+  final log = logger('Firebase Setup', level: Level.debug);
   return () async {
-    print('Firebase Initialising');
+    log.d('Firebase Initialising');
     WidgetsFlutterBinding.ensureInitialized();
 
-    print('Firebase.initializeApp: name($appName)');
+    log.d('Firebase.initializeApp: name($appName)');
     final app = await Firebase.initializeApp(
       name: appName,
       options: firebaseOptions,
     );
 
-    print('FirebaseAuth.instanceFor: name($appName)');
+    log.d('FirebaseAuth.instanceFor: name($appName)');
     final auth = FirebaseAuth.instanceFor(app: app);
-    print('FirebaseDatabase.instanceFor: name($appName)');
+    log.d('FirebaseDatabase.instanceFor: name($appName)');
     final database = FirebaseDatabase.instanceFor(app: app);
 
-    print('Firebase Building Child');
+    log.d('Firebase Building Child');
     final widget = await child2widget(childBuilder(app, firebaseOptions));
-    print('Firebase Returning Scope');
+    log.d('Firebase Returning Scope');
     return ProviderScope(
       overrides: [
         FirebaseProviders.appName.overrideWithValue(appName),
@@ -58,5 +59,5 @@ Future<ProviderScope> Function() andFirebase(
 }
 
 Future<Widget> child2widget(dynamic child) async {
-  return child is Future<Widget> ? await child : child;
+  return child is Future<Widget> ? await child : child as Widget;
 }

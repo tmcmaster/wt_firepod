@@ -4,21 +4,24 @@ import 'package:wt_firepod_examples/pages/async_example_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const ProviderScope(
+  runApp(
+    const ProviderScope(
       child: MaterialApp(
-    debugShowCheckedModeBanner: true,
-    home: Scaffold(
-      body: Center(
-        child: Column(
-          children: [
-            Text(':-)'),
-            SizedBox(
-              height: 400,
-              child: AsyncExamplePage(),
+        debugShowCheckedModeBanner: true,
+        home: Scaffold(
+          body: Center(
+            child: Column(
+              children: [
+                Text(':-)'),
+                SizedBox(
+                  height: 400,
+                  child: AsyncExamplePage(),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     ),
-  )));
+  );
 }

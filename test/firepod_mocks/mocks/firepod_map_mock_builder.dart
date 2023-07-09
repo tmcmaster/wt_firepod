@@ -21,26 +21,26 @@ class FirepodMapMockBuilder {
 
   FirepodMock<GenericLookupMap<bool>> firepodMapBool() => FirepodMock(
         const GenericLookupMap(map: {
-          "1": true,
-        }),
+          '1': true,
+        },),
       );
   FirepodMock<GenericLookupMap<double>> firepodMapDouble() => FirepodMock(
-        const GenericLookupMap(map: {"01": 1.1}),
+        const GenericLookupMap(map: {'01': 1.1}),
       );
   FirepodMock<GenericLookupMap<int>> firepodMapInt() => FirepodMock(
-        const GenericLookupMap(map: {"01": 1}),
+        const GenericLookupMap(map: {'01': 1}),
       );
   FirepodMock<GenericLookupMap<String>> firepodMapString() => FirepodMock(
-        const GenericLookupMap(map: {"01": "1"}),
+        const GenericLookupMap(map: {'01': '1'}),
       );
   FirepodMock<GenericLookupMap<Product>> firepodMapObject() => FirepodMock(
         GenericLookupMap(map: {
-          "001": Product(
+          '001': Product(
             order: 1,
             price: 1,
             title: 'Product 1',
             weight: 1.1,
           )
-        }),
+        },),
       );
 }

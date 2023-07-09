@@ -12,7 +12,7 @@ class LinkEmailSignInView extends ConsumerWidget {
   final FlutterfireAuthNotifier firebaseLogin;
   final String landingRoute;
 
-  LinkEmailSignInView({
+  const LinkEmailSignInView({
     required this.firebaseLogin,
     this.landingRoute = '/',
   });

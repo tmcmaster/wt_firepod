@@ -17,7 +17,6 @@ class ExampleFirepodListObject extends ConsumerWidget {
     autoSave: true,
     decoder: decoder,
     encoder: encoder,
-    keyField: 'id',
   );
 
   const ExampleFirepodListObject({super.key});

@@ -38,7 +38,7 @@ class Product extends TitleIdJsonSupport<Product> with _$Product {
 
   factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
 
-  static Product fromJsonDynamic(Map<dynamic, dynamic> json) =>
+  factory Product.fromJsonDynamic(Map<dynamic, dynamic> json) =>
       Product.fromJson(Map<String, dynamic>.from(json));
 
   @override

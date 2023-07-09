@@ -34,12 +34,14 @@ class LinkEmailSignInForm extends HookConsumerWidget {
             controller: passwordController,
             obscureText: true,
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           ElevatedButton(
-            child: Text('Link Email Sign In'),
+            child: const Text('Link Email Sign In'),
             onPressed: () {
-              print('Linking email sign in with logged in account: ${emailController.text}');
-              firebaseLogin.linkEmailSignIn(emailController.text, passwordController.text).then((UserAuthResult auth) {
+              log.d('Linking email sign in with logged in account: ${emailController.text}');
+              firebaseLogin
+                  .linkEmailSignIn(emailController.text, passwordController.text)
+                  .then((UserAuthResult auth) {
                 log.d('Login completed : ${auth.success} : ${auth.user.name}');
                 if (auth.user != UserAuth.none) {
                   log.d('Linking email sign in was successful. Routing to the default page.');
@@ -51,9 +53,9 @@ class LinkEmailSignInForm extends HookConsumerWidget {
             },
           ),
           ElevatedButton(
-            child: Text('Unlink Email Sign In'),
+            child: const Text('Unlink Email Sign In'),
             onPressed: () {
-              print('Unlinking email sign in with logged in account: ${emailController.text}');
+              log.d('Unlinking email sign in with logged in account: ${emailController.text}');
               firebaseLogin
                   .unlinkEmailSignIn(emailController.text, passwordController.text)
                   .then((UserAuthResult auth) {

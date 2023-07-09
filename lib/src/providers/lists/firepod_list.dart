@@ -9,12 +9,11 @@ class FirepodList<M> {
     required M Function(Object object) decoder,
     required dynamic Function(M object) encoder,
     required String path,
-    String? keyField,
     bool watch = false,
     bool autoSave = false,
   }) {
     List<M> modelListDecoder(Object object) {
-      return ((object as List).whereType<Object>()).map((Object o) => decoder(o)).toList();
+      return (object as List).whereType<Object>().map((Object o) => decoder(o)).toList();
     }
 
     List<dynamic>? modelListEncoder(List<M>? list) {

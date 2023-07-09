@@ -40,7 +40,7 @@ class EmailSignInForm extends HookConsumerWidget {
           ElevatedButton(
             child: const Text('Email Sign In'),
             onPressed: () {
-              print('Logging in with email: ${emailController.text}');
+              log.d('Logging in with email: ${emailController.text}');
               firebaseLogin
                   .emailSignIn(emailController.text, passwordController.text)
                   .then((UserAuthResult auth) {

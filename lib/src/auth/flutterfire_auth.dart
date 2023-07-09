@@ -9,11 +9,10 @@ import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:wt_firepod/src/auth/user_auth.dart';
+import 'package:wt_firepod/src/auth/user_auth_result.dart';
 import 'package:wt_firepod/src/providers/firebase_providers.dart';
 import 'package:wt_logging/wt_logging.dart';
-
-import 'user_auth.dart';
-import 'user_auth_result.dart';
 
 class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
   static final log = logger(FlutterfireAuthNotifier);
@@ -60,26 +59,29 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
   }
 
   Future<void> getUserProfile() async {
-    HttpsCallable callable = FirebaseFunctions.instance.httpsCallable('userProfile');
+    final callable = FirebaseFunctions.instance.httpsCallable('userProfile');
     final results = await callable();
     log.d(results.toString());
   }
 
   Future<void> logout() {
     final userLog = ref.read(UserLog.provider);
-    return firebaseAuth.signOut().then((_) {
-      log.i('User has logged out successfully');
-      userLog.info('User has logged out successfully');
-    }, onError: (error) {
-      log.i('Logout error: ${error.toString()}');
-      userLog.error('Logout error: ${error.toString()}');
-    });
+    return firebaseAuth.signOut().then(
+      (_) {
+        log.i('User has logged out successfully');
+        userLog.info('User has logged out successfully');
+      },
+      onError: (error) {
+        log.i('Logout error: $error');
+        userLog.error('Logout error: $error');
+      },
+    );
   }
 
   Future<UserAuthResult> emailSignIn(String email, String password) {
     log.d('emailSignIn');
     return _waitForCredentials(
-        firebaseAuth.signInWithEmailAndPassword(email: email, password: password));
+        firebaseAuth.signInWithEmailAndPassword(email: email, password: password),);
   }
 
   Future<UserAuthResult> linkEmailSignIn(String email, String password) {
@@ -102,7 +104,7 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
                 name: user.displayName ?? '',
                 email: user.email ?? '',
               ),
-            ));
+            ),);
           } else {
             completer.completeError('Could not create a linked email login');
           }
@@ -149,7 +151,7 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
   Future<UserAuthResult> createUser(String email, String password) {
     log.d('createUser');
     return _waitForCredentials(
-        firebaseAuth.createUserWithEmailAndPassword(email: email, password: password));
+        firebaseAuth.createUserWithEmailAndPassword(email: email, password: password),);
   }
 
   Future<UserAuthResult> resetPassword(String email) {
@@ -160,7 +162,7 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
       log.d('resetPassword : success');
       completer.complete(UserAuthResult.success(UserAuth.none));
     }).catchError((error, stacktrace) {
-      log.d('resetPassword : error : ${error.toString()}');
+      log.d('resetPassword : error : $error');
       completer.complete(UserAuthResult.error(error.toString()));
     });
 
@@ -177,17 +179,20 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
     final completer = Completer<UserAuthResult>();
 
     _createGoogleCredentials().then((credentials) {
-      _waitForCredentials(firebaseAuth.signInWithCredential(credentials)).then((userAuthResults) {
-        log.d('googleSignIn : success : ${userAuthResults.user.email}');
-        completer.complete(userAuthResults);
-      }, onError: (error) {
-        log.d('googleSignIn : error : Could not get UserAuthResults: ${error.toString()}');
-        completer.completeError("Could not get UserAuthResults: ${error.toString()}");
-      });
+      _waitForCredentials(firebaseAuth.signInWithCredential(credentials)).then(
+        (userAuthResults) {
+          log.d('googleSignIn : success : ${userAuthResults.user.email}');
+          completer.complete(userAuthResults);
+        },
+        onError: (error) {
+          log.d('googleSignIn : error : Could not get UserAuthResults: $error');
+          completer.completeError('Could not get UserAuthResults: $error');
+        },
+      );
     }, onError: (error) {
-      log.d('googleSignIn : error : Could not get Google credentials: ${error.toString()}');
-      completer.completeError("Could not get Google credentials: ${error.toString()}");
-    });
+      log.d('googleSignIn : error : Could not get Google credentials: $error');
+      completer.completeError('Could not get Google credentials: $error');
+    },);
 
     return completer.future;
   }
@@ -201,16 +206,16 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
           .then((userAuthResults) {
         completer.complete(userAuthResults);
       }).catchError((error) {
-        completer.completeError("Could not get the UserAuthResults: ${error.toString()}");
+        completer.completeError('Could not get the UserAuthResults: $error');
       });
     }).catchError((error) {
-      completer.completeError("Could not get the Apple credentials: ${error.toString()}");
+      completer.completeError('Could not get the Apple credentials: $error');
     });
 
     return completer.future;
   }
 
-  Future<UserAuthResult> phoneSignIn(mobileNumber) async {
+  Future<UserAuthResult> phoneSignIn(String mobileNumber) async {
     final completer = Completer<UserAuthResult>();
 
     log.d('phoneSignIn: mobile number: $mobileNumber');
@@ -224,7 +229,7 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
   }
 
   Future<UserAuthResult> verifyPhoneNumber(
-      ConfirmationResult confirmationResult, String verificationCode) async {
+      ConfirmationResult confirmationResult, String verificationCode,) async {
     return _waitForCredentials(confirmationResult.confirm(verificationCode));
   }
 
@@ -245,7 +250,7 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
       ],
       nonce: nonce,
     ).then((appleCredential) {
-      final oAuthCredential = OAuthProvider("apple.com").credential(
+      final oAuthCredential = OAuthProvider('apple.com').credential(
         idToken: appleCredential.identityToken,
         rawNonce: rawNonce,
       );
@@ -265,7 +270,7 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
     _googleSignIn.signIn().then(
       (googleUser) {
         if (googleUser == null) {
-          completer.completeError("User is not logged into Google.");
+          completer.completeError('User is not logged into Google.');
         } else {
           googleUser.authentication.then((googleAuth) {
             final oAuthCredential = GoogleAuthProvider.credential(
@@ -274,12 +279,12 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
             );
             completer.complete(oAuthCredential);
           }).catchError((error) {
-            completer.completeError("Could not get googleAuth: ${error.toString()}");
+            completer.completeError('Could not get googleAuth: $error');
           });
         }
       },
       onError: (error) {
-        completer.completeError("Could not sign in user: ${error.toString()}");
+        completer.completeError('Could not sign in user: $error');
       },
     );
 
@@ -297,7 +302,7 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
       }).onError((error, stackTrace) {
         final errorString = error.toString();
         log.d('(2) _handleCredentialsFuture errorString: $errorString');
-        log.d('(2) _handleCredentialsFuture errorString: ${error}');
+        log.d('(2) _handleCredentialsFuture errorString: $error');
         completer.completeError(errorString);
       });
     } catch (error) {

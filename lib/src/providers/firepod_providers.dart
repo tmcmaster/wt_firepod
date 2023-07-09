@@ -1,91 +1,25 @@
-import 'dart:async';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:wt_firepod/src/models/site.dart';
-import 'package:wt_firepod/src/providers/firebase_providers.dart';
-import 'package:wt_logging/wt_logging.dart';
-import 'package:wt_settings/wt_settings.dart';
+import 'package:wt_firepod/src/providers/maps/firepod_map_string.dart';
 
-import '../settings/firepod_settings.dart';
-
-abstract class FirepodProviders {
+mixin FirepodProviders {
+  static final sitesList = FirepodMapString(
+    name: 'Sites',
+    path: '/data/{user}/sites',
+    watch: true,
+    autoSave: false,
+  );
   static final siteListProvider = StateNotifierProvider<SiteListNotifier, List<Site>?>(
     name: 'siteListProvider',
-    (ref) => SiteListNotifier(null, ref),
+    (ref) => SiteListNotifier(ref),
   );
 }
 
-class SiteListNotifier extends StateNotifier<List<Site>?> {
-  final log = logger(SiteListNotifier, level: Level.warning);
-
-  final Ref ref;
-  late StreamSubscription _subscription;
-
-  SiteListNotifier(super.state, this.ref) {
-    _subscription = ref.read(FirebaseProviders.auth).authStateChanges().listen((User? user) {
-      final site = ref.read(FirepodSettings.site.value);
-      final siteNotifier = ref.read(FirepodSettings.site.notifier);
-      log.d('Settings site at login: ${site?.name}');
-      if (user == null) {
-        log.d('User logged out. Setting site list to an empty list');
-        state = [];
-      } else {
-        log.d('User logged in');
-        final userId = user.uid;
-        log.d('Loading site data from the database for UserId($userId)');
-        // TODO may need to change this to watch for changes. Restarting the app is fine for now.
-        ref.read(FirebaseProviders.database).ref('data').child(userId).child('sites').get().then(
-            (snapshot) {
-          log.d('New site data loaded from the database.');
-          if (snapshot.exists) {
-            final siteMap = snapshot.value as Map<Object?, Object?>;
-            state = siteMap.entries
-                .map((e) => Site(id: e.key as String, name: e.value as String))
-                .toList();
-            log.i('Updated site list.');
-            if (_siteIsLoaded(site)) {
-              if (_siteIsInList(site)) {
-                log.d('Site has loaded, and it appears in the new list of sites.');
-              } else {
-                log.d(
-                    'Site does not appear in the new list of sites, so selecting the first site in the list.');
-                _setSiteToFirstItemInList(siteNotifier);
-              }
-            } else {
-              log.d('New site list has loaded. Site has not been loaded. Loading site.');
-              siteNotifier.load();
-            }
-          } else {
-            log.w('Could not find the site list for user: ${user.displayName ?? user.uid}');
-            state = [];
-          }
-        }, onError: (error) {
-          log.e(error.toString());
-          //ref.read(messageServiceProvider).error('User does not have required permission.');
-        });
-      }
+// TODO: need to look at being able to get a list of objects with FirepodListObject
+class SiteListNotifier extends StateNotifier<List<Site>> {
+  SiteListNotifier(Ref ref) : super([]) {
+    ref.listen(FirepodProviders.sitesList.value, (previous, next) {
+      state = next.map.entries.map((e) => Site(id: e.key, name: e.value)).toList();
     });
-  }
-
-  @override
-  void dispose() {
-    _subscription.cancel();
-    super.dispose();
-  }
-
-  bool _siteIsLoaded(Site? site) {
-    return site != null;
-  }
-
-  bool _siteIsInList(Site? site) {
-    log.d('Checking if $site is in $state');
-    return site != null && state != null && state!.contains(site);
-  }
-
-  void _setSiteToFirstItemInList(SettingsObjectNotifier<Site?> siteNotifier) {
-    if (state != null && state!.isNotEmpty) {
-      siteNotifier.replaceValue(state![0]);
-    }
   }
 }

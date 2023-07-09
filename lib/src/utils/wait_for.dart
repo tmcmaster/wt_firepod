@@ -1,4 +1,4 @@
-class WaitFor {
+mixin WaitFor {
   static Future<T> twoFutures<T, A, B>(
     Future<A> f1,
     Future<B> f2,

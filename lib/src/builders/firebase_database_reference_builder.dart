@@ -1,8 +1,10 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:wt_firepod/wt_firepod.dart';
+import 'package:wt_logging/wt_logging.dart';
 
 class FirebaseDatabaseReferenceBuilder {
+  static final log = logger(FirebaseDatabaseReferenceBuilder, level: Level.warning);
   static final provider = Provider(
     name: 'FirebaseDatabaseReferenceBuilder',
     (ref) => FirebaseDatabaseReferenceBuilder(ref),
@@ -22,12 +24,16 @@ class FirebaseDatabaseReferenceBuilder {
       return null;
     }
 
-    List<String> pathParts = splitPath(path, userId: userId, siteId: siteId);
+    final pathParts = splitPath(path, userId: userId, siteId: siteId);
+    log.d('Path Parts: $pathParts');
+
     final database = ref.read(FirebaseProviders.database);
     DatabaseReference dbRef = database.ref();
-    for (String part in pathParts) {
+    for (final String part in pathParts) {
       dbRef = dbRef.child(part);
     }
+    log.d('Path: ${dbRef.path}');
+
     return dbRef;
   }
 
@@ -43,11 +49,13 @@ class FirebaseDatabaseReferenceBuilder {
     }
     return trimPath(path)
         .split('/')
-        .map((String part) => part == '{user}'
-            ? userId ?? ''
-            : part == '{site}'
-                ? siteId ?? ''
-                : part)
+        .map(
+          (String part) => part == '{user}'
+              ? userId ?? ''
+              : part == '{site}'
+                  ? siteId ?? ''
+                  : part,
+        )
         .toList();
   }
 

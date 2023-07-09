@@ -16,7 +16,7 @@ class LoginView extends ConsumerWidget {
   final FlutterfireAuthNotifier firebaseLogin;
   final String landingRoute;
 
-  LoginView({
+  const LoginView({
     required this.firebaseLogin,
     this.landingRoute = '/',
   });
@@ -29,15 +29,16 @@ class LoginView extends ConsumerWidget {
         centerTitle: true,
       ),
       body: Center(
-          child: kIsWeb || Platform.isMacOS
-              ? EmailSignInForm(
-                  firebaseLogin: firebaseLogin,
-                  landingRoute: landingRoute,
-                )
-              : GoogleSignInForm(
-                  firebaseLogin: firebaseLogin,
-                  landingRoute: landingRoute,
-                )),
+        child: kIsWeb || Platform.isMacOS
+            ? EmailSignInForm(
+                firebaseLogin: firebaseLogin,
+                landingRoute: landingRoute,
+              )
+            : GoogleSignInForm(
+                firebaseLogin: firebaseLogin,
+                landingRoute: landingRoute,
+              ),
+      ),
     );
   }
 }

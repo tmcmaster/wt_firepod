@@ -10,7 +10,8 @@ import 'package:wt_models/wt_models.dart';
 class GenericSiteDataNotifier<T> extends GenericSiteDataNotifierBase<T> {
   static final log = logger(GenericSiteDataNotifier, level: Level.warning);
 
-  late ProviderSubscription _removeListener;
+  ProviderSubscription? _removeSiteListListener;
+  ProviderSubscription? _removeUserListener;
   StreamSubscription<DatabaseEvent>? _subscription;
   DatabaseReference? _dbRef;
 
@@ -34,10 +35,27 @@ class GenericSiteDataNotifier<T> extends GenericSiteDataNotifierBase<T> {
     _setupSubscribers(ref);
     if (path.contains('{site}')) {
       log.d('Listening to ${FirepodSettings.site.value.name} for changes.');
-      _removeListener = ref.listen<IdSupport?>(FirepodSettings.site.value, (oldSite, newSite) {
-        log.d('${FirepodSettings.site.value} has changed');
-        _setupSubscribers(ref);
-      }, onError: (error, _) {});
+      _removeSiteListListener = ref.listen<IdSupport?>(
+        FirepodSettings.site.value,
+        (_, newSite) {
+          log.d('${FirepodSettings.site.value} changed to $newSite');
+          _setupSubscribers(ref);
+        },
+        onError: (error, _) {},
+      );
+    }
+    if (path.contains('{user}')) {
+      log.d('Listening to ${FirebaseProviders.auth.name} for changes.');
+      _removeUserListener = ref.listen(
+        FirebaseProviders.auth,
+        (_, newUser) {
+          log.d('${FirebaseProviders.auth.name} changed to $newUser');
+          _setupSubscribers(ref);
+        },
+        onError: (error, _) {
+          log.e('There was an error while listening for when the user changes.');
+        },
+      );
     }
   }
 
@@ -51,9 +69,12 @@ class GenericSiteDataNotifier<T> extends GenericSiteDataNotifierBase<T> {
         if (_subscription != null) {
           _subscription!.cancel();
         }
-        _subscription = _dbRef!.onValue.listen((event) {
-          state = event.snapshot.value == null ? none : decoder(event.snapshot.value!);
-        }, onError: (error) => log.e(error));
+        _subscription = _dbRef!.onValue.listen(
+          (event) {
+            state = event.snapshot.value == null ? none : decoder(event.snapshot.value!);
+          },
+          onError: (error) => log.e(error),
+        );
       }
       load();
     }
@@ -77,37 +98,39 @@ class GenericSiteDataNotifier<T> extends GenericSiteDataNotifierBase<T> {
   @override
   void load() {
     if (_dbRef != null) {
-      _dbRef!.get().then((snapshot) {
-        if (snapshot.exists) {
-          if (snapshot.value == null) {
-            state = none;
-          } else {
-            if (isScalar) {
-              if (snapshot.value is Map<dynamic, dynamic>) {
-                // TODO: need to find out why reading scalar values reads the parent map
-                //      this will be loading a lot more data that is need each time.
-                final value = (snapshot.value as Map<dynamic, dynamic>)[snapshot.key];
-                state = decoder(value) ?? none;
+      _dbRef!.get().then(
+        (snapshot) {
+          if (snapshot.exists) {
+            if (snapshot.value == null) {
+              state = none;
+            } else {
+              if (isScalar) {
+                if (snapshot.value is Map<dynamic, dynamic>) {
+                  // TODO: need to find out why reading scalar values reads the parent map
+                  //      this will be loading a lot more data that is need each time.
+                  final value = (snapshot.value! as Map<dynamic, dynamic>)[snapshot.key];
+                  state = decoder(value as Object) ?? none;
+                } else {
+                  state = snapshot.value == null ? none : decoder(snapshot.value!);
+                }
               } else {
                 state = snapshot.value == null ? none : decoder(snapshot.value!);
               }
-            } else {
-              state = snapshot.value == null ? none : decoder(snapshot.value!);
             }
+          } else {
+            state = none;
           }
-        } else {
-          state = none;
-        }
-      }, onError: (error) => log.e(error));
+        },
+        onError: (error) => log.e(error),
+      );
     }
   }
 
   @override
   void dispose() {
-    if (_subscription != null) {
-      _subscription!.cancel();
-    }
-    _removeListener.close();
+    _subscription?.cancel();
+    _removeSiteListListener?.close();
+    _removeUserListener?.close();
     super.dispose();
   }
 }

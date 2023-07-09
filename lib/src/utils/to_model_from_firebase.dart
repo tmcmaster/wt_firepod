@@ -12,10 +12,10 @@ class ToModelFromFirebase<T extends IdJsonSupport<T>> extends ToModelFrom<T> {
   });
 
   List<T> snapshotList(DataSnapshot snapshot) {
-    if (snapshot.exists) {
-      final map = snapshot.value as Map<dynamic, dynamic>;
-      var newMap = _transformMap(map);
-      return newMap.values.map((e) => super.json(_transformMap(e))).toList();
+    if (snapshot.exists && snapshot.value != null) {
+      final map = snapshot.value! as Map<dynamic, dynamic>;
+      final newMap = _transformMap(map);
+      return newMap.values.map((e) => super.json(_transformMap(e as Map))).toList();
     } else {
       return [];
     }
@@ -23,15 +23,17 @@ class ToModelFromFirebase<T extends IdJsonSupport<T>> extends ToModelFrom<T> {
 
   Map<String, dynamic> _transformMap(Map<dynamic, dynamic> map) {
     return {
-      for (var e in map.entries) e.key.toString(): _addKeyFieldIfRequired(e.value, e.key, idField)
+      for (var e in map.entries)
+        e.key.toString(): _addKeyFieldIfRequired(e.value as Object, e.key as String, idField)
     };
   }
 
   T snapshot(DataSnapshot snapshot) {
-    if (snapshot.exists) {
-      final map = snapshot.value as Map<dynamic, dynamic>;
-      var newMap = {
-        for (var e in map.entries) e.key.toString(): _addKeyFieldIfRequired(e.value, e.key, idField)
+    if (snapshot.exists && snapshot.value != null) {
+      final map = snapshot.value! as Map;
+      final newMap = {
+        for (var e in map.entries)
+          e.key.toString(): _addKeyFieldIfRequired(e.value as Object, e.key as String, idField)
       };
 
       newMap[idField] = snapshot.key ?? '';
@@ -55,8 +57,10 @@ class ToModelFromFirebase<T extends IdJsonSupport<T>> extends ToModelFrom<T> {
   }
 
   static Map<String, dynamic> firebaseMapToJsonMap(Map<Object?, Object?> map) {
-    return Map.fromEntries(map.entries.map((e) {
-      return MapEntry<String, dynamic>(e.key.toString(), e.value);
-    }));
+    return Map.fromEntries(
+      map.entries.map((e) {
+        return MapEntry<String, dynamic>(e.key.toString(), e.value);
+      }),
+    );
   }
 }

@@ -2,16 +2,12 @@ import 'package:wt_firepod/wt_firepod.dart';
 
 class FirepodListInt extends FirepodList<int> {
   FirepodListInt({
-    required String name,
-    required String path,
-    bool watch = false,
-    bool autoSave = false,
+    required super.name,
+    required super.path,
+    super.watch,
+    super.autoSave,
   }) : super(
-          name: name,
-          path: path,
           decoder: (Object object) => int.parse(object.toString()),
           encoder: (int value) => value,
-          watch: watch,
-          autoSave: autoSave,
         );
 }

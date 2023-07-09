@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'user_auth.dart';
+import 'package:wt_firepod/src/auth/user_auth.dart';
 
 class UserAuthResult {
   final ConfirmationResult? confirmationResult;

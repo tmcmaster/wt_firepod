@@ -2,7 +2,7 @@ import 'package:wt_firepod/src/providers/objects/firepod_object.dart';
 
 import '../models/product.dart';
 
-abstract class TestingDatabaseObject {
+mixin TestingDatabaseObject {
   static const basePath = '/v1/testing/object';
 
   static final firepodObjectProduct = FirepodObject<Product>(

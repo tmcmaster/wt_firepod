@@ -13,10 +13,12 @@ class FirepodObjectMockBuilder {
     ];
   }
 
-  FirepodMock<Product> firepodObjectProduct() => FirepodMock(Product(
-        order: 1,
-        price: 1,
-        title: 'Product 1',
-        weight: 1.1,
-      ));
+  FirepodMock<Product> firepodObjectProduct() => FirepodMock(
+        Product(
+          order: 1,
+          price: 1,
+          title: 'Product 1',
+          weight: 1.1,
+        ),
+      );
 }
