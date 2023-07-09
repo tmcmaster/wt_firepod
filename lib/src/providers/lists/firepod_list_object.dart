@@ -8,6 +8,8 @@ class FirepodListObject<T> extends FirepodList<T> {
     required Map<dynamic, dynamic> Function(T object) encoder,
     super.watch,
     super.autoSave,
+    super.idField,
+    super.valueField,
   }) : super(
           decoder: (Object value) {
             return decoder(value as Map<dynamic, dynamic>);

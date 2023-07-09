@@ -16,6 +16,15 @@ class ExampleUserSiteList extends ConsumerWidget {
     autoSave: true,
   );
 
+  static final testing = FirepodListObject(
+    name: 'Site List',
+    path: '/data/{user}/sites',
+    decoder: Site.convert.from.dynamicMap.to.model,
+    encoder: Site.convert.to.dynamicMap.from.model,
+    idField: 'id',
+    valueField: 'name',
+  );
+
   const ExampleUserSiteList({super.key});
 
   @override

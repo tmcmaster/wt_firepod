@@ -11,9 +11,29 @@ class FirepodList<M> {
     required String path,
     bool watch = false,
     bool autoSave = false,
+    String? idField,
+    String? valueField,
   }) {
     List<M> modelListDecoder(Object object) {
-      return (object as List).whereType<Object>().map((Object o) => decoder(o)).toList();
+      if (object is Map) {
+        return object.entries.map((e) {
+          final key = e.key.toString();
+          final value = e.value;
+          final map = value is Map
+              ? {
+                  ...value,
+                  if (idField != null) idField: key,
+                }
+              : {
+                  if (valueField != null) valueField: value,
+                  if (idField != null) idField: key,
+                };
+
+          return decoder(map);
+        }).toList();
+      } else {
+        return (object as List).whereType<Object>().map((Object o) => decoder(o)).toList();
+      }
     }
 
     List<dynamic>? modelListEncoder(List<M>? list) {
