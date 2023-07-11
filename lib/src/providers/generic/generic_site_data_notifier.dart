@@ -71,7 +71,11 @@ class GenericSiteDataNotifier<T> extends GenericSiteDataNotifierBase<T> {
         }
         _subscription = _dbRef!.onValue.listen(
           (event) {
-            state = event.snapshot.value == null ? none : decoder(event.snapshot.value!);
+            try {
+              state = event.snapshot.value == null ? none : decoder(event.snapshot.value!);
+            } catch (error) {
+              log.e('Error while converting value from Ref($path): $error');
+            }
           },
           onError: (error) => log.e(error),
         );

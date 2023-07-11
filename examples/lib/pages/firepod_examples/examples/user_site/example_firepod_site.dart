@@ -5,7 +5,7 @@ import 'package:wt_firepod_examples/pages/firepod_examples/examples/example_fire
 import 'package:wt_logging/wt_logging.dart';
 
 class ExampleFirepodSite extends ConsumerWidget {
-  static final log = logger(ExampleFirepodSite, level: Level.debug);
+  static final log = logger(ExampleFirepodSite, level: Level.warning);
   const ExampleFirepodSite({super.key});
 
   @override

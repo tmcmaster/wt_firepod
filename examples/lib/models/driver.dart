@@ -1,24 +1,30 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_models/wt_models.dart';
 
 part 'driver.freezed.dart';
 part 'driver.g.dart';
 
 @freezed
-class Driver extends TitleIdJsonSupport<Driver> with _$Driver {
-  static final from = ToModelFromFirebase<Driver>(json: _Driver.fromJson, titles: _titles);
-  static final to = FromModelToFirebase<Driver>(titles: _titles);
+class Driver extends BaseModel<Driver> with _$Driver {
+  static final convert = DslConvert<Driver>(
+    titles: ['id'],
+    jsonToModel: Driver.fromJson,
+    none: none,
+  );
 
-  static final _titles = ['id', 'name', 'phone'];
+  static const none = Driver(
+    id: '',
+    name: '',
+    phone: '',
+  );
 
-  factory Driver({
-    @Default('') required String id,
-    @Default('') required String name,
-    @Default('') required String phone,
+  const factory Driver({
+    @Default('') String id,
+    @Default('') String name,
+    @Default('') String phone,
   }) = _Driver;
 
-  Driver._();
+  const Driver._();
 
   factory Driver.fromJson(Map<String, dynamic> json) => _$DriverFromJson(json);
 
@@ -27,4 +33,7 @@ class Driver extends TitleIdJsonSupport<Driver> with _$Driver {
 
   @override
   String getTitle() => name;
+
+  @override
+  List<String> getTitles() => convert.titles();
 }

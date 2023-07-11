@@ -1,27 +1,36 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_models/wt_models.dart';
 
 part 'customer.freezed.dart';
 part 'customer.g.dart';
 
 @freezed
-class Customer extends TitleIdJsonSupport<Customer> with _$Customer {
-  static final from = ToModelFromFirebase<Customer>(json: _Customer.fromJson, titles: _titles);
-  static final to = FromModelToFirebase<Customer>(titles: _titles);
+class Customer extends BaseModel<Customer> with _$Customer {
+  static final convert = DslConvert<Customer>(
+    titles: ['id'],
+    jsonToModel: Customer.fromJson,
+    none: none,
+  );
 
-  static final _titles = ['id', 'name'];
+  static const none = Customer(
+    id: '',
+    name: '',
+    phone: '',
+    email: '',
+    address: '',
+    postcode: 0,
+  );
 
-  factory Customer({
-    @Default('') required String id,
-    @Default('') required String name,
-    @Default('') required String phone,
-    @Default('') required String email,
-    @Default('') required String address,
-    @Default(0) required int postcode,
+  const factory Customer({
+    @Default('') String id,
+    @Default('') String name,
+    @Default('') String phone,
+    @Default('') String email,
+    @Default('') String address,
+    @Default(0) int postcode,
   }) = _Customer;
 
-  Customer._();
+  const Customer._();
 
   factory Customer.fromJson(Map<String, dynamic> json) => _$CustomerFromJson(json);
 
@@ -30,4 +39,7 @@ class Customer extends TitleIdJsonSupport<Customer> with _$Customer {
 
   @override
   String getTitle() => name;
+
+  @override
+  List<String> getTitles() => convert.titles();
 }

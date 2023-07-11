@@ -6,6 +6,17 @@ version: 1.0.0+1
 environment:
   sdk: '>=2.18.2 <3.0.0'
 
+# Scripts to be run with rps
+scripts:
+  init: flutter pub get
+  clean: flutter clean
+  refresh: flutter clean; flutter pub get
+  test: flutter test
+  check: flutter analyze
+  outdated: dart pub outdated --show-all
+  freezed:
+    build: dart run build_runner build --delete-conflicting-outputs
+
 dependencies:
   cloud_functions:
   cupertino_icons:
@@ -22,6 +33,7 @@ dependencies:
   form_builder_validators:
   freezed:
   freezed_annotation:
+  json_annotation: ^4.8.1
   logger:
   riverpod:
   wt_action_button:
@@ -47,3 +59,5 @@ flutter:
 dependency_overrides:
   wt_firepod:
     path: ..
+  wt_models:
+    path: ../../wt_models

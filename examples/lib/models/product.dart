@@ -1,26 +1,34 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_models/wt_models.dart';
 
 part 'product.freezed.dart';
 part 'product.g.dart';
 
 @freezed
-class Product extends OrderTitleIdJsonSupport<Product> with _$Product {
-  static final from = ToModelFromFirebase<Product>(json: _Product.fromJson, titles: _titles);
-  static final to = FromModelToFirebase<Product>(titles: _titles);
+class Product extends BaseModel<Product> with _$Product, OrderSupport {
+  static final convert = DslConvert<Product>(
+    titles: ['id'],
+    jsonToModel: Product.fromJson,
+    none: none,
+  );
 
-  static final _titles = ['id', 'title', 'price', 'weight'];
+  static const none = Product(
+    id: '',
+    title: '',
+    order: 0,
+    price: 0.0,
+    weight: 0.0,
+  );
 
-  factory Product({
-    @Default('') required String id,
-    @Default('') required String title,
-    @Default(0.0) required double order,
-    @Default(0.0) required double price,
-    @Default(0.0) required double weight,
+  const factory Product({
+    @Default('') String id,
+    @Default('') String title,
+    @Default(0.0) double order,
+    @Default(0.0) double price,
+    @Default(0.0) double weight,
   }) = _Product;
 
-  Product._();
+  const Product._();
 
   factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
 
@@ -32,4 +40,7 @@ class Product extends OrderTitleIdJsonSupport<Product> with _$Product {
 
   @override
   double getOrder() => order;
+
+  @override
+  List<String> getTitles() => convert.titles();
 }

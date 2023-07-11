@@ -1,24 +1,30 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_models/wt_models.dart';
 
 part 'supplier.freezed.dart';
 part 'supplier.g.dart';
 
 @freezed
-class Supplier extends TitleIdJsonSupport<Supplier> with _$Supplier {
-  static final from = ToModelFromFirebase<Supplier>(json: _Supplier.fromJson, titles: _titles);
-  static final to = FromModelToFirebase<Supplier>(titles: _titles);
+class Supplier extends BaseModel<Supplier> with _$Supplier {
+  static final convert = DslConvert<Supplier>(
+    titles: ['id'],
+    jsonToModel: Supplier.fromJson,
+    none: none,
+  );
 
-  static final _titles = ['id', 'name'];
+  static const none = Supplier(
+    id: '',
+    name: '',
+    code: '',
+  );
 
-  factory Supplier({
-    @Default('') required String id,
-    @Default('') required String name,
-    @Default('') required String code,
+  const factory Supplier({
+    @Default('') String id,
+    @Default('') String name,
+    @Default('') String code,
   }) = _Supplier;
 
-  Supplier._();
+  const Supplier._();
 
   factory Supplier.fromJson(Map<String, dynamic> json) => _$SupplierFromJson(json);
 
@@ -27,4 +33,7 @@ class Supplier extends TitleIdJsonSupport<Supplier> with _$Supplier {
 
   @override
   String getTitle() => name;
+
+  @override
+  List<String> getTitles() => convert.titles();
 }

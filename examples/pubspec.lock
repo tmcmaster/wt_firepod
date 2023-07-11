@@ -434,10 +434,10 @@ packages:
     dependency: "direct main"
     description:
       name: freezed
-      sha256: a9520490532087cf38bf3f7de478ab6ebeb5f68bb1eb2641546d92719b224445
+      sha256: "1abef0aa34d4e5b97c9b34f75f980091d718224496a854419710c1b5454021cc"
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.5"
+    version: "2.4.0"
   freezed_annotation:
     dependency: "direct main"
     description:
@@ -575,7 +575,7 @@ packages:
     source: hosted
     version: "0.6.7"
   json_annotation:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: json_annotation
       sha256: b10a7b2ff83d83c777edba3c6a0f97045ddadd56c944e1a23a3fdf43a1bf4467
@@ -1031,11 +1031,9 @@ packages:
   wt_models:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "98008e63ce826901719fe9b85191f4b5db8c0062"
-      url: "https://github.com/tmcmaster/wt_models.git"
-    source: git
+      path: "../../wt_models"
+      relative: true
+    source: path
     version: "0.0.2"
   wt_settings:
     dependency: transitive
@@ -1063,5 +1061,5 @@ packages:
     source: hosted
     version: "3.1.2"
 sdks:
-  dart: ">=3.0.3 <4.0.0"
+  dart: ">=3.0.0 <4.0.0"
   flutter: ">=3.10.0"
