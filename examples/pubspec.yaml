@@ -59,5 +59,3 @@ flutter:
 dependency_overrides:
   wt_firepod:
     path: ..
-  wt_models:
-    path: ../../wt_models
