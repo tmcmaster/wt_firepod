@@ -23,7 +23,7 @@ Future<ProviderScope> Function() andFirebase(
   required String appName,
   required FirebaseOptions firebaseOptions,
 }) {
-  final log = logger('Firebase Setup', level: Level.debug);
+  final log = logger('Firebase Setup');
   return () async {
     log.d('Firebase Initialising');
     WidgetsFlutterBinding.ensureInitialized();

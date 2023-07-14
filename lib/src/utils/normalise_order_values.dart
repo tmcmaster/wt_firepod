@@ -9,7 +9,7 @@ Future<void> normaliseOrderValue({
   required String path,
   String? orderField,
 }) async {
-  final log = logger('Normalise Order Value', level: Level.warning);
+  final log = logger('Normalise Order Value');
 
   final sortedList = [...list];
   sortedList.sort((a, b) => a.getOrder().compareTo(b.getOrder()));

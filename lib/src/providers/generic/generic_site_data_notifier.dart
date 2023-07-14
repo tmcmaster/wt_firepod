@@ -8,7 +8,7 @@ import 'package:wt_logging/wt_logging.dart';
 import 'package:wt_models/wt_models.dart';
 
 class GenericSiteDataNotifier<T> extends GenericSiteDataNotifierBase<T> {
-  static final log = logger(GenericSiteDataNotifier, level: Level.warning);
+  static final log = logger(GenericSiteDataNotifier);
 
   ProviderSubscription? _removeSiteListListener;
   ProviderSubscription? _removeUserListener;

@@ -4,7 +4,7 @@ import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class FirepodList<M> {
-  static final log = logger(FirepodList, level: Level.debug);
+  static final log = logger(FirepodList);
 
   late StateNotifierProvider<GenericSiteDataNotifierBase<List<M>>, List<M>> value;
 

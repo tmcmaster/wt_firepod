@@ -4,7 +4,7 @@ import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class FirebaseDatabaseReferenceBuilder {
-  static final log = logger(FirebaseDatabaseReferenceBuilder, level: Level.warning);
+  static final log = logger(FirebaseDatabaseReferenceBuilder);
   static final provider = Provider(
     name: 'FirebaseDatabaseReferenceBuilder',
     (ref) => FirebaseDatabaseReferenceBuilder(ref),
