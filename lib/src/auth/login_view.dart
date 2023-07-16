@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_firepod/src/auth/auth.dart';
 import 'package:wt_firepod/src/auth/email_sign_in_form.dart';
 import 'package:wt_firepod/src/auth/google_sign_in_form.dart';

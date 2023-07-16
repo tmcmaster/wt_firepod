@@ -1,6 +1,6 @@
 name: wt_firepod
 description: Package the integrates Firebase and Riverpod functionality.
-version: 0.0.1
+version: 1.0.0+1
 publish_to: 'none'
 homepage: https://github.com/tmcmaster/wt_firepod
 
@@ -19,28 +19,25 @@ scripts:
     build: dart run build_runner build --delete-conflicting-outputs
 
 dependencies:
-  cloud_functions:
-  crypto:
-  firebase_auth:
-  firebase_core:
-  firebase_database:
-  firebase_remote_config:
+  cloud_functions: ^4.3.4
+  crypto: ^3.0.3
+  firebase_auth: ^4.7.0
+  firebase_core: ^2.15.0
+  firebase_database: ^10.2.4
+  firebase_remote_config: ^4.2.4
   flutter:
     sdk: flutter
-  flutter_animated_dialog:
-  flutter_form_builder:
-  flutter_hooks:
-  flutter_riverpod:
-  font_awesome_flutter:
-  form_builder_validators:
-  freezed_annotation:
-  google_sign_in:
-  hooks_riverpod:
-  logger:
-  riverpod:
-  shared_preferences:
-  sign_in_with_apple:
-  uuid:
+  flutter_animated_dialog: ^2.0.1
+  flutter_form_builder: ^9.0.0
+  flutter_riverpod: ^2.3.6
+  font_awesome_flutter: ^10.5.0
+  form_builder_validators: ^9.0.0
+  freezed_annotation: ^2.4.1
+  google_sign_in: ^6.1.4
+  logger: ^1.4.0
+  shared_preferences: ^2.2.0
+  sign_in_with_apple: ^5.0.0
+  uuid: ^3.0.7
   wt_logging:
     git:
       url: https://github.com/tmcmaster/wt_logging.git
@@ -51,7 +48,6 @@ dependencies:
       url: https://github.com/tmcmaster/wt_settings.git
 
 dev_dependencies:
-  flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
 
@@ -64,3 +60,4 @@ dev_dependencies:
 #    path: ../wt_logging
 
 flutter:
+  uses-material-design: true

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_firepod/src/auth/flutterfire_auth.dart';
 import 'package:wt_firepod/src/auth/user_auth.dart';
 import 'package:wt_firepod/src/auth/user_auth_result.dart';
 import 'package:wt_logging/wt_logging.dart';
 
-class GoogleSignInForm extends HookConsumerWidget {
+class GoogleSignInForm extends ConsumerWidget {
   static final log = logger(GoogleSignInForm);
 
   final FlutterfireAuthNotifier firebaseLogin;

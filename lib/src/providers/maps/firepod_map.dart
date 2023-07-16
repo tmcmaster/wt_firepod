@@ -1,4 +1,4 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_firepod/src/providers/generic/generic_lookup_map.dart';
 import 'package:wt_firepod/src/providers/generic/generic_site_data_notifier.dart';
 import 'package:wt_firepod/src/providers/generic/generic_site_data_notifier_base.dart';

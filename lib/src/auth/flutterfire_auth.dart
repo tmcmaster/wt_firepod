@@ -6,8 +6,8 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:wt_firepod/src/auth/user_auth.dart';
 import 'package:wt_firepod/src/auth/user_auth_result.dart';
@@ -81,7 +81,8 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
   Future<UserAuthResult> emailSignIn(String email, String password) {
     log.d('emailSignIn');
     return _waitForCredentials(
-        firebaseAuth.signInWithEmailAndPassword(email: email, password: password),);
+      firebaseAuth.signInWithEmailAndPassword(email: email, password: password),
+    );
   }
 
   Future<UserAuthResult> linkEmailSignIn(String email, String password) {
@@ -98,13 +99,15 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
         firebaseAuth.currentUser?.linkWithCredential(credentials).then((credentials) async {
           final user = credentials.user;
           if (user != null) {
-            completer.complete(UserAuthResult.success(
-              UserAuth(
-                uuid: user.uid,
-                name: user.displayName ?? '',
-                email: user.email ?? '',
+            completer.complete(
+              UserAuthResult.success(
+                UserAuth(
+                  uuid: user.uid,
+                  name: user.displayName ?? '',
+                  email: user.email ?? '',
+                ),
               ),
-            ),);
+            );
           } else {
             completer.completeError('Could not create a linked email login');
           }
@@ -151,7 +154,8 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
   Future<UserAuthResult> createUser(String email, String password) {
     log.d('createUser');
     return _waitForCredentials(
-        firebaseAuth.createUserWithEmailAndPassword(email: email, password: password),);
+      firebaseAuth.createUserWithEmailAndPassword(email: email, password: password),
+    );
   }
 
   Future<UserAuthResult> resetPassword(String email) {
@@ -178,21 +182,24 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
     log.d('googleSignIn');
     final completer = Completer<UserAuthResult>();
 
-    _createGoogleCredentials().then((credentials) {
-      _waitForCredentials(firebaseAuth.signInWithCredential(credentials)).then(
-        (userAuthResults) {
-          log.d('googleSignIn : success : ${userAuthResults.user.email}');
-          completer.complete(userAuthResults);
-        },
-        onError: (error) {
-          log.d('googleSignIn : error : Could not get UserAuthResults: $error');
-          completer.completeError('Could not get UserAuthResults: $error');
-        },
-      );
-    }, onError: (error) {
-      log.d('googleSignIn : error : Could not get Google credentials: $error');
-      completer.completeError('Could not get Google credentials: $error');
-    },);
+    _createGoogleCredentials().then(
+      (credentials) {
+        _waitForCredentials(firebaseAuth.signInWithCredential(credentials)).then(
+          (userAuthResults) {
+            log.d('googleSignIn : success : ${userAuthResults.user.email}');
+            completer.complete(userAuthResults);
+          },
+          onError: (error) {
+            log.d('googleSignIn : error : Could not get UserAuthResults: $error');
+            completer.completeError('Could not get UserAuthResults: $error');
+          },
+        );
+      },
+      onError: (error) {
+        log.d('googleSignIn : error : Could not get Google credentials: $error');
+        completer.completeError('Could not get Google credentials: $error');
+      },
+    );
 
     return completer.future;
   }
@@ -229,7 +236,9 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
   }
 
   Future<UserAuthResult> verifyPhoneNumber(
-      ConfirmationResult confirmationResult, String verificationCode,) async {
+    ConfirmationResult confirmationResult,
+    String verificationCode,
+  ) async {
     return _waitForCredentials(confirmationResult.confirm(verificationCode));
   }
 

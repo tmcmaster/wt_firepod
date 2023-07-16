@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_firepod/src/auth/auth.dart';
 import 'package:wt_firepod/src/auth/link_email_sign_in_form.dart';
 import 'package:wt_logging/wt_logging.dart';
