@@ -13,6 +13,11 @@ mixin FirebaseProviders {
     (ref) => throw Exception('Need to override the FirebaseOptions provider.'),
   );
 
+  static final app = Provider<FirebaseApp>(
+    name: 'FirebaseApp',
+    (ref) => throw Exception('Need to override the FirebaseApp provider.'),
+  );
+
   static final auth = Provider<FirebaseAuth>(
     name: 'FirebaseAuth',
     (ref) => throw Exception('Need to override the FirebaseAuth provider.'),
