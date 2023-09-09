@@ -19,7 +19,9 @@ scripts:
     build: dart run build_runner build --delete-conflicting-outputs
 
 dependencies:
+  cloud_firestore: ^4.9.1
   cloud_functions: ^4.3.4
+  firebase_storage: ^11.2.6
   crypto: ^3.0.3
   firebase_auth: ^4.7.0
   firebase_core: ^2.15.0
