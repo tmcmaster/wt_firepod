@@ -73,7 +73,7 @@ class ExampleFirepodObject extends ConsumerWidget {
                   weight: noSiteWatch.weight + 1.0,
                 ),
               );
-            }
+            },
           },
         ),
         ValueAndAction(
@@ -86,7 +86,7 @@ class ExampleFirepodObject extends ConsumerWidget {
                   weight: noSiteNoWatch.weight + 1.0,
                 ),
               );
-            }
+            },
           },
         ),
         ValueAndAction(
@@ -99,7 +99,7 @@ class ExampleFirepodObject extends ConsumerWidget {
                   weight: siteWatch.weight + 1.0,
                 ),
               );
-            }
+            },
           },
         ),
         ValueAndAction(
@@ -112,9 +112,9 @@ class ExampleFirepodObject extends ConsumerWidget {
                   weight: siteNoWatch.weight + 1.0,
                 ),
               );
-            }
+            },
           },
-        )
+        ),
       ],
     );
   }

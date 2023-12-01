@@ -10,7 +10,7 @@ class FirepodMapInt extends FirepodMap<int> {
     super.autoSave,
   }) : super(
           none: none,
-          decoder: (value) => int.parse(value.toString()),
+          decoder: (value) => int.tryParse(value.toString()) ?? 0,
           encoder: (object) => object,
         );
 }

@@ -16,6 +16,12 @@ scripts:
   outdated: dart pub outdated --show-all
   freezed:
     build: dart run build_runner build --delete-conflicting-outputs
+  macos:
+    init: flutter create --platforms=macos .
+    build: flutter build macos --release
+    run: flutter run -t lib/main_widgetbook.dart -d MacOS
+    configure: open macos/Runner.xcworkspace
+    fix: (cd macos; rm Podfile.lock; gem pristine ffi --version 1.15.5; pod install --repo-update)
 
 dependencies:
   cupertino_icons: ^1.0.5

@@ -10,7 +10,7 @@ class FirepodMapDouble extends FirepodMap<double> {
     super.autoSave,
   }) : super(
           none: none,
-          decoder: (value) => double.parse(value.toString()),
+          decoder: (value) => double.tryParse(value.toString()) ?? 0.0,
           encoder: (object) => object,
         );
 }

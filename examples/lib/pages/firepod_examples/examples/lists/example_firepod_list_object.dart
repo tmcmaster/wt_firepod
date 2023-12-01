@@ -39,7 +39,7 @@ class ExampleFirepodListObject extends ConsumerWidget {
                     price: 2,
                     title: 'New Product',
                     weight: 3,
-                  )
+                  ),
                 ]),
             'Remove': () {
               if (productList.length > 1) {

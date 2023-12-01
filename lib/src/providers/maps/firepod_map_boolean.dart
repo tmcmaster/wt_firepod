@@ -10,7 +10,7 @@ class FirepodMapBoolean extends FirepodMap<bool> {
     super.autoSave,
   }) : super(
           none: none,
-          decoder: (value) => bool.parse(value.toString()),
+          decoder: (value) => bool.tryParse(value.toString()) ?? false,
           encoder: (object) => object,
         );
 }

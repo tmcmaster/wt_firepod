@@ -15,7 +15,9 @@ class ToModelFromFirebase<T extends IdJsonSupport<T>> extends ToModelFrom<T> {
     if (snapshot.exists && snapshot.value != null) {
       final map = snapshot.value! as Map<dynamic, dynamic>;
       final newMap = _transformMap(map);
-      return newMap.values.map((e) => super.json(_transformMap(e as Map))).toList();
+      return newMap.values
+          .map((e) => super.json(_transformMap(e as Map)))
+          .toList();
     } else {
       return [];
     }
@@ -23,8 +25,9 @@ class ToModelFromFirebase<T extends IdJsonSupport<T>> extends ToModelFrom<T> {
 
   Map<String, dynamic> _transformMap(Map<dynamic, dynamic> map) {
     return {
-      for (var e in map.entries)
-        e.key.toString(): _addKeyFieldIfRequired(e.value as Object, e.key as String, idField)
+      for (final e in map.entries)
+        e.key.toString():
+            _addKeyFieldIfRequired(e.value as Object, e.key as String, idField),
     };
   }
 
@@ -32,8 +35,12 @@ class ToModelFromFirebase<T extends IdJsonSupport<T>> extends ToModelFrom<T> {
     if (snapshot.exists && snapshot.value != null) {
       final map = snapshot.value! as Map;
       final newMap = {
-        for (var e in map.entries)
-          e.key.toString(): _addKeyFieldIfRequired(e.value as Object, e.key as String, idField)
+        for (final e in map.entries)
+          e.key.toString(): _addKeyFieldIfRequired(
+            e.value as Object,
+            e.key as String,
+            idField,
+          ),
       };
 
       newMap[idField] = snapshot.key ?? '';
@@ -43,7 +50,9 @@ class ToModelFromFirebase<T extends IdJsonSupport<T>> extends ToModelFrom<T> {
       if (super.none != null) {
         return super.none!;
       } else {
-        throw Exception('Could not find required firebase object of Type(${T.runtimeType})');
+        throw Exception(
+          'Could not find required firebase object of Type(${T.runtimeType})',
+        );
       }
     }
   }

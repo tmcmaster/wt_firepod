@@ -19,32 +19,48 @@ scripts:
     build: dart run build_runner build --delete-conflicting-outputs
 
 dependencies:
-  cloud_firestore: ^4.9.1
-  cloud_functions: ^4.3.4
-  firebase_storage: ^11.2.6
+  #cloud_firestore: ^4.9.1
+  #cloud_functions: ^4.3.4
   crypto: ^3.0.3
   firebase_auth: ^4.7.0
   firebase_core: ^2.15.0
+  firebase_crashlytics: ^3.4.5
   firebase_database: ^10.2.4
-  firebase_remote_config: ^4.2.4
+  #firebase_remote_config: ^4.2.4
+  firebase_storage: ^11.2.6
+  firebase_ui_auth: ^1.10.0
+  firebase_ui_localizations: ^1.8.0
+  firebase_ui_oauth_apple: ^1.2.14
+  firebase_ui_oauth_google: ^1.2.14
   flutter:
     sdk: flutter
   flutter_animated_dialog: ^2.0.1
   flutter_form_builder: ^9.0.0
+  flutter_localization: ^0.1.14
   flutter_riverpod: ^2.3.6
   font_awesome_flutter: ^10.5.0
   form_builder_validators: ^9.0.0
   freezed_annotation: ^2.4.1
+  go_router:
   google_sign_in: ^6.1.4
   logger: ^1.4.0
   shared_preferences: ^2.2.0
   sign_in_with_apple: ^5.0.0
   uuid: ^4.0.0
+
+  wt_action_button:
+    git:
+      url: https://github.com/tmcmaster/wt_action_button.git
+  wt_app_scaffold:
+    path: ../wt_app_scaffold
+  #    git:
+  #      url: https://github.com/tmcmaster/wt_app_scaffold.git
   wt_logging:
     git:
       url: https://github.com/tmcmaster/wt_logging.git
   wt_models:
-    git: https://github.com/tmcmaster/wt_models.git
+    git:
+      url: https://github.com/tmcmaster/wt_models.git
   wt_settings:
     git:
       url: https://github.com/tmcmaster/wt_settings.git
@@ -53,13 +69,15 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-#dependency_overrides:
+dependency_overrides:
+  wt_app_scaffold:
+    path: ../wt_app_scaffold
 #  wt_models:
 #    path: ../wt_models
 #  wt_settings:
 #    path: ../wt_settings
-#  wt_logging:
-#    path: ../wt_logging
+  wt_logging:
+    path: ../wt_logging
 
 flutter:
   uses-material-design: true

@@ -6,7 +6,7 @@ mixin Transformer {
             ? convertSnapshotMap(entry.value as Map)
             : entry.value is List
                 ? convertList(entry.value as List)
-                : entry.value
+                : entry.value,
     };
   }
 

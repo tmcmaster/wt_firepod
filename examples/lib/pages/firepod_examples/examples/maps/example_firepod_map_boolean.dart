@@ -54,7 +54,7 @@ class ExampleFirepodMapBoolean extends ConsumerWidget {
               final newMap = {...noSiteWatch.map};
               newMap['test'] = !(newMap['test'] ?? true);
               noSiteWatchNotifier.update(GenericLookupMap<bool>(map: newMap));
-            }
+            },
           },
         ),
         ValueAndAction(
@@ -65,7 +65,7 @@ class ExampleFirepodMapBoolean extends ConsumerWidget {
               final newMap = {...noSiteNoWatch.map};
               newMap['test'] = !(newMap['test'] ?? true);
               noSiteNoWatchNotifier.update(GenericLookupMap<bool>(map: newMap));
-            }
+            },
           },
         ),
         ValueAndAction(
@@ -76,7 +76,7 @@ class ExampleFirepodMapBoolean extends ConsumerWidget {
               final newMap = {...siteWatch.map};
               newMap['test'] = !(newMap['test'] ?? true);
               siteWatchNotifier.update(GenericLookupMap<bool>(map: newMap));
-            }
+            },
           },
         ),
         ValueAndAction(
@@ -87,7 +87,7 @@ class ExampleFirepodMapBoolean extends ConsumerWidget {
               final newMap = {...siteNoWatch.map};
               newMap['test'] = !(newMap['test'] ?? true);
               siteNoWatchNotifier.update(GenericLookupMap<bool>(map: newMap));
-            }
+            },
           },
         ),
       ],

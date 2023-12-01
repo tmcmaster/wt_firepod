@@ -40,7 +40,7 @@ class FirepodMapMockBuilder {
             price: 1,
             title: 'Product 1',
             weight: 1.1,
-          )
+          ),
         },),
       );
 }

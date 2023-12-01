@@ -1,5 +1,6 @@
 export 'src/auth/auth.dart';
 export 'src/auth/login_view.dart';
+export 'src/init/firebase_dsl.dart';
 export 'src/models/site.dart';
 export 'src/providers/firebase_providers.dart';
 export 'src/providers/firepod_providers.dart';
@@ -26,6 +27,7 @@ export 'src/providers/scalars/firepod_scalar_int.dart';
 export 'src/providers/scalars/firepod_scalar_string.dart';
 export 'src/settings/firepod_settings.dart';
 export 'src/utils/data_transforms.dart';
+export 'src/utils/firepod_features.dart';
 export 'src/utils/from_model_to_firebase.dart';
 export 'src/utils/normalise_order_values.dart';
 export 'src/utils/to_model_from_firebase.dart';

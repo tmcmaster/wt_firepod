@@ -77,12 +77,12 @@ class ExampleFirepodNestedObjects extends ConsumerWidget {
                     price: 4.4,
                     title: 'Product 4',
                     weight: 4.4,
-                  )
+                  ),
                 ],
               );
 
               log.d(Delivery.convert.to.jsonMapString.from.model(delivery));
-            }
+            },
           },
         ),
       ],

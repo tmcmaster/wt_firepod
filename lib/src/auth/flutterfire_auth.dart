@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:cloud_functions/cloud_functions.dart';
+// import 'package:cloud_functions/cloud_functions.dart';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -28,7 +28,8 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
   FlutterfireAuthNotifier(this.ref) : super(UserAuth.none) {
     firebaseAuth = ref.read(FirebaseProviders.auth);
 
-    _streamListener = firebaseAuth.authStateChanges().listen((User? user) async {
+    _streamListener =
+        firebaseAuth.authStateChanges().listen((User? user) async {
       if (user == null) {
         log.d('User signed out');
         state = UserAuth.none;
@@ -38,13 +39,18 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
         // TODO: need to add firebase database support to this package (need to pass in which databaseProvider to use).
         // TODO: need to sort out how to userAuthProvider know about the database provider (maybe need to use family??).
         // TODO: might need to make this package a firebase package that has database and auth features.
-        state = UserAuth(uuid: user.uid, name: user.displayName ?? '', email: user.email ?? '');
+        state = UserAuth(
+          uuid: user.uid,
+          name: user.displayName ?? '',
+          email: user.email ?? '',
+        );
       }
     });
 
     final firebaseOptions = ref.read(FirebaseProviders.firebaseOptions);
     _googleSignIn = GoogleSignIn(
-      clientId: kIsWeb ? firebaseOptions.appId : firebaseOptions.androidClientId,
+      clientId:
+          kIsWeb ? firebaseOptions.appId : firebaseOptions.androidClientId,
       scopes: <String>[
         'email',
         'https://www.googleapis.com/auth/contacts.readonly',
@@ -58,11 +64,11 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
     super.dispose();
   }
 
-  Future<void> getUserProfile() async {
-    final callable = FirebaseFunctions.instance.httpsCallable('userProfile');
-    final results = await callable();
-    log.d(results.toString());
-  }
+  // Future<void> getUserProfile() async {
+  //   final callable = FirebaseFunctions.instance.httpsCallable('userProfile');
+  //   final results = await callable();
+  //   log.d(results.toString());
+  // }
 
   Future<void> logout() {
     final userLog = ref.read(UserLog.provider);
@@ -86,7 +92,9 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
   }
 
   Future<UserAuthResult> linkEmailSignIn(String email, String password) {
-    if (!linkEmailSignInEnabled) throw Exception('Linking email sign in support is disabled');
+    if (!linkEmailSignInEnabled) {
+      throw Exception('Linking email sign in support is disabled');
+    }
 
     final completer = Completer<UserAuthResult>();
 
@@ -94,9 +102,12 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
       completer.completeError('User is not currently logging in.');
     } else {
       try {
-        final credentials = EmailAuthProvider.credential(email: email, password: password);
+        final credentials =
+            EmailAuthProvider.credential(email: email, password: password);
         log.d('Email Provider ID: ${credentials.providerId}');
-        firebaseAuth.currentUser?.linkWithCredential(credentials).then((credentials) async {
+        firebaseAuth.currentUser
+            ?.linkWithCredential(credentials)
+            .then((credentials) async {
           final user = credentials.user;
           if (user != null) {
             completer.complete(
@@ -127,20 +138,23 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
   }
 
   Future<UserAuthResult> unlinkEmailSignIn(String email, String password) {
-    if (!linkEmailSignInEnabled) throw Exception('Linking email sign in support is disabled');
-
+    if (!linkEmailSignInEnabled) {
+      throw Exception('Linking email sign in support is disabled');
+    }
     final completer = Completer<UserAuthResult>();
 
     if (firebaseAuth.currentUser == null) {
       completer.completeError('User is not currently logging in.');
     } else {
       try {
-        final credentials = EmailAuthProvider.credential(email: email, password: password);
+        final credentials =
+            EmailAuthProvider.credential(email: email, password: password);
         log.d('Email Provider ID: ${credentials.providerId}');
         completer.completeError('WIP');
-        firebaseAuth.currentUser
-            ?.unlink(credentials.providerId)
-            .then((value) => log.d(value), onError: (error, stackTrace) => log.e(error));
+        firebaseAuth.currentUser?.unlink(credentials.providerId).then(
+              (value) => log.d(value),
+              onError: (error, stackTrace) => log.e(error),
+            );
       } catch (error) {
         final errorString = error.toString();
         log.d('(3) _handleCredentialsFuture errorString: $errorString');
@@ -154,7 +168,10 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
   Future<UserAuthResult> createUser(String email, String password) {
     log.d('createUser');
     return _waitForCredentials(
-      firebaseAuth.createUserWithEmailAndPassword(email: email, password: password),
+      firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      ),
     );
   }
 
@@ -184,19 +201,24 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
 
     _createGoogleCredentials().then(
       (credentials) {
-        _waitForCredentials(firebaseAuth.signInWithCredential(credentials)).then(
+        _waitForCredentials(firebaseAuth.signInWithCredential(credentials))
+            .then(
           (userAuthResults) {
             log.d('googleSignIn : success : ${userAuthResults.user.email}');
             completer.complete(userAuthResults);
           },
           onError: (error) {
-            log.d('googleSignIn : error : Could not get UserAuthResults: $error');
+            log.d(
+              'googleSignIn : error : Could not get UserAuthResults: $error',
+            );
             completer.completeError('Could not get UserAuthResults: $error');
           },
         );
       },
       onError: (error) {
-        log.d('googleSignIn : error : Could not get Google credentials: $error');
+        log.d(
+          'googleSignIn : error : Could not get Google credentials: $error',
+        );
         completer.completeError('Could not get Google credentials: $error');
       },
     );
@@ -246,9 +268,12 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
     final completer = Completer<OAuthCredential>();
 
     log.d('_createAppleCredentials');
-    const charset = '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
+    const charset =
+        '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
     final random = Random.secure();
-    final rawNonce = List.generate(32, (_) => charset[random.nextInt(charset.length)]).join();
+    final rawNonce =
+        List.generate(32, (_) => charset[random.nextInt(charset.length)])
+            .join();
     final bytes = utf8.encode(rawNonce);
     final digest = sha256.convert(bytes);
     final nonce = digest.toString();
@@ -300,13 +325,17 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
     return completer.future;
   }
 
-  Future<UserAuthResult> _waitForCredentials(Future<UserCredential> credentialFuture) {
+  Future<UserAuthResult> _waitForCredentials(
+    Future<UserCredential> credentialFuture,
+  ) {
     final completer = Completer<UserAuthResult>();
     log.d('_handleCredentialsFuture: Handling credentials....');
     try {
       credentialFuture.then((credentials) async {
         final userAuthResult = _processCredentials(credentials);
-        log.d('(1) _handleCredentialsFuture successString: ${userAuthResult.user.email}');
+        log.d(
+          '(1) _handleCredentialsFuture successString: ${userAuthResult.user.email}',
+        );
         completer.complete(userAuthResult);
       }).onError((error, stackTrace) {
         final errorString = error.toString();

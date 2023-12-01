@@ -47,7 +47,7 @@ class ValueAndAction extends StatelessWidget {
                     ElevatedButton(
                       onPressed: e.value,
                       child: Text(e.key),
-                    )
+                    ),
                   ],
                 )
                 .expand((element) => element)
