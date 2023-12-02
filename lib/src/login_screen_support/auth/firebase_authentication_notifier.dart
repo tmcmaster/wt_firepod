@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_platform/auth/app_scaffold_authentication_interface.dart';
-import 'package:wt_app_scaffold/app_platform/auth/scaffold_app_user.dart';
+import 'package:wt_app_scaffold/app_platform/auth/app_scaffold_user.dart';
 import 'package:wt_firepod/src/providers/firebase_providers.dart';
 import 'package:wt_logging/wt_logging.dart';
 
@@ -15,7 +15,7 @@ class FirebaseAuthenticationNotifier
   final Ref ref;
   FirebaseAuthenticationNotifier(this.ref)
       : super(
-          ScaffoldAppUser.empty(),
+          AppScaffoldUser.empty(),
         ) {
     final subscription = ref.read(FirebaseProviders.auth).userChanges().listen(
       (user) {
@@ -54,9 +54,9 @@ class FirebaseAuthenticationNotifier
     throw UnimplementedError();
   }
 
-  Future<ScaffoldAppUser> transformUser(User? user) async {
+  Future<AppScaffoldUser> transformUser(User? user) async {
     if (user == null) {
-      return ScaffoldAppUser.empty();
+      return AppScaffoldUser.empty();
     } else {
       final userId = user.uid;
       final userDetailsSnapshot = await ref
@@ -67,7 +67,7 @@ class FirebaseAuthenticationNotifier
       final jsonMap = userDetailsSnapshot.value as Map?;
       final firstName = (jsonMap?['firstName'] ?? '') as String;
       final lastName = (jsonMap?['lastName'] ?? '') as String;
-      return ScaffoldAppUser(
+      return AppScaffoldUser(
         id: user.uid,
         firstName: firstName,
         lastName: lastName,

@@ -7,8 +7,6 @@ import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:wt_app_scaffold/app_platform/auth/app_scaffold_authentication.dart';
-import 'package:wt_app_scaffold/app_platform/auth/scaffold_app_user.dart';
 import 'package:wt_app_scaffold/app_platform/model/app_scaffold_feature_definition.dart';
 import 'package:wt_app_scaffold/app_platform/model/app_scaffold_override_definition.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
@@ -90,7 +88,7 @@ class FirebaseLoginFeatureDefinition extends AppScaffoldFeatureDefinition {
 
   static AppScaffoldOverrideDefinition _overrideAuthenticationNotifier() {
     return AppScaffoldOverrideDefinition(
-      value: ScaffoldAppUser.empty(),
+      value: AppScaffoldUser.empty(),
       override: AppScaffoldAuthenticationStore.user.overrideWith(
         (ref) => FirebaseAuthenticationNotifier(ref),
       ),

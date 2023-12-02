@@ -52,9 +52,8 @@ dependencies:
     git:
       url: https://github.com/tmcmaster/wt_action_button.git
   wt_app_scaffold:
-    path: ../wt_app_scaffold
-  #    git:
-  #      url: https://github.com/tmcmaster/wt_app_scaffold.git
+    git:
+      url: https://github.com/tmcmaster/wt_app_scaffold.git
   wt_logging:
     git:
       url: https://github.com/tmcmaster/wt_logging.git
@@ -69,15 +68,15 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-dependency_overrides:
-  wt_app_scaffold:
-    path: ../wt_app_scaffold
+#dependency_overrides:
+#  wt_app_scaffold:
+#    path: ../wt_app_scaffold
 #  wt_models:
 #    path: ../wt_models
 #  wt_settings:
 #    path: ../wt_settings
-  wt_logging:
-    path: ../wt_logging
+#  wt_logging:
+#    path: ../wt_logging
 
 flutter:
   uses-material-design: true
