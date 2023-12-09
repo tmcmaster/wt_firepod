@@ -69,8 +69,8 @@ dev_dependencies:
     sdk: flutter
 
 dependency_overrides:
-#  wt_app_scaffold:
-#    path: ../wt_app_scaffold
+  wt_app_scaffold:
+    path: ../wt_app_scaffold
 #  wt_models:
 #    path: ../wt_models
 #  wt_settings:

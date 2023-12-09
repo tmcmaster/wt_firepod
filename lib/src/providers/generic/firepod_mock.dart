@@ -10,4 +10,7 @@ class FirepodMock<T> extends GenericSiteDataNotifierBase<T> {
 
   @override
   void update(T newValue) {}
+
+  @override
+  String? getPath() => null;
 }

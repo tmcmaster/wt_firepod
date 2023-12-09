@@ -104,6 +104,11 @@ class GenericSiteDataNotifier<T> extends GenericSiteDataNotifierBase<T> {
   }
 
   @override
+  String? getPath() {
+    return _dbRef?.path;
+  }
+
+  @override
   void load() {
     if (_dbRef != null) {
       _dbRef!.get().then(

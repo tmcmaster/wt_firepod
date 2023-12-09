@@ -13,6 +13,7 @@ AppScaffoldFeatureDefinition withFirebase(
   bool crashlytics = false,
   bool database = false,
   bool storage = false,
+  void Function()? onReady,
 }) {
   return FirebaseFeatureDefinition(
     childFeature,
@@ -22,6 +23,7 @@ AppScaffoldFeatureDefinition withFirebase(
     crashlytics: crashlytics,
     database: database,
     storage: storage,
+    onReady: onReady,
   );
 }
 

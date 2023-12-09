@@ -24,6 +24,7 @@ class FirebaseFeatureDefinition extends AppScaffoldFeatureDefinition {
     required bool database,
     required bool storage,
     required bool crashlytics,
+    void Function()? onReady,
   }) : super(
           contextBuilder: (contextMap) async {
             log.d('Firebase Initialising');
@@ -52,6 +53,8 @@ class FirebaseFeatureDefinition extends AppScaffoldFeatureDefinition {
                 return true;
               };
             }
+
+            onReady?.call();
 
             final newContextMap = {
               ...contextMap,
