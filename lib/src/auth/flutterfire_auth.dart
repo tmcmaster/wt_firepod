@@ -72,6 +72,7 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
 
   Future<void> logout() {
     final userLog = ref.read(UserLog.provider);
+    _googleSignIn.disconnect();
     return firebaseAuth.signOut().then(
       (_) {
         log.i('User has logged out successfully');
