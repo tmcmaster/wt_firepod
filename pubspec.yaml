@@ -43,7 +43,7 @@ dependencies:
   freezed_annotation: ^2.4.1
   go_router:
   google_sign_in: ^6.1.4
-  logger: ^1.4.0
+  logger: ^2.4.0
   shared_preferences: ^2.2.0
   sign_in_with_apple: ^5.0.0
   uuid: ^4.0.0
@@ -68,9 +68,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-dependency_overrides:
-  wt_app_scaffold:
-    path: ../wt_app_scaffold
+#dependency_overrides:
+#  wt_app_scaffold:
+#    path: ../wt_app_scaffold
 #  wt_models:
 #    path: ../wt_models
 #  wt_settings:
