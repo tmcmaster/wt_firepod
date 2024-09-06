@@ -4,7 +4,7 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: '>=3.2.4 <4.0.0'
 
 # Scripts to be run with rps
 scripts:
@@ -24,10 +24,10 @@ scripts:
     fix: (cd macos; rm Podfile.lock; gem pristine ffi --version 1.15.5; pod install --repo-update)
 
 dependencies:
-  cupertino_icons: ^1.0.5
-  firebase_auth: ^4.7.1
-  firebase_core: ^2.15.0
-  firebase_database: ^10.2.4
+  cupertino_icons: ^1.0.8
+  firebase_auth: ^5.2.0
+  firebase_core: ^3.4.0
+  firebase_database: ^11.1.1
   flutter:
     sdk: flutter
   flutter_animated_dialog: ^2.0.1
