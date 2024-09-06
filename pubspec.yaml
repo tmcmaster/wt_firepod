@@ -39,7 +39,7 @@ dependencies:
   flutter_localization: ^0.1.14
   flutter_riverpod: ^2.3.6
   font_awesome_flutter: ^10.5.0
-  form_builder_validators: ^9.0.0
+  form_builder_validators: ^11.0.0
   freezed_annotation: ^2.4.1
   go_router:
   google_sign_in: ^6.1.4
