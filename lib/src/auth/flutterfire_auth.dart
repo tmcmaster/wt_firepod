@@ -15,7 +15,7 @@ import 'package:wt_firepod/src/providers/firebase_providers.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
-  static final log = logger(FlutterfireAuthNotifier);
+  static final log = logger(FlutterfireAuthNotifier, level: Level.debug);
 
   static const linkEmailSignInEnabled = true;
 
@@ -200,29 +200,62 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
     log.d('googleSignIn');
     final completer = Completer<UserAuthResult>();
 
-    _createGoogleCredentials().then(
-      (credentials) {
-        _waitForCredentials(firebaseAuth.signInWithCredential(credentials))
-            .then(
-          (userAuthResults) {
-            log.d('googleSignIn : success : ${userAuthResults.user.email}');
-            completer.complete(userAuthResults);
-          },
-          onError: (error) {
-            log.d(
-              'googleSignIn : error : Could not get UserAuthResults: $error',
-            );
-            completer.completeError('Could not get UserAuthResults: $error');
-          },
-        );
-      },
-      onError: (error) {
-        log.d(
-          'googleSignIn : error : Could not get Google credentials: $error',
-        );
-        completer.completeError('Could not get Google credentials: $error');
-      },
-    );
+    final clientId = ref.read(FirebaseProviders.firebaseOptions).iosClientId;
+
+    GoogleSignIn(
+      clientId: clientId,
+    ).signIn().then((GoogleSignInAccount? account) {
+      if (account != null) {
+        account.authentication.then((authentication) {
+          final credential = GoogleAuthProvider.credential(
+            accessToken: authentication.accessToken,
+            idToken: authentication.idToken,
+          );
+          firebaseAuth.signInWithCredential(credential).then((userCredentials) {
+            log.d('Login Value: $userCredentials');
+            final user = UserAuthResult.success(UserAuth(
+              email: userCredentials.user?.email ?? '',
+              uuid: userCredentials.user?.uid ?? '',
+              name: userCredentials.user?.displayName ?? '',
+            ));
+            completer.complete(user);
+          }).catchError((error) {
+            log.e('Login Error: $error');
+            completer.completeError(error.toString());
+          });
+        }).catchError((error) {
+          log.e('Login Error: $error');
+          completer.completeError(error.toString());
+        });
+      }
+    }).catchError((error) {
+      log.e('Login Error: $error');
+      completer.completeError(error.toString());
+    });
+
+    // _createGoogleCredentials().then(
+    //   (credentials) {
+    //     _waitForCredentials(firebaseAuth.signInWithCredential(credentials))
+    //         .then(
+    //       (userAuthResults) {
+    //         log.d('googleSignIn : success : ${userAuthResults.user.email}');
+    //         completer.complete(userAuthResults);
+    //       },
+    //       onError: (error) {
+    //         log.d(
+    //           'googleSignIn : error : Could not get UserAuthResults: $error',
+    //         );
+    //         completer.completeError('Could not get UserAuthResults: $error');
+    //       },
+    //     );
+    //   },
+    //   onError: (error) {
+    //     log.d(
+    //       'googleSignIn : error : Could not get Google credentials: $error',
+    //     );
+    //     completer.completeError('Could not get Google credentials: $error');
+    //   },
+    // );
 
     return completer.future;
   }

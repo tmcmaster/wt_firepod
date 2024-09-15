@@ -1,12 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:wt_app_scaffold/app_platform/auth/app_scaffold_authentication_interface.dart';
 import 'package:wt_app_scaffold/app_platform/auth/app_scaffold_user.dart';
 import 'package:wt_firepod/src/providers/firebase_providers.dart';
 import 'package:wt_logging/wt_logging.dart';
 
-class FirebaseAuthenticationNotifier
-    extends AppScaffoldAuthenticationInterface {
+class FirebaseAuthenticationNotifier extends AppScaffoldAuthenticationInterface {
   static final log = logger(
     FirebaseAuthenticationNotifier,
     level: Level.debug,
@@ -49,9 +49,22 @@ class FirebaseAuthenticationNotifier
   }
 
   @override
-  Future<void> signInWithGoogle() {
-    // TODO: implement signInWithGoogle
-    throw UnimplementedError();
+  Future<void> signInWithGoogle() async {
+    final GoogleSignInAccount? account = await GoogleSignIn(
+      clientId: '626479055094-qih6hfrg4cppf316rru2i7orreprbh7h.apps.googleusercontent.com',
+    ).signIn();
+
+    if (account != null) {
+      final GoogleSignInAuthentication authentication = await account.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: authentication.accessToken,
+        idToken: authentication.idToken,
+      );
+      final userCredentials =
+          await ref.read(FirebaseProviders.auth).signInWithCredential(credential);
+
+      log.d('User: ${userCredentials.user}');
+    }
   }
 
   Future<AppScaffoldUser> transformUser(User? user) async {
@@ -59,11 +72,8 @@ class FirebaseAuthenticationNotifier
       return AppScaffoldUser.empty();
     } else {
       final userId = user.uid;
-      final userDetailsSnapshot = await ref
-          .read(FirebaseProviders.database)
-          .ref('/v2/users')
-          .child(userId)
-          .get();
+      final userDetailsSnapshot =
+          await ref.read(FirebaseProviders.database).ref('/v2/users').child(userId).get();
       final jsonMap = userDetailsSnapshot.value as Map?;
       final firstName = (jsonMap?['firstName'] ?? '') as String;
       final lastName = (jsonMap?['lastName'] ?? '') as String;

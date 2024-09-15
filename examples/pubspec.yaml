@@ -4,7 +4,7 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.2.4 <4.0.0'
+  sdk: '>=3.0.0 <4.0.0'
 
 # Scripts to be run with rps
 scripts:
@@ -24,22 +24,22 @@ scripts:
     fix: (cd macos; rm Podfile.lock; gem pristine ffi --version 1.15.5; pod install --repo-update)
 
 dependencies:
-  cupertino_icons: ^1.0.8
-  firebase_auth: ^5.2.0
-  firebase_core: ^3.4.0
-  firebase_database: ^11.1.1
+  cupertino_icons: 
+  firebase_auth: 
+  firebase_core: 
+  firebase_database: 
   flutter:
     sdk: flutter
-  flutter_animated_dialog: ^2.0.1
-  flutter_form_builder: ^9.1.0
-  flutter_riverpod: ^2.3.6
-  font_awesome_flutter: ^10.5.0
-  form_builder_validators: ^11.0.0
-  freezed: ^2.4.1
-  freezed_annotation: ^2.4.1
-  json_annotation: ^4.8.1
-  logger: ^2.4.0
-  riverpod: ^2.3.6
+  flutter_form_builder:
+  flutter_riverpod: 
+  font_awesome_flutter: 
+  form_builder_validators: 
+  freezed: 
+  freezed_annotation: 
+  google_sign_in:
+  json_annotation: 
+  logger: 
+  riverpod: 
   wt_action_button:
     git: https://github.com/tmcmaster/wt_action_button.git
   wt_firepod:
@@ -48,13 +48,15 @@ dependencies:
     git: https://github.com/tmcmaster/wt_logging.git
   wt_models:
     git: https://github.com/tmcmaster/wt_models.git
+  wt_settings:
+    git: https://github.com/tmcmaster/wt_settings.git
 
 dev_dependencies:
-  build_runner: ^2.4.6
-  flutter_lints: ^2.0.2
+  build_runner: 
+  flutter_lints: 
   flutter_test:
     sdk: flutter
-  json_serializable: ^6.7.1
+  json_serializable: 
 flutter:
   uses-material-design: true
   assets:

@@ -56,7 +56,7 @@ class FirebaseLoginFeatureDefinition extends AppScaffoldFeatureDefinition {
                     EmailLinkAuthProvider(
                       actionCodeSettings: FirebaseAuthKeys.actionCodeSettings,
                     ),
-                  if (googleEnabled && !kIsWeb && Platform.isAndroid)
+                  if (googleEnabled && (Platform.isAndroid || Platform.isMacOS))
                     GoogleProvider(clientId: googleClientId),
                   if (appleEnabled) AppleProvider(),
                 ],
