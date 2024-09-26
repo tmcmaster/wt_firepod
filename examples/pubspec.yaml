@@ -41,15 +41,15 @@ dependencies:
   logger: 
   riverpod: 
   wt_action_button:
-    git: https://github.com/tmcmaster/wt_action_button.git
+    git: git@github.com:tmcmaster/wt_action_button.git
   wt_firepod:
-    git: https://github.com/tmcmaster/wt_firepod.git
+    git: git@github.com:tmcmaster/wt_firepod.git
   wt_logging:
-    git: https://github.com/tmcmaster/wt_logging.git
+    git: git@github.com:tmcmaster/wt_logging.git
   wt_models:
-    git: https://github.com/tmcmaster/wt_models.git
+    git: git@github.com:tmcmaster/wt_models.git
   wt_settings:
-    git: https://github.com/tmcmaster/wt_settings.git
+    git: git@github.com:tmcmaster/wt_settings.git
 
 dev_dependencies:
   build_runner: 

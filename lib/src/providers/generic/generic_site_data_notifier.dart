@@ -8,7 +8,7 @@ import 'package:wt_logging/wt_logging.dart';
 import 'package:wt_models/wt_models.dart';
 
 class GenericSiteDataNotifier<T> extends GenericSiteDataNotifierBase<T> {
-  static final log = logger(GenericSiteDataNotifier, level: Level.debug);
+  static final log = logger(GenericSiteDataNotifier, level: Level.warning);
 
   ProviderSubscription? _removeSiteListListener;
   ProviderSubscription? _removeUserListener;
@@ -22,6 +22,7 @@ class GenericSiteDataNotifier<T> extends GenericSiteDataNotifierBase<T> {
   final bool autoLoad;
   final bool autoSave;
   final bool isScalar;
+
   GenericSiteDataNotifier({
     required Ref ref,
     required this.none,
@@ -74,9 +75,7 @@ class GenericSiteDataNotifier<T> extends GenericSiteDataNotifierBase<T> {
         _subscription = _dbRef!.onValue.listen(
           (event) {
             try {
-              state = event.snapshot.value == null
-                  ? none
-                  : decoder(event.snapshot.value!);
+              state = event.snapshot.value == null ? none : decoder(event.snapshot.value!);
             } catch (error) {
               log.e('Error while converting value from Ref($path): $error');
             }
@@ -126,20 +125,17 @@ class GenericSiteDataNotifier<T> extends GenericSiteDataNotifierBase<T> {
                 if (snapshot.value is Map<dynamic, dynamic>) {
                   // TODO: need to find out why reading scalar values reads the parent map
                   //      this will be loading a lot more data that is need each time.
-                  final value =
-                      (snapshot.value! as Map<dynamic, dynamic>)[snapshot.key];
+                  final value = (snapshot.value! as Map<dynamic, dynamic>)[snapshot.key];
                   if (value == null) {
                     state = none;
                   } else {
                     state = decoder(value as Object) ?? none;
                   }
                 } else {
-                  state =
-                      snapshot.value == null ? none : decoder(snapshot.value!);
+                  state = snapshot.value == null ? none : decoder(snapshot.value!);
                 }
               } else {
-                state =
-                    snapshot.value == null ? none : decoder(snapshot.value!);
+                state = snapshot.value == null ? none : decoder(snapshot.value!);
               }
             }
           } else {
