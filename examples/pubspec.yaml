@@ -73,3 +73,7 @@ dependency_overrides:
   #    path: ../wt_settings
 #  wt_logging:
 #    path: ../../wt_logging
+#  flutter_inappwebview:
+#    path: ../../../fork/flutter_inappwebview/flutter_inappwebview
+#  flutter_inappwebview_ios:
+#    path: ../../../fork/flutter_inappwebview/flutter_inappwebview_ios
