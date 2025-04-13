@@ -30,9 +30,7 @@ void loginWithGoogle(FirebaseApp app) {
           accessToken: authentication.accessToken,
           idToken: authentication.idToken,
         );
-        FirebaseAuth.instanceFor(app: app)
-            .signInWithCredential(credential)
-            .then((user) {
+        FirebaseAuth.instanceFor(app: app).signInWithCredential(credential).then((user) {
           log.d('Login Value: $user');
           runApp(MaterialApp(
               debugShowCheckedModeBanner: false,
@@ -51,7 +49,6 @@ void loginWithGoogle(FirebaseApp app) {
   }).catchError((error) {
     log.d('Login Error: $error');
   });
-
 }
 
 // ignore: unreachable_from_main

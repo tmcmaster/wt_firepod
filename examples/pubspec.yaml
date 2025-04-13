@@ -25,7 +25,7 @@ scripts:
 
 dependencies:
   cupertino_icons: 
-  firebase_auth: 
+  firebase_auth: ^5.5.2 
   firebase_core: 
   firebase_database: 
   flutter:
@@ -42,6 +42,8 @@ dependencies:
   riverpod: 
   wt_action_button:
     git: git@github.com:tmcmaster/wt_action_button.git
+  wt_app_scaffold:
+    git: git@github.com:tmcmaster/wt_app_scaffold.git
   wt_firepod:
     git: git@github.com:tmcmaster/wt_firepod.git
   wt_logging:
@@ -65,15 +67,11 @@ flutter:
 dependency_overrides:
   wt_firepod:
     path: ..
-#  wt_app_scaffold:
-#    path: ../../wt_app_scaffold
-  #  wt_models:
-  #    path: ../wt_models
-  #  wt_settings:
-  #    path: ../wt_settings
-#  wt_logging:
-#    path: ../../wt_logging
-#  flutter_inappwebview:
-#    path: ../../../fork/flutter_inappwebview/flutter_inappwebview
-#  flutter_inappwebview_ios:
-#    path: ../../../fork/flutter_inappwebview/flutter_inappwebview_ios
+  wt_app_scaffold:
+    path: ../../wt_app_scaffold
+  wt_models:
+    path: ../../wt_models
+  wt_settings:
+    path: ../../wt_settings
+  wt_logging:
+    path: ../../wt_logging

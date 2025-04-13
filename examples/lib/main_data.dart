@@ -28,11 +28,14 @@ void main() async {
           runApp(
             ProviderScope(
               overrides: [
-                FirebaseProviders.database
-                    .overrideWithValue(FirebaseDatabase.instanceFor(app: app)),
+                FirebaseProviders.database.overrideWithValue(FirebaseDatabase.instanceFor(app: app)),
                 FirebaseProviders.auth.overrideWithValue(FirebaseAuth.instanceFor(app: app)),
+                FirebaseProviders.firebaseOptions.overrideWithValue(DefaultFirebaseOptions.currentPlatform)
               ],
-              child: const MaterialApp(home: FirepodExamplesPage()),
+              child: const MaterialApp(
+                debugShowCheckedModeBanner: false,
+                home: FirepodExamplesPage(),
+              ),
             ),
           );
         },

@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:wt_app_scaffold/app_platform/features/app_scaffold_login_feature.dart';
 import 'package:wt_app_scaffold/app_platform/model/app_scaffold_feature_definition.dart';
+import 'package:wt_firepod/src/init/features/auth_gateway_feature_definition.dart';
 import 'package:wt_firepod/src/init/features/firebase_feature_definition.dart';
 import 'package:wt_firepod/src/init/features/firebase_login_feature_definition.dart';
 
@@ -44,5 +45,19 @@ AppScaffoldFeatureDefinition withFirebaseLogin(
       appleEnabled: appleEnabled,
       emailLinkEnabled: emailLinkEnabled,
     ),
+  );
+}
+
+const andAuthGateway = withAuthGateway;
+
+AppScaffoldFeatureDefinition withAuthGateway(
+  AppScaffoldFeatureDefinition child, {
+  bool googleEnabled = false,
+  bool emailEnabled = false,
+}) {
+  return AuthGatewayFeatureDefinition(
+    child,
+    googleEnabled: googleEnabled,
+    emailEnabled: emailEnabled,
   );
 }

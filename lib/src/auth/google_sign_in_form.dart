@@ -38,7 +38,9 @@ class GoogleSignInForm extends ConsumerWidget {
             if (auth.user != UserAuth.none) {
               log.i('Authentication was successful.');
               userLog.info('Authentication was successful.');
-              Navigator.of(context).pushReplacementNamed(landingRoute);
+              Future.delayed(const Duration(seconds: 1), () {
+                Navigator.of(context).pushReplacementNamed(landingRoute);
+              });
             } else {
               log.d('Authentication was not successful.');
               userLog.warn('Authentication was not successful.');

@@ -26,6 +26,7 @@ class FirebaseFeatureDefinition extends AppScaffoldFeatureDefinition {
     required bool crashlytics,
     void Function()? onReady,
   }) : super(
+          childFeature: childFeature,
           contextBuilder: (contextMap) async {
             log.d('Firebase Initialising');
             WidgetsFlutterBinding.ensureInitialized();
@@ -43,13 +44,11 @@ class FirebaseFeatureDefinition extends AppScaffoldFeatureDefinition {
               log.i('Setting up Crashlytics');
 
               FlutterError.onError = (errorDetails) {
-                FirebaseCrashlytics.instance
-                    .recordFlutterFatalError(errorDetails);
+                FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
               };
               // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
               PlatformDispatcher.instance.onError = (error, stack) {
-                FirebaseCrashlytics.instance
-                    .recordError(error, stack, fatal: true);
+                FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
                 return true;
               };
             }
@@ -64,8 +63,7 @@ class FirebaseFeatureDefinition extends AppScaffoldFeatureDefinition {
               ),
               FirebaseProviders.firebaseOptions: AppScaffoldOverrideDefinition(
                 value: firebaseOptions,
-                override: FirebaseProviders.firebaseOptions
-                    .overrideWithValue(firebaseOptions),
+                override: FirebaseProviders.firebaseOptions.overrideWithValue(firebaseOptions),
               ),
               FirebaseProviders.app: AppScaffoldOverrideDefinition(
                 value: app,
@@ -82,8 +80,7 @@ class FirebaseFeatureDefinition extends AppScaffoldFeatureDefinition {
                 GoRouterStore.initialRoute: _overrideInitialRoute(
                   loginEnabled: auth,
                 ),
-              if (database)
-                FirebaseProviders.database: _initialiseDatabase(app),
+              if (database) FirebaseProviders.database: _initialiseDatabase(app),
               // if (firestore) FirebaseProviders.firestore: _initialiseFirestore(app),
               if (storage) FirebaseProviders.storage: _initialiseStorage(app),
               // if (functions) FirebaseProviders.functions: _initialiseFunctions(app),
@@ -96,9 +93,7 @@ class FirebaseFeatureDefinition extends AppScaffoldFeatureDefinition {
             }
           },
           widgetBuilder: (context, ref) {
-            return childFeature == null
-                ? Container()
-                : childFeature.widgetBuilder(context, ref);
+            return childFeature == null ? Container() : childFeature.widgetBuilder(context, ref);
           },
         );
 

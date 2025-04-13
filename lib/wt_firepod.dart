@@ -1,5 +1,11 @@
 export 'src/auth/auth.dart';
+export 'src/auth/google_sign_in_form.dart';
 export 'src/auth/login_view.dart';
+export 'src/auth_gateway/auth_gate.dart';
+export 'src/auth_gateway/email_login_form.dart';
+export 'src/auth_gateway/google_login_button.dart';
+export 'src/auth_gateway/login_page.dart';
+export 'src/auth_gateway/sign_out_button.dart';
 export 'src/init/firebase_dsl.dart';
 export 'src/models/site.dart';
 export 'src/providers/firebase_providers.dart';

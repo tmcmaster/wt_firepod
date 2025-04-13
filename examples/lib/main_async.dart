@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wt_firepod_examples/pages/async_example_page.dart';
+import 'package:wt_firepod_examples/pages/firepod_examples/examples/async/async_example_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

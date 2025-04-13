@@ -9,7 +9,7 @@ import 'package:wt_firepod_examples/pages/firepod_examples/widgets/value_and_act
 import 'package:wt_logging/wt_logging.dart';
 
 class ExampleFirepodNestedObjects extends ConsumerWidget {
-  static final log = logger(ExampleFirepodNestedObjects, level: Level.warning);
+  static final log = logger(ExampleFirepodNestedObjects, level: Level.debug);
 
   static const basePath = '/v1/testing/nested_objects';
   static final decoder = Delivery.convert.from.dynamicMap.to.model;
@@ -45,7 +45,7 @@ class ExampleFirepodNestedObjects extends ConsumerWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         ValueAndAction(
-          title: 'List of nested objecrs',
+          title: 'List of nested objects',
           value: deliveryList,
           actionMap: {
             'Nothing': () {},

@@ -42,5 +42,5 @@ firebase_options.dart
 #macos/Runner/GoogleService-Info.plist
 #macos/firebase_app_id_file.json
 
-examples/lib/login/app_secrets.dart
+examples/lib/auth_gateway/app_secrets.dart
 coverage

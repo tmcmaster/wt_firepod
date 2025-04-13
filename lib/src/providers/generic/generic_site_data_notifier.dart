@@ -8,11 +8,12 @@ import 'package:wt_logging/wt_logging.dart';
 import 'package:wt_models/wt_models.dart';
 
 class GenericSiteDataNotifier<T> extends GenericSiteDataNotifierBase<T> {
-  static final log = logger(GenericSiteDataNotifier, level: Level.warning);
+  static final log = logger(GenericSiteDataNotifier, level: Level.debug);
 
   ProviderSubscription? _removeSiteListListener;
   ProviderSubscription? _removeUserListener;
   StreamSubscription<DatabaseEvent>? _subscription;
+  StreamSubscription<User?>? _userSubscription;
   DatabaseReference? _dbRef;
 
   final String path;
@@ -36,29 +37,31 @@ class GenericSiteDataNotifier<T> extends GenericSiteDataNotifierBase<T> {
     _setupSubscribers(ref);
     if (path.contains('{site}')) {
       log.d('Listening to ${FirepodSettings.site.value.name} for changes.');
-      _removeSiteListListener = ref.listen<IdSupport?>(
-        FirepodSettings.site.value,
-        (_, newSite) {
-          log.d('${FirepodSettings.site.value} changed to $newSite');
+      _removeSiteListListener = ref.listen<IdSupport?>(FirepodSettings.site.value, (_, newSite) {
+        log.d('${FirepodSettings.site.value} changed to $newSite');
+        if (newSite == null) {
+          _removeSubscribers(ref);
+        } else {
           _setupSubscribers(ref);
-        },
-        onError: (error, _) {},
-      );
+        }
+      }, onError: (error, _) {});
     }
     if (path.contains('{user}')) {
       log.d('Listening to ${FirebaseProviders.auth.name} for changes.');
-      _removeUserListener = ref.listen(
-        FirebaseProviders.auth,
-        (_, newUser) {
-          log.d('${FirebaseProviders.auth.name} changed to $newUser');
+      _userSubscription = ref.read(FirebaseProviders.auth).authStateChanges().listen((newUser) {
+        log.d('${FirebaseProviders.auth.name} changed to $newUser');
+        if (newUser == null) {
+          _removeSubscribers(ref);
+        } else {
           _setupSubscribers(ref);
-        },
-        onError: (error, _) {
-          log.e(
-            'There was an error while listening for when the user changes.',
-          );
-        },
-      );
+        }
+      });
+    }
+  }
+
+  void _removeSubscribers(Ref ref) {
+    if (_subscription != null) {
+      _subscription!.cancel();
     }
   }
 
@@ -80,7 +83,7 @@ class GenericSiteDataNotifier<T> extends GenericSiteDataNotifierBase<T> {
               log.e('Error while converting value from Ref($path): $error');
             }
           },
-          onError: (error) => log.e(error),
+          onError: (error) => log.e('Subscription($path) experienced an error: $error'),
         );
       }
       load();
@@ -109,7 +112,9 @@ class GenericSiteDataNotifier<T> extends GenericSiteDataNotifierBase<T> {
 
   @override
   void load() {
+    log.d('Loading data from path: $path');
     if (_dbRef != null) {
+      log.d('Ref(${_dbRef?.path})');
       _dbRef!.get().then(
         (snapshot) {
           if (snapshot.exists) {
@@ -117,7 +122,6 @@ class GenericSiteDataNotifier<T> extends GenericSiteDataNotifierBase<T> {
               state = none;
             } else {
               log.d(
-                'Ref(${_dbRef?.path}) '
                 'Snapshot(${snapshot.key}) '
                 'Value(${snapshot.value})',
               );
@@ -152,6 +156,7 @@ class GenericSiteDataNotifier<T> extends GenericSiteDataNotifierBase<T> {
     _subscription?.cancel();
     _removeSiteListListener?.close();
     _removeUserListener?.close();
+    _userSubscription?.cancel();
     super.dispose();
   }
 }
