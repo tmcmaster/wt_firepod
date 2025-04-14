@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -32,8 +33,13 @@ class _GoogleLoginButtonState extends ConsumerState<GoogleLoginButton> {
       onError: widget.onError,
     );
 
+    final clientId = ref.read(FirebaseProviders.clientId);
+    log.d('Web($kIsWeb): $clientId');
+
     try {
-      final googleUser = await GoogleSignIn().signIn();
+      final googleUser = await GoogleSignIn(
+        clientId: clientId,
+      ).signIn();
       if (googleUser == null) {
         setState(() => loading = false);
         return;

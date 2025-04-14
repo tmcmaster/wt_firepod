@@ -1,0 +1,10 @@
+scripts:
+  init: flutter pub get
+  clean: flutter clean
+  refresh: flutter clean; flutter pub get
+  update: flutter clean; rm pubspec.lock; flutter pub update
+  test: flutter test
+  check: flutter analyze
+  outdated: dart pub outdated --show-all
+  freezed:
+    build: dart run build_runner build --delete-conflicting-outputs

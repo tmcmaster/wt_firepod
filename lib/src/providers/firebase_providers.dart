@@ -18,6 +18,13 @@ mixin FirebaseProviders {
     ),
   );
 
+  static final clientId = Provider<String>(
+    name: 'FirebaseProviders.clientId',
+    (ref) => throw Exception(
+      'FirebaseProviders.clientId provider needs to be overridden. :-(',
+    ),
+  );
+
   static final app = Provider<FirebaseApp>(
     name: 'FirebaseProviders.app',
     (ref) => throw Exception(
