@@ -20,14 +20,14 @@ scripts:
     init: flutter create --platforms=macos .
     build: flutter build macos --release
     run: flutter run -t lib/main_widgetbook.dart -d MacOS
-    configure: open macos/Runner.xcworkspace
+    xcode: open macos/Runner.xcworkspace
     fix: (cd macos; rm Podfile.lock; gem pristine ffi --version 1.15.5; pod install --repo-update)
 
 dependencies:
   cupertino_icons: 
   firebase_auth: ^5.5.2 
-  firebase_core: 
-  firebase_database: 
+  firebase_core: ^3.13.0
+  firebase_database: ^11.3.5
   flutter:
     sdk: flutter
   flutter_form_builder:
@@ -36,7 +36,7 @@ dependencies:
   form_builder_validators: 
   freezed: 
   freezed_annotation: 
-  google_sign_in:
+  google_sign_in: ^6.3.0
   json_annotation: 
   logger: 
   riverpod: 

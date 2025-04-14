@@ -106,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Text(
                     error!,
                     style: const TextStyle(color: Colors.red),
-                  )
+                  ),
               ],
             ),
           ),

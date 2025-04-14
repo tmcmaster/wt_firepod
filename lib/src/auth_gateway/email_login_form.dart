@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wt_firepod/src/auth_gateway/message_publisher.dart';
 import 'package:wt_firepod/wt_firepod.dart';
+import 'package:wt_logging/wt_logging.dart';
 
 class EmailLoginForm extends ConsumerStatefulWidget {
   final TextEditingController? emailController;
   final TextEditingController? passwordController;
-  final void Function(User user)? onSuccess;
+  final void Function(String message)? onSuccess;
   final void Function(String error)? onError;
 
   const EmailLoginForm({
@@ -21,6 +23,8 @@ class EmailLoginForm extends ConsumerStatefulWidget {
 }
 
 class _EmailLoginFormState extends ConsumerState<EmailLoginForm> {
+  static final log = logger(EmailLoginForm, level: Level.debug);
+
   late final TextEditingController emailController;
   late final TextEditingController passwordController;
 
@@ -31,17 +35,31 @@ class _EmailLoginFormState extends ConsumerState<EmailLoginForm> {
       loading = true;
     });
 
+    final messagePublisher = MessagePublisher(
+      messenger: ScaffoldMessenger.of(context),
+      log: log,
+      onSuccess: widget.onSuccess,
+      onError: widget.onError,
+    );
+
     try {
       final auth = ref.read(FirebaseProviders.auth);
-      final credential = await auth.signInWithEmailAndPassword(
+      final userCredential = await auth.signInWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
-      if (widget.onSuccess != null) {
-        widget.onSuccess!(credential.user!);
+      if (userCredential.user != null) {
+        final user = userCredential.user!;
+        messagePublisher.publishMessage(
+          'Successfully logged in with Email/Password: ${user.displayName ?? user.email ?? user.uid}',
+        );
+      } else {
+        messagePublisher.publishError('Logging in with Email/Password did not return a user');
       }
     } on FirebaseAuthException catch (e) {
-      if (widget.onError != null) widget.onError!(e.message ?? "Unknown error");
+      messagePublisher.publishError(e.message ?? 'Unknown error');
+    } catch (error) {
+      messagePublisher.publishError(error.toString());
     } finally {
       setState(() => loading = false);
     }

@@ -31,17 +31,17 @@ PODS:
   - firebase_core (3.13.0):
     - Firebase/CoreOnly (~> 11.10.0)
     - FlutterMacOS
-  - firebase_crashlytics (4.1.3):
+  - firebase_crashlytics (4.3.5):
     - Firebase/CoreOnly (~> 11.10.0)
     - Firebase/Crashlytics (~> 11.10.0)
     - firebase_core
     - FlutterMacOS
-  - firebase_database (11.1.4):
+  - firebase_database (11.3.5):
     - Firebase/CoreOnly (~> 11.10.0)
     - Firebase/Database (~> 11.10.0)
     - firebase_core
     - FlutterMacOS
-  - firebase_storage (12.3.3):
+  - firebase_storage (12.4.5):
     - Firebase/CoreOnly (~> 11.10.0)
     - Firebase/Storage (~> 11.10.0)
     - firebase_core
@@ -255,13 +255,13 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AppAuth: d4f13a8fe0baf391b2108511793e4b479691fb73
   desktop_webview_auth: 9bba53a29c9bc6a4ff621fd0ebfbb18856c4dada
-  device_info_plus: 74e614483d05c89290d30a4c8feae15d555f7427
+  device_info_plus: 1b14eed9bf95428983aed283a8d51cce3d8c4215
   Firebase: 1fe1c0a7d9aaea32efe01fbea5f0ebd8d70e53a2
   firebase_auth: 2271b9240513461dfcdcf7cfa0121893acdb2de7
   firebase_core: bb06473757206589a00a36920cbf0f33646e19cc
-  firebase_crashlytics: fa74a823c4df970ba2a379d8bfcb44da0ff287a7
-  firebase_database: 9bd2996a7f91466e58a8948d820dc841cf943762
-  firebase_storage: 5d8bdc4d31d2767513cf265e5e3e758dbd4a4c81
+  firebase_crashlytics: 0cc6cfdca3be060304abaceb6613840ea82210c9
+  firebase_database: 0968a72bb7663098cfb91e46a7b1d40d264d404d
+  firebase_storage: a361c42a15990723606a0fe1cdcb7dc6cbeefb53
   FirebaseAppCheckInterop: f23709c9ce92d810aa53ff4ce12ad3e666a3c7be
   FirebaseAuth: c4146bdfdc87329f9962babd24dae89373f49a32
   FirebaseAuthInterop: ac22ed402c2f4e3a8c63ebd3278af9a06073c1be
@@ -278,7 +278,7 @@ SPEC CHECKSUMS:
   flutter_inappwebview_macos: bdf207b8f4ebd58e86ae06cd96b147de99a67c9b
   flutter_localization: 4035848ae2ed142875d5fd3dde328250a5e81f42
   FlutterMacOS: 8f6f14fa908a6fb3fba0cd85dbd81ec4b251fb24
-  google_sign_in_ios: 07375bfbf2620bc93a602c0e27160d6afc6ead38
+  google_sign_in_ios: 4111e87aa5e24a4404f00ea13479f35e571969cc
   GoogleDataTransport: aae35b7ea0c09004c3797d53c8c41f66f219d6a7
   GoogleSignIn: d4281ab6cf21542b1cfaff85c191f230b399d2db
   GoogleUtilities: 26a3abef001b6533cf678d3eb38fd3f614b7872d
@@ -294,6 +294,6 @@ SPEC CHECKSUMS:
   shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
   sign_in_with_apple: a9e97e744e8edc36aefc2723111f652102a7a727
 
-PODFILE CHECKSUM: dac0ddf03d136db544afc27b87cc6c08492e67b9
+PODFILE CHECKSUM: 930d48e8c633d9de1a7912e71bc19ff68109e4bd
 
 COCOAPODS: 1.16.2

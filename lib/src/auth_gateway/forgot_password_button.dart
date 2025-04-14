@@ -1,14 +1,20 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wt_firepod/src/auth_gateway/message_publisher.dart';
 import 'package:wt_firepod/src/providers/firebase_providers.dart';
+import 'package:wt_logging/wt_logging.dart';
 
 class ForgotPasswordButton extends ConsumerStatefulWidget {
   final TextEditingController emailController;
+  final void Function(String message)? onSuccess;
+  final void Function(String error)? onError;
 
   const ForgotPasswordButton({
     super.key,
     required this.emailController,
+    this.onSuccess,
+    this.onError,
   });
 
   @override
@@ -16,6 +22,8 @@ class ForgotPasswordButton extends ConsumerStatefulWidget {
 }
 
 class _ForgotPasswordButtonState extends ConsumerState<ForgotPasswordButton> {
+  static final log = logger(ForgotPasswordButton, level: Level.debug);
+
   bool _loading = false;
 
   Future<void> _sendResetEmail(BuildContext context) async {
@@ -29,12 +37,21 @@ class _ForgotPasswordButtonState extends ConsumerState<ForgotPasswordButton> {
 
     setState(() => _loading = true);
 
+    final messagePublisher = MessagePublisher(
+      messenger: ScaffoldMessenger.of(context),
+      log: log,
+      onSuccess: widget.onSuccess,
+      onError: widget.onError,
+    );
+
     try {
       final auth = ref.read(FirebaseProviders.auth);
       await auth.sendPasswordResetEmail(email: email);
-      messenger.showSnackBar(const SnackBar(content: Text('Password reset email sent.')));
+      messagePublisher.publishMessage('Password reset email sent.');
     } on FirebaseAuthException catch (e) {
-      messenger.showSnackBar(SnackBar(content: Text(e.message ?? 'Error sending reset email.')));
+      messagePublisher.publishError(e.message ?? 'Error sending reset email.');
+    } catch (error) {
+      messagePublisher.publishError(error.toString());
     } finally {
       setState(() => _loading = false);
     }

@@ -17,13 +17,13 @@ class LoginPage extends StatelessWidget {
           child: Column(
             children: [
               EmailLoginForm(
-                onSuccess: (user) => log.d('Logged in: ${user.email}'),
-                onError: (err) => log.d('Email login failed: $err'),
+                onSuccess: (message) => log.d('Logged in: $message'),
+                onError: (error) => log.d('Email login failed: $error'),
               ),
               const SizedBox(height: 16),
               GoogleLoginButton(
-                onSuccess: (user) => log.d('Google login success: ${user.displayName}'),
-                onError: (err) => log.d('Google login failed: $err'),
+                onSuccess: (message) => log.d('Google login success: $message'),
+                onError: (error) => log.d('Google login failed: $error'),
               ),
             ],
           ),

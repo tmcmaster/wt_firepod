@@ -1,13 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wt_firepod/src/auth_gateway/message_publisher.dart';
 import 'package:wt_firepod/src/providers/firebase_providers.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class SignUpButton extends ConsumerStatefulWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
-  final void Function(User user)? onSuccess;
+  final void Function(String message)? onSuccess;
   final void Function(String error)? onError;
 
   const SignUpButton({
@@ -32,7 +33,12 @@ class _SignUpButtonState extends ConsumerState<SignUpButton> {
       loading = true;
     });
 
-    final messenger = ScaffoldMessenger.of(context);
+    final messagePublisher = MessagePublisher(
+      messenger: ScaffoldMessenger.of(context),
+      log: log,
+      onSuccess: widget.onSuccess,
+      onError: widget.onError,
+    );
 
     try {
       final auth = ref.read(FirebaseProviders.auth);
@@ -42,19 +48,18 @@ class _SignUpButtonState extends ConsumerState<SignUpButton> {
       );
       if (userCredential.user != null) {
         final user = userCredential.user!;
-        _handleSuccess(
-          messenger,
-          user: userCredential.user!,
-          successMessage: 'Successfully signed up: ${user.displayName ?? user.email ?? user.uid}',
+        messagePublisher.publishMessage(
+          'Successfully signed up: ${user.displayName ?? user.email ?? user.uid}',
         );
       } else {
-        _handleError(messenger, errorMessage: 'Signup did not return a user');
+        messagePublisher.publishError('Signup did not return a user');
       }
     } on FirebaseAuthException catch (e) {
-      _handleError(
-        messenger,
-        errorMessage: 'There was an error while trying to signup: ${e.message ?? 'Unknown error'}',
+      messagePublisher.publishError(
+        'There was an error while trying to signup: ${e.message ?? 'Unknown error'}',
       );
+    } catch (error) {
+      messagePublisher.publishError(error.toString());
     } finally {
       setState(() => loading = false);
     }
@@ -76,32 +81,6 @@ class _SignUpButtonState extends ConsumerState<SignUpButton> {
             child: const Text('Create Account'),
           ),
       ],
-    );
-  }
-
-  void _handleError(
-    ScaffoldMessengerState messenger, {
-    required String errorMessage,
-  }) {
-    log.e(errorMessage);
-    messenger.showSnackBar(
-      SnackBar(
-        content: Text(errorMessage),
-      ),
-    );
-    widget.onError?.call(errorMessage);
-  }
-
-  void _handleSuccess(
-    ScaffoldMessengerState messenger, {
-    required User user,
-    required String successMessage,
-  }) {
-    widget.onSuccess?.call(user);
-    messenger.showSnackBar(
-      SnackBar(
-        content: Text(successMessage),
-      ),
     );
   }
 }
