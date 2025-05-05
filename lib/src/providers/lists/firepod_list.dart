@@ -60,5 +60,5 @@ class FirepodList<M> {
           ),
         );
 
-  AlwaysAliveRefreshable<GenericSiteDataNotifierBase<List<M>>> get notifier => value.notifier;
+  Refreshable<GenericSiteDataNotifierBase<List<M>>> get notifier => value.notifier;
 }

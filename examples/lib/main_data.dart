@@ -8,7 +8,7 @@ import 'package:wt_firepod_examples/firebase_options.dart';
 import 'package:wt_firepod_examples/pages/firepod_examples_page.dart';
 import 'package:wt_logging/wt_logging.dart';
 
-void main() async {
+void main() {
   final log = logger('Examples Main', level: Level.warning);
 
   WidgetsFlutterBinding.ensureInitialized();

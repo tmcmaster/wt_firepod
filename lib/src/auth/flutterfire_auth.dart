@@ -29,7 +29,7 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
     firebaseAuth = ref.read(FirebaseProviders.auth);
 
     _streamListener =
-        firebaseAuth.authStateChanges().listen((User? user) async {
+        firebaseAuth.authStateChanges().listen((User? user) {
       if (user == null) {
         log.d('User signed out');
         state = UserAuth.none;
@@ -108,7 +108,7 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
         log.d('Email Provider ID: ${credentials.providerId}');
         firebaseAuth.currentUser
             ?.linkWithCredential(credentials)
-            .then((credentials) async {
+            .then((credentials) {
           final user = credentials.user;
           if (user != null) {
             completer.complete(
@@ -260,7 +260,7 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
     return completer.future;
   }
 
-  Future<UserAuthResult> appleSignIn() async {
+  Future<UserAuthResult> appleSignIn() {
     log.d('appleSignIn');
     final completer = Completer<UserAuthResult>();
 
@@ -278,7 +278,7 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
     return completer.future;
   }
 
-  Future<UserAuthResult> phoneSignIn(String mobileNumber) async {
+  Future<UserAuthResult> phoneSignIn(String mobileNumber) {
     final completer = Completer<UserAuthResult>();
 
     log.d('phoneSignIn: mobile number: $mobileNumber');
@@ -294,7 +294,7 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
   Future<UserAuthResult> verifyPhoneNumber(
     ConfirmationResult confirmationResult,
     String verificationCode,
-  ) async {
+  ) {
     return _waitForCredentials(confirmationResult.confirm(verificationCode));
   }
 
@@ -365,7 +365,7 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
     final completer = Completer<UserAuthResult>();
     log.d('_handleCredentialsFuture: Handling credentials....');
     try {
-      credentialFuture.then((credentials) async {
+      credentialFuture.then((credentials) {
         final userAuthResult = _processCredentials(credentials);
         log.d(
           '(1) _handleCredentialsFuture successString: ${userAuthResult.user.email}',

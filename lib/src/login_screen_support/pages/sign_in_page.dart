@@ -41,7 +41,7 @@ class SignInPage extends ConsumerWidget {
           Navigator.pushNamed(context, '/phone');
         }),
         AuthStateChangeAction<SignedIn>(
-          (context, state) async {
+          (context, state) {
             if (state.user == null) {
               ref.read(AppScaffoldAuthenticationStore.user.notifier).signOut();
             } else {

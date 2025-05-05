@@ -33,6 +33,6 @@ abstract class FirepodMap<T> {
     );
   }
 
-  AlwaysAliveRefreshable<GenericSiteDataNotifierBase<GenericLookupMap>> get notifier =>
+  Refreshable<GenericSiteDataNotifierBase<GenericLookupMap>> get notifier =>
       value.notifier;
 }

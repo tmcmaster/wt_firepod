@@ -29,5 +29,5 @@ class FirepodScalar<T> {
     );
   }
 
-  AlwaysAliveRefreshable<GenericSiteDataNotifierBase<T>> get notifier => value.notifier;
+  Refreshable<GenericSiteDataNotifierBase<T>> get notifier => value.notifier;
 }
