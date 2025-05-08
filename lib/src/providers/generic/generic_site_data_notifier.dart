@@ -121,7 +121,7 @@ class GenericSiteDataNotifier<T> extends GenericSiteDataNotifierBase<T> {
             if (snapshot.value == null) {
               state = none;
             } else {
-              log.d(
+              log.t(
                 'Snapshot(${snapshot.key}) '
                 'Value(${snapshot.value})',
               );
