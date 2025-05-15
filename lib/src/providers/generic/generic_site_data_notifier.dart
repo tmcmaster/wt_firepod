@@ -142,6 +142,7 @@ class GenericSiteDataNotifier<T> extends GenericSiteDataNotifierBase<T> {
                 state = snapshot.value == null ? none : decoder(snapshot.value!);
               }
             }
+            log.d('Data has been loaded from the database: $path');
           } else {
             state = none;
           }
