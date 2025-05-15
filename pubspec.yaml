@@ -58,17 +58,17 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-dependency_overrides:
-  wt_app_scaffold:
-    path: ../wt_app_scaffold
-  wt_models:
-    path: ../wt_models
-  wt_settings:
-    path: ../wt_settings
-  wt_action_button:
-    path: ../wt_action_button
-  wt_logging:
-    path: ../wt_logging
+#dependency_overrides:
+#  wt_app_scaffold:
+#    path: ../wt_app_scaffold
+#  wt_models:
+#    path: ../wt_models
+#  wt_settings:
+#    path: ../wt_settings
+#  wt_action_button:
+#    path: ../wt_action_button
+#  wt_logging:
+#    path: ../wt_logging
 #  flutter_inappwebview:
 #    path: ../../fork/flutter_inappwebview/flutter_inappwebview
 #  flutter_inappwebview_ios:
