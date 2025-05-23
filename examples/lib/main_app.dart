@@ -8,8 +8,8 @@ import 'package:wt_app_scaffold/models/page_info.dart';
 import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
 import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
 import 'package:wt_firepod/wt_firepod.dart';
-import 'package:wt_firepod_examples/firebase_options.dart';
 import 'package:wt_firepod_examples/pages/firepod_examples_page.dart';
+import 'package:wt_firepod_examples/secrets/firebase_options.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 void main() {

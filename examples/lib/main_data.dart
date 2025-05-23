@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_firepod_examples/config/app_secrets.dart';
-import 'package:wt_firepod_examples/firebase_options.dart';
 import 'package:wt_firepod_examples/pages/firepod_examples_page.dart';
+import 'package:wt_firepod_examples/secrets/firebase_options.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 void main() {

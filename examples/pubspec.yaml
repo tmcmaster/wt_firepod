@@ -49,13 +49,15 @@ flutter:
     - assets/
 
 dependency_overrides:
-  wt_firepod:
-    path: ..
+  wt_action_button:
+    path: ../../wt_action_button
   wt_app_scaffold:
     path: ../../wt_app_scaffold
+  wt_firepod:
+    path: ..
+  wt_logging:
+    path: ../../wt_logging
   wt_models:
     path: ../../wt_models
   wt_settings:
     path: ../../wt_settings
-  wt_logging:
-    path: ../../wt_logging
