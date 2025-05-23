@@ -2,6 +2,7 @@ name: wt_firepod
 description: Package the integrates Firebase and Riverpod functionality.
 version: 1.0.0+1
 publish_to: 'none'
+repository: https://github.com/tmcmaster/wt_firepod/tree/wix_admin
 homepage: https://github.com/tmcmaster/wt_firepod
 
 environment:
