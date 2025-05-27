@@ -4,7 +4,7 @@ import 'package:wt_firepod/src/auth_gateway/google_login_button.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class LoginPage extends StatelessWidget {
-  static final log = logger(LoginPage, level: Level.debug);
+  static final log = logger(LoginPage);
 
   const LoginPage({super.key});
 

@@ -9,5 +9,6 @@ mixin FirepodProviders {
     encoder: Site.convert.to.dynamicMap.from.model,
     idField: 'id',
     valueField: 'name',
+    watch: true,
   );
 }

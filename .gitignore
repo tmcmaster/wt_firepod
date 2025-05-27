@@ -44,3 +44,4 @@ firebase_options.dart
 
 examples/lib/auth_gateway/app_secrets.dart
 coverage
+.flutter-plugins-dependencies

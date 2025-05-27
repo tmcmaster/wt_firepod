@@ -21,6 +21,8 @@ class FirebaseDatabaseReferenceBuilder {
     final siteId = siteRequired ? ref.read(FirepodSettings.site.value)?.id : null;
 
     if (userRequired && userId == null || siteRequired && siteId == null) {
+      log.d('Path could not be built: UserRequired($userRequired), '
+          'User($userId), SiteRequired($siteRequired), Site($siteId)');
       return null;
     }
 
@@ -32,7 +34,7 @@ class FirebaseDatabaseReferenceBuilder {
     for (final String part in pathParts) {
       dbRef = dbRef.child(part);
     }
-    log.d('Path: ${dbRef.path}');
+    log.d('Completed Path: ${dbRef.path}');
 
     return dbRef;
   }

@@ -19,7 +19,7 @@ class GoogleLoginButton extends ConsumerStatefulWidget {
 }
 
 class _GoogleLoginButtonState extends ConsumerState<GoogleLoginButton> {
-  static final log = logger(GoogleLoginButton, level: Level.debug);
+  static final log = logger(GoogleLoginButton);
 
   bool loading = false;
 

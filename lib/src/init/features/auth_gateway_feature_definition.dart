@@ -8,7 +8,7 @@ import 'package:wt_firepod/wt_firepod.dart' hide EmailAuthProvider;
 import 'package:wt_logging/wt_logging.dart';
 
 class AuthGatewayFeatureDefinition extends AppScaffoldFeatureDefinition {
-  static final log = logger(AuthGatewayFeatureDefinition, level: Level.debug);
+  static final log = logger(AuthGatewayFeatureDefinition);
   AuthGatewayFeatureDefinition(
     AppScaffoldFeatureDefinition? childFeature, {
     required bool googleEnabled,

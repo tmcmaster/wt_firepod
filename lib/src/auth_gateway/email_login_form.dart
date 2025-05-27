@@ -23,7 +23,7 @@ class EmailLoginForm extends ConsumerStatefulWidget {
 }
 
 class _EmailLoginFormState extends ConsumerState<EmailLoginForm> {
-  static final log = logger(EmailLoginForm, level: Level.debug);
+  static final log = logger(EmailLoginForm);
 
   late final TextEditingController emailController;
   late final TextEditingController passwordController;

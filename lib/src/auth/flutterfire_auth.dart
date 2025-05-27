@@ -15,7 +15,7 @@ import 'package:wt_firepod/src/providers/firebase_providers.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
-  static final log = logger(FlutterfireAuthNotifier, level: Level.debug);
+  static final log = logger(FlutterfireAuthNotifier);
 
   static const linkEmailSignInEnabled = true;
 

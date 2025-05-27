@@ -24,7 +24,7 @@ class SignUpButton extends ConsumerStatefulWidget {
 }
 
 class _SignUpButtonState extends ConsumerState<SignUpButton> {
-  static final log = logger(SignUpButton, level: Level.debug);
+  static final log = logger(SignUpButton);
 
   bool loading = false;
 

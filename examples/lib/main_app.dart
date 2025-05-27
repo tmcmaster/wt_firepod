@@ -35,10 +35,7 @@ void main() {
     },
     enableProviderMonitoring: false,
     includeOverrides: [],
-    preloadProviders: [
-      FirepodSettings.site.value,
-      UserLog.provider,
-    ],
+    providerManager: FirepodProviderManager.provider,
   );
 }
 

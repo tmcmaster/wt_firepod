@@ -15,7 +15,7 @@ import 'package:wt_firepod/src/providers/firebase_providers.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class FirebaseFeatureDefinition extends AppScaffoldFeatureDefinition {
-  static final log = logger(FirebaseFeatureDefinition, level: Level.debug);
+  static final log = logger(FirebaseFeatureDefinition);
   FirebaseFeatureDefinition(
     AppScaffoldFeatureDefinition? childFeature, {
     required String appName,

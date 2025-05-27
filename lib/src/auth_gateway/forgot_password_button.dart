@@ -22,7 +22,7 @@ class ForgotPasswordButton extends ConsumerStatefulWidget {
 }
 
 class _ForgotPasswordButtonState extends ConsumerState<ForgotPasswordButton> {
-  static final log = logger(ForgotPasswordButton, level: Level.debug);
+  static final log = logger(ForgotPasswordButton);
 
   bool _loading = false;
 

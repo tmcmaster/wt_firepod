@@ -50,6 +50,9 @@ dependencies:
   wt_models:
     git:
       url: git@github.com:tmcmaster/wt_models.git
+  wt_provider_manager:
+    git:
+      url: git@github.com:tmcmaster/wt_provider_manager.git
   wt_settings:
     git:
       url: git@github.com:tmcmaster/wt_settings.git
@@ -67,6 +70,8 @@ dependency_overrides:
     path: ../wt_logging
   wt_models:
     path: ../wt_models
+  wt_provider_manager:
+    path: ../wt_provider_manager
   wt_settings:
     path: ../wt_settings
 

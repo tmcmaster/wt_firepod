@@ -6,7 +6,7 @@ import 'package:wt_firepod/src/providers/firebase_providers.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class SignOutButton extends ConsumerWidget {
-  static final log = logger(SignOutButton, level: Level.debug);
+  static final log = logger(SignOutButton);
 
   final void Function(String message)? onSuccess;
   final void Function(String error)? onError;
