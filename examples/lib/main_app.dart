@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wt_app_scaffold/app_platform/scaffold_app_dsl.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/models/app_styles.dart';
-import 'package:wt_app_scaffold/models/page_info.dart';
+import 'package:wt_app_scaffold/models/definition/info/page_info.dart';
 import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
 import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
 import 'package:wt_firepod/wt_firepod.dart';
@@ -50,7 +50,7 @@ mixin ExampleApp {
     applicationType: ApplicationType.goRouterMenu,
     menuAction: (context) => HiddenDrawerOpener.of(context)?.open(),
     profilePage: PageDefinition(
-      pageInfo: const PageInfo(
+      pageInfo: PageInfo(
         name: 'profile',
         title: 'Profile',
         icon: Icons.person,
@@ -59,7 +59,7 @@ mixin ExampleApp {
     ),
     pages: [
       PageDefinition(
-        pageInfo: const PageInfo(
+        pageInfo: PageInfo(
           name: 'examples',
           title: 'Examples',
           icon: FontAwesomeIcons.bug,
@@ -69,7 +69,7 @@ mixin ExampleApp {
         pageBuilder: (_) => const FirepodExamplesPage(),
       ),
       PageDefinition(
-        pageInfo: const PageInfo(
+        pageInfo: PageInfo(
           name: 'userLog',
           title: 'User Log',
           icon: Icons.info,
