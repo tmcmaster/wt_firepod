@@ -5,7 +5,7 @@ import 'package:wt_firepod/src/providers/generic/firepod_state_notifier_provider
 import 'package:wt_firepod/src/utils/transformer.dart';
 import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_logging/wt_logging.dart';
-import 'package:wt_provider_manager/wt_provider_manager.dart';
+import 'package:wt_provider_manager/provider_manager.dart';
 
 class FirepodList<M> with FirepodStateNotifierProviders<List<M>>, WaitForIsReadyProvider {
   static final log = logger(FirepodList);

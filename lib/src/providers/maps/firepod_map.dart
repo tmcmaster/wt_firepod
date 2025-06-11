@@ -5,7 +5,7 @@ import 'package:wt_firepod/src/providers/generic/firepod_state_notifier_provider
 import 'package:wt_firepod/src/providers/generic/generic_lookup_map.dart';
 import 'package:wt_firepod/src/providers/generic/generic_site_data_notifier.dart';
 import 'package:wt_firepod/src/providers/generic/generic_site_data_notifier_base.dart';
-import 'package:wt_provider_manager/wt_provider_manager.dart';
+import 'package:wt_provider_manager/provider_manager.dart';
 
 abstract class FirepodMap<T> with FirepodStateNotifierProviders<GenericLookupMap<T>>, WaitForIsReadyProvider {
   @override

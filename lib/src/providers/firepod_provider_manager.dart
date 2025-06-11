@@ -1,9 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_firepod/src/providers/firebase_providers.dart';
 import 'package:wt_firepod/src/providers/firepod_providers.dart';
 import 'package:wt_firepod/src/settings/firepod_settings.dart';
-import 'package:wt_provider_manager/wt_provider_manager.dart';
+import 'package:wt_provider_manager/provider_manager.dart';
 
 class FirepodProviderManager extends ProviderManager {
   static final provider = Provider(
@@ -21,7 +20,7 @@ class FirepodProviderManager extends ProviderManager {
           ].toProviderInitialisers(),
           settingsInitialisers: [
             FirepodSettings.settingsProviders,
-          ].toSettingInitialisers(),
+          ].toSettingsInitialisers(),
           databaseInitialisers: [
             FirepodProviders.sitesList.value,
           ].toDatabaseInitialisers(),

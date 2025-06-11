@@ -41,6 +41,9 @@ dependencies:
   wt_action_button:
     git:
       url: git@github.com:tmcmaster/wt_action_button.git
+  wt_app_definition:
+    git:
+      url: git@github.com:tmcmaster/wt_app_definition.git
   wt_app_scaffold:
     git:
       url: git@github.com:tmcmaster/wt_app_scaffold.git
@@ -64,6 +67,8 @@ dev_dependencies:
 dependency_overrides:
   wt_action_button:
     path: ../wt_action_button
+  wt_app_definition:
+    path: ../wt_app_definition
   wt_app_scaffold:
     path: ../wt_app_scaffold
   wt_logging:

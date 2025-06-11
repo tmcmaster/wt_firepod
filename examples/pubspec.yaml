@@ -26,6 +26,8 @@ dependencies:
   riverpod: 
   wt_action_button:
     git: git@github.com:tmcmaster/wt_action_button.git
+  wt_app_definition:
+    git: git@github.com:tmcmaster/wt_app_definition.git
   wt_app_scaffold:
     git: git@github.com:tmcmaster/wt_app_scaffold.git
   wt_firepod:
@@ -49,6 +51,8 @@ flutter:
     - assets/
 
 dependency_overrides:
+  wt_app_definition:
+    path: ../../wt_app_definition
   wt_app_scaffold:
     path: ../../wt_app_scaffold
   wt_firepod:

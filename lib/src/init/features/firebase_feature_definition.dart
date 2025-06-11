@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:wt_app_scaffold/app_platform/model/app_scaffold_feature_definition.dart';
 import 'package:wt_app_scaffold/app_platform/model/app_scaffold_override_definition.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/providers/auth_providers.dart';
+import 'package:wt_app_scaffold/providers/app_scaffold_store.dart';
 import 'package:wt_firepod/src/login_screen_support/logout_action.dart';
 import 'package:wt_firepod/src/providers/firebase_providers.dart';
 import 'package:wt_logging/wt_logging.dart';
@@ -69,11 +69,10 @@ class FirebaseFeatureDefinition extends AppScaffoldFeatureDefinition {
                 value: app,
                 override: FirebaseProviders.app.overrideWithValue(app),
               ),
-
               if (auth) FirebaseProviders.auth: _initialiseAuth(app),
-              if (auth) AuthProviders.logoutAction: _initialiseLogoutAction(),
+              if (auth) AppScaffoldStore.logoutAction: _initialiseLogoutAction(),
               if (auth)
-                AuthProviders.loginEnabled: _overrideLoginEnabled(
+                AppScaffoldStore.loginEnabled: _overrideLoginEnabled(
                   loginEnabled: auth,
                 ),
               if (auth)
@@ -81,9 +80,7 @@ class FirebaseFeatureDefinition extends AppScaffoldFeatureDefinition {
                   loginEnabled: auth,
                 ),
               if (database) FirebaseProviders.database: _initialiseDatabase(app),
-              // if (firestore) FirebaseProviders.firestore: _initialiseFirestore(app),
               if (storage) FirebaseProviders.storage: _initialiseStorage(app),
-              // if (functions) FirebaseProviders.functions: _initialiseFunctions(app),
             };
 
             if (childFeature == null) {
@@ -120,7 +117,7 @@ class FirebaseFeatureDefinition extends AppScaffoldFeatureDefinition {
   static AppScaffoldOverrideDefinition _initialiseLogoutAction() {
     return AppScaffoldOverrideDefinition(
       value: null,
-      override: AuthProviders.logoutAction.overrideWith(
+      override: AppScaffoldStore.logoutAction.overrideWith(
         (ref) => LogoutAction(ref),
       ),
     );
@@ -131,7 +128,7 @@ class FirebaseFeatureDefinition extends AppScaffoldFeatureDefinition {
   }) {
     return AppScaffoldOverrideDefinition(
       value: loginEnabled,
-      override: AuthProviders.loginEnabled.overrideWith(
+      override: AppScaffoldStore.loginEnabled.overrideWith(
         (ref) => loginEnabled,
       ),
     );

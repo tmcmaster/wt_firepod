@@ -1,9 +1,9 @@
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wt_app_scaffold/app_platform/util/app_scaffold_router.dart';
+import 'package:wt_app_definition/app_definition.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
+import 'package:wt_app_scaffold/providers/app_scaffold_store.dart';
 import 'package:wt_firepod/src/login_screen_support/builders/action_builders.dart';
 import 'package:wt_firepod/src/login_screen_support/builders/component_builders.dart';
 import 'package:wt_firepod/wt_firepod.dart';
@@ -23,7 +23,8 @@ class SignInPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final auth = ref.watch(FirebaseProviders.auth);
 
-    final appDetails = ref.read(AppScaffoldProviders.appDetails);
+    final appDefinition = ref.read(AppDefinition.provider);
+    final appDetails = appDefinition.appDetails;
     final iconPath = appDetails.iconPath;
     final welcomeString = _createWelcomeString(appDetails);
 
@@ -50,7 +51,7 @@ class SignInPage extends ConsumerWidget {
                 auth.currentUser!.sendEmailVerification();
                 Navigator.pushNamed(context, '/verify-email');
               } else {
-                ref.read(AppScaffoldRouter.provider).go('/');
+                ref.read(AppScaffoldStore.router).go('/');
               }
             }
           },
@@ -91,8 +92,7 @@ class SignInPage extends ConsumerWidget {
   }
 
   String _createWelcomeString(AppDetails appDetails) {
-    final name =
-        appDetails.title.isNotEmpty ? appDetails.title : appDetails.subTitle;
+    final name = appDetails.title.isNotEmpty ? appDetails.title : appDetails.subTitle;
     return name.isEmpty ? 'Welcome!' : 'Welcome to $name!';
   }
 }

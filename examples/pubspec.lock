@@ -1381,6 +1381,13 @@ packages:
       url: "git@github.com:tmcmaster/wt_action_button.git"
     source: git
     version: "1.0.0+1"
+  wt_app_definition:
+    dependency: "direct main"
+    description:
+      path: "../../wt_app_definition"
+      relative: true
+    source: path
+    version: "0.0.1"
   wt_app_scaffold:
     dependency: "direct main"
     description:
@@ -1409,6 +1416,15 @@ packages:
       relative: true
     source: path
     version: "1.0.0+1"
+  wt_provider_manager:
+    dependency: transitive
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: c8353c4ebad2d53b9e42c5f4a59471c4ee2b1402
+      url: "git@github.com:tmcmaster/wt_provider_manager.git"
+    source: git
+    version: "0.0.1"
   wt_settings:
     dependency: "direct main"
     description:
