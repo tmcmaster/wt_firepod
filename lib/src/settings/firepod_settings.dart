@@ -4,7 +4,7 @@ import 'package:wt_firepod/src/providers/firepod_providers.dart';
 import 'package:wt_settings/wt_settings.dart';
 
 mixin FirepodSettings {
-  static final AppScaffoldSettingsMapProviders settingsProviders = {
+  static final SettingsProvidersMap settingsProviders = {
     'Firepod': [
       site,
     ],

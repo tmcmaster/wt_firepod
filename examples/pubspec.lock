@@ -1416,6 +1416,13 @@ packages:
       relative: true
     source: path
     version: "1.0.0+1"
+  wt_prototyping:
+    dependency: "direct main"
+    description:
+      path: "../../wt_prototyping"
+      relative: true
+    source: path
+    version: "0.0.1"
   wt_provider_manager:
     dependency: transitive
     description:
@@ -1432,6 +1439,15 @@ packages:
       relative: true
     source: path
     version: "1.0.0+1"
+  wt_workflow_tree:
+    dependency: transitive
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: cae97285b4b5774fe678a6649c1288c9068a689d
+      url: "git@github.com:tmcmaster/wt_workflow_tree.git"
+    source: git
+    version: "0.0.1"
   xdg_directories:
     dependency: transitive
     description:

@@ -8,6 +8,7 @@ import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_firepod_examples/firebase_options.dart';
 import 'package:wt_firepod_examples/pages/firepod_examples_page.dart';
 import 'package:wt_logging/wt_logging.dart';
+import 'package:wt_prototyping/prototyping.dart';
 
 void main() {
   runMyApp(
@@ -61,7 +62,7 @@ mixin ExampleApp {
           icon: FontAwesomeIcons.bug,
           itemType: ItemType.primary,
         ),
-        scaffoldType: ScaffoldPageType.transparentCard,
+        pageType: AppScaffoldPageType.transparentCard,
         pageBuilder: (_) => const FirepodExamplesPage(),
       ),
       PageDefinition(
@@ -72,7 +73,7 @@ mixin ExampleApp {
           itemType: ItemType.primary,
           landing: true,
         ),
-        scaffoldType: ScaffoldPageType.transparentCard,
+        pageType: AppScaffoldPageType.transparentCard,
         pageBuilder: (_) => Scaffold(
           appBar: AppBar(
             title: const Text('User Log'),
